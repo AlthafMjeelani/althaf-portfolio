@@ -17,7 +17,7 @@ echo "🚀 Starting deployment to GitHub Pages..."
 echo "📦 Building Flutter web app..."
 fvm flutter clean
 fvm flutter pub get
-fvm flutter build web --release --base-href="${BASE_HREF}"
+fvm flutter build web --base-href "${BASE_HREF}" --release
 
 # Step 2: Check if build was successful
 if [ ! -d "$BUILD_DIR" ]; then
@@ -25,35 +25,54 @@ if [ ! -d "$BUILD_DIR" ]; then
     exit 1
 fi
 
-# Step 3: Save current branch and switch to gh-pages
+# Step 3: Copy build files to temporary directory before switching branches
+TEMP_DIR=$(mktemp -d)
+echo "📁 Copying build files to temporary directory..."
+cp -r $BUILD_DIR/* "$TEMP_DIR/"
+
+# Step 4: Save current branch and switch to gh-pages
 echo "🔄 Switching to $DEPLOY_BRANCH branch..."
-git stash  # Stash any uncommitted changes
+if ! git diff-index --quiet HEAD --; then
+    git stash  # Stash any uncommitted changes
+    STASHED=true
+else
+    STASHED=false
+fi
 git checkout $DEPLOY_BRANCH 2>/dev/null || git checkout -b $DEPLOY_BRANCH
 
-# Step 4: Remove old files (except .git and .gitignore)
+# Step 5: Remove old files (except .git and .gitignore)
 echo "🧹 Cleaning old files..."
-find . -mindepth 1 -maxdepth 1 ! -name '.git' ! -name '.gitignore' -exec rm -rf {} +
+find . -mindepth 1 -maxdepth 1 ! -name '.' ! -name '.git' ! -name '.gitignore' -exec rm -rf {} +
 
-# Step 5: Copy new build files
+# Step 6: Copy new build files from temp directory
 echo "📋 Copying build files..."
-cp -r $BUILD_DIR/* .
+cp -r "$TEMP_DIR"/* .
 
-# Step 6: Remove build artifacts that shouldn't be in gh-pages
-rm -f .last_build_id .nojekyll 2>/dev/null || true
+# Step 7: Create .nojekyll file to prevent Jekyll processing
+touch .nojekyll
 
-# Step 7: Stage and commit
+# Step 8: Stage and commit
 echo "💾 Committing changes..."
 git add -A
-git commit -m "Deploy Flutter web app to GitHub Pages - $(date '+%Y-%m-%d %H:%M:%S')" || echo "No changes to commit"
+if git diff --staged --quiet; then
+    echo "⚠️  No changes to commit"
+else
+    git commit -m "Deploy Flutter web app to GitHub Pages - $(date '+%Y-%m-%d %H:%M:%S')"
+    
+    # Step 9: Push to GitHub
+    echo "📤 Pushing to GitHub..."
+    git push origin $DEPLOY_BRANCH --force
+fi
 
-# Step 8: Push to GitHub
-echo "📤 Pushing to GitHub..."
-git push origin $DEPLOY_BRANCH
+# Step 10: Cleanup temp directory
+rm -rf "$TEMP_DIR"
 
-# Step 9: Switch back to original branch
+# Step 11: Switch back to original branch
 echo "🔄 Switching back to $CURRENT_BRANCH branch..."
 git checkout $CURRENT_BRANCH
-git stash pop 2>/dev/null || true
+if [ "$STASHED" = true ]; then
+    git stash pop 2>/dev/null || true
+fi
 
 echo "✅ Deployment complete!"
 echo "🌐 Your site should be available at: https://althafmjeelani.github.io/${REPO_NAME}/"
