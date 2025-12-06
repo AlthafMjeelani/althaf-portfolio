@@ -92,7 +92,7 @@ class ProjectsSection extends StatelessWidget {
           'Designed intuitive UI for voice interactions',
         ],
         playStoreUrl:
-            'https://play.google.com/store/apps/details?id=com.texol.stocksnap',
+            'https://play.google.com/store/apps/details?id=com.texol.speakorder',
         appStoreUrl: 'https://apps.apple.com/in/app/speak-order/id6738990670',
         thumbnailImagePath: 'assets/images/speakorder_tump.png',
         fullImagePath: 'assets/images/speakorder.png',
@@ -155,7 +155,7 @@ class ProjectsSection extends StatelessWidget {
           'Optimized background synchronization for efficiency',
         ],
         playStoreUrl:
-            'https://play.google.com/store/apps/details?id=com.texol.taskforces',
+            'https://play.google.com/store/apps/details?id=com.texol.workforcetime',
         appStoreUrl: 'https://apps.apple.com/in/app/workforcetime/id1378828558',
         thumbnailImagePath: 'assets/images/workforcetime_tump.png',
         fullImagePath: 'assets/images/workforcetime.png',
@@ -188,10 +188,10 @@ class ProjectsSection extends StatelessWidget {
         playStoreUrl:
             'https://play.google.com/store/apps/developer?id=AGSKART+PRIVATE+LIMITED',
         appStoreUrl: 'https://apps.apple.com/in/app/agskart/id6503183690',
-        thumbnailImagePath: 'assets/images/stocksnap_tump.png',
-        fullImagePath: 'assets/images/stocksnap.png',
+        thumbnailImagePath: 'assets/images/ags_tump.png',
+        fullImagePath: 'assets/images/ags.png',
         screenshots: [
-          'assets/images/stocksnap.png',
+          'assets/images/ags.png',
           // Add more screenshots: 'assets/images/agskart_screen1.png', etc.
         ],
       ),

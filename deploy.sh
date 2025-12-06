@@ -49,7 +49,17 @@ echo "📋 Copying build files..."
 cp -r "$TEMP_DIR"/* .
 
 # Step 7: Create .nojekyll file to prevent Jekyll processing
+echo "📝 Creating .nojekyll file..."
 touch .nojekyll
+
+# Step 7.5: Copy favicon files to ensure they're included
+echo "📋 Ensuring favicon files are included..."
+if [ -f "web/favicon_circular.png" ]; then
+  cp web/favicon_circular.png . 2>/dev/null || true
+fi
+if [ -f "web/favicon_circular.svg" ]; then
+  cp web/favicon_circular.svg . 2>/dev/null || true
+fi
 
 # Step 8: Stage and commit
 echo "💾 Committing changes..."
