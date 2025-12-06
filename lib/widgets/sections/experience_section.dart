@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../common/section_title.dart';
-import '../hero/animated_background.dart';
 
 class ExperienceSection extends StatelessWidget {
   const ExperienceSection({super.key});
@@ -9,6 +8,7 @@ class ExperienceSection extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final isWide = screenWidth >= 800;
+    final isMobile = screenWidth < 600;
 
     final experiences = [
       {
@@ -36,110 +36,148 @@ class ExperienceSection extends StatelessWidget {
 
     return Container(
       width: double.infinity,
-      constraints: const BoxConstraints(minHeight: 600),
-      child: Stack(
-        children: [
-          // Animated background (same as home)
-          const AnimatedBackground(),
+      padding: EdgeInsets.symmetric(
+        horizontal: isMobile ? 16 : (isWide ? 60 : 24),
+        vertical: isMobile ? 40 : 60,
+      ),
+      child: Center(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 1000),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              sectionTitle(
+                context,
+                'Experience',
+                icon: Icons.business_center_outlined,
+              ),
+              SizedBox(height: isMobile ? 24 : 40),
+              // Timeline with experience cards
+              _buildTimeline(context, experiences, isWide, isMobile),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
 
-          // Content - Centered
-          Center(
-            child: ConstrainedBox(
-              constraints: const BoxConstraints(maxWidth: 1000),
-              child: Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: isWide ? 60 : 24,
-                  vertical: 80,
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    sectionTitle(
+  Widget _buildTimeline(
+    BuildContext context,
+    List<Map<String, String>> experiences,
+    bool isWide,
+    bool isMobile,
+  ) {
+    final timelineLeft = isMobile ? 12.0 : (isWide ? 40.0 : 20.0);
+
+    return Stack(
+      children: [
+        // Vertical timeline line
+        if (!isMobile)
+          Positioned(
+            left: timelineLeft,
+            top: 0,
+            bottom: 0,
+            child: Container(
+              width: 2,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    Theme.of(
                       context,
-                      'Experience',
-                      icon: Icons.business_center_outlined,
-                    ),
-                    const SizedBox(height: 20),
-                    Text(
-                      'My professional journey',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: Colors.white.withValues(alpha: 0.6),
-                        fontSize: isWide ? 16 : 14,
-                        fontWeight: FontWeight.w400,
-                        letterSpacing: 1,
-                      ),
-                    ),
-                    const SizedBox(height: 60),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        // Timeline line
-                        if (isWide) ...[
-                          SizedBox(
-                            width: 4,
-                            child: Column(
-                              children: [
-                                Container(
-                                  width: 4,
-                                  height: 100,
-                                  decoration: BoxDecoration(
-                                    gradient: const LinearGradient(
-                                      begin: Alignment.topCenter,
-                                      end: Alignment.bottomCenter,
-                                      colors: [
-                                        Color(0xFF00D9FF),
-                                        Color(0xFF0099CC),
-                                      ],
-                                    ),
-                                    borderRadius: BorderRadius.circular(2),
-                                  ),
-                                ),
-                                for (int i = 0; i < experiences.length - 1; i++)
-                                  Container(
-                                    margin: const EdgeInsets.symmetric(
-                                      vertical: 60,
-                                    ),
-                                    width: 4,
-                                    height: 80,
-                                    decoration: BoxDecoration(
-                                      color: const Color(
-                                        0xFF00D9FF,
-                                      ).withValues(alpha: 0.3),
-                                      borderRadius: BorderRadius.circular(2),
-                                    ),
-                                  ),
-                              ],
-                            ),
-                          ),
-                          const SizedBox(width: 32),
-                        ],
-                        // Experience cards
-                        Expanded(
-                          child: Column(
-                            children: [
-                              for (int i = 0; i < experiences.length; i++)
-                                Padding(
-                                  padding: EdgeInsets.only(
-                                    bottom: isWide ? 60 : 24,
-                                  ),
-                                  child: _buildExperienceCard(
-                                    context,
-                                    experience: experiences[i],
-                                    index: i,
-                                    isWide: isWide,
-                                  ),
-                                ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 40),
+                    ).colorScheme.primary.withValues(alpha: 0.3),
+                    Theme.of(
+                      context,
+                    ).colorScheme.primary.withValues(alpha: 0.1),
                   ],
                 ),
               ),
+            ),
+          ),
+        // Timeline items
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            for (int i = 0; i < experiences.length; i++)
+              _buildTimelineItem(
+                context,
+                experience: experiences[i],
+                index: i,
+                isWide: isWide,
+                isMobile: isMobile,
+                isLast: i == experiences.length - 1,
+                timelineLeft: timelineLeft,
+              ),
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget _buildTimelineItem(
+    BuildContext context, {
+    required Map<String, String> experience,
+    required int index,
+    required bool isWide,
+    required bool isMobile,
+    required bool isLast,
+    required double timelineLeft,
+  }) {
+    final nodeSize = isMobile ? 12.0 : 16.0;
+    final leftPadding = isMobile ? 0.0 : (timelineLeft + nodeSize + 24);
+
+    return Padding(
+      padding: EdgeInsets.only(
+        bottom: isLast ? 0 : (isMobile ? 24 : 40),
+        left: leftPadding,
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Timeline node (circle) - only show if not mobile
+          if (!isMobile)
+            Container(
+              margin: EdgeInsets.only(right: 16, top: 4),
+              width: nodeSize,
+              height: nodeSize,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: Theme.of(context).colorScheme.surface,
+                border: Border.all(
+                  color: Theme.of(context).colorScheme.primary,
+                  width: 3,
+                ),
+                boxShadow: [
+                  BoxShadow(
+                    color: Theme.of(
+                      context,
+                    ).colorScheme.primary.withValues(alpha: 0.3),
+                    blurRadius: 8,
+                    spreadRadius: 2,
+                  ),
+                ],
+              ),
+              child: Center(
+                child: Container(
+                  width: 8,
+                  height: 8,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
+                ),
+              ),
+            ),
+          // Experience card
+          Expanded(
+            child: _buildExperienceCard(
+              context,
+              experience: experience,
+              index: index,
+              isWide: isWide,
+              isMobile: isMobile,
             ),
           ),
         ],
@@ -152,166 +190,103 @@ class ExperienceSection extends StatelessWidget {
     required Map<String, String> experience,
     required int index,
     required bool isWide,
+    required bool isMobile,
   }) {
     return Container(
-      padding: const EdgeInsets.all(32),
+      padding: EdgeInsets.all(isMobile ? 16 : 24),
       decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [
-            const Color(0xFF1A1F2E).withValues(alpha: 0.85),
-            const Color(0xFF0F1419).withValues(alpha: 0.95),
-          ],
-        ),
-        borderRadius: BorderRadius.circular(20),
+        color: Theme.of(context).colorScheme.surface.withValues(alpha: 0.7),
+        borderRadius: BorderRadius.circular(16),
         border: Border.all(
-          color: const Color(0xFF00D9FF).withValues(alpha: 0.3),
-          width: 1.5,
+          color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.2),
+          width: 1,
         ),
         boxShadow: [
           BoxShadow(
-            color: const Color(0xFF00D9FF).withValues(alpha: 0.15),
-            blurRadius: 25,
+            color: Theme.of(context).brightness == Brightness.dark
+                ? Colors.black.withValues(alpha: 0.3)
+                : Colors.grey.withValues(alpha: 0.1),
+            blurRadius: 20,
             spreadRadius: 0,
-            offset: const Offset(0, 8),
-          ),
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.3),
-            blurRadius: 15,
-            spreadRadius: 0,
-            offset: const Offset(0, 6),
+            offset: const Offset(0, 4),
           ),
         ],
       ),
-      child: Row(
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          if (isWide) ...[
-            Container(
-              width: 56,
-              height: 56,
-              decoration: BoxDecoration(
-                gradient: const LinearGradient(
-                  colors: [Color(0xFF00D9FF), Color(0xFF0099CC)],
-                ),
-                borderRadius: BorderRadius.circular(12),
-                boxShadow: [
-                  BoxShadow(
-                    color: const Color(0xFF00D9FF).withValues(alpha: 0.4),
-                    blurRadius: 12,
-                    spreadRadius: 0,
-                    offset: const Offset(0, 4),
-                  ),
-                ],
-              ),
-              child: Center(
-                child: Text(
-                  '${index + 1}',
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontWeight: FontWeight.w900,
-                  ),
-                ),
+          // Period badge
+          Container(
+            padding: EdgeInsets.symmetric(
+              horizontal: isMobile ? 10 : 12,
+              vertical: isMobile ? 5 : 6,
+            ),
+            decoration: BoxDecoration(
+              color: Theme.of(
+                context,
+              ).colorScheme.primary.withValues(alpha: 0.1),
+              borderRadius: BorderRadius.circular(20),
+              border: Border.all(
+                color: Theme.of(
+                  context,
+                ).colorScheme.primary.withValues(alpha: 0.3),
+                width: 1,
               ),
             ),
-            const SizedBox(width: 24),
-          ],
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  children: [
-                    Expanded(
-                      child: Text(
-                        experience['role']!,
-                        style: TextStyle(
-                          fontWeight: FontWeight.w900,
-                          fontSize: isWide ? 22 : 20,
-                          color: Colors.white,
-                          letterSpacing: -0.3,
-                        ),
-                      ),
-                    ),
-                    if (!isWide)
-                      Container(
-                        width: 40,
-                        height: 40,
-                        decoration: BoxDecoration(
-                          gradient: const LinearGradient(
-                            colors: [Color(0xFF00D9FF), Color(0xFF0099CC)],
-                          ),
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Center(
-                          child: Text(
-                            '${index + 1}',
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w900,
-                            ),
-                          ),
-                        ),
-                      ),
-                  ],
-                ),
-                const SizedBox(height: 10),
-                Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 12,
-                    vertical: 6,
-                  ),
-                  decoration: BoxDecoration(
-                    color: const Color(0xFF00D9FF).withValues(alpha: 0.15),
-                    borderRadius: BorderRadius.circular(8),
-                    border: Border.all(
-                      color: const Color(0xFF00D9FF).withValues(alpha: 0.3),
-                      width: 1,
-                    ),
-                  ),
-                  child: Text(
-                    experience['company']!,
-                    style: const TextStyle(
-                      color: Color(0xFF00D9FF),
-                      fontSize: 15,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  experience['period']!,
+            child: Text(
+              experience['period']!,
+              style: TextStyle(
+                color: Theme.of(context).colorScheme.primary,
+                fontSize: isMobile ? 11 : 12,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ),
+          SizedBox(height: isMobile ? 12 : 16),
+          // Role title
+          Text(
+            experience['role']!,
+            style: TextStyle(
+              fontWeight: FontWeight.w700,
+              fontSize: isMobile ? 16 : (isWide ? 20 : 18),
+              color: Theme.of(context).colorScheme.onSurface,
+            ),
+          ),
+          SizedBox(height: isMobile ? 6 : 8),
+          // Company name
+          Row(
+            children: [
+              Icon(
+                Icons.business_outlined,
+                size: isMobile ? 14 : 16,
+                color: Theme.of(context).colorScheme.primary,
+              ),
+              SizedBox(width: isMobile ? 4 : 6),
+              Flexible(
+                child: Text(
+                  experience['company']!,
                   style: TextStyle(
-                    color: Colors.white.withValues(alpha: 0.5),
-                    fontSize: 13,
-                    fontWeight: FontWeight.w500,
+                    color: Theme.of(context).colorScheme.primary,
+                    fontSize: isMobile ? 13 : 15,
+                    fontWeight: FontWeight.w600,
                   ),
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
                 ),
-                const SizedBox(height: 16),
-                Container(
-                  width: 60,
-                  height: 2,
-                  decoration: BoxDecoration(
-                    gradient: const LinearGradient(
-                      colors: [Color(0xFF00D9FF), Color(0xFF0099CC)],
-                    ),
-                    borderRadius: BorderRadius.circular(2),
-                  ),
-                ),
-                const SizedBox(height: 16),
-                Text(
-                  experience['desc']!,
-                  style: TextStyle(
-                    color: Colors.white.withValues(alpha: 0.8),
-                    fontSize: isWide ? 15 : 14,
-                    height: 1.7,
-                    fontWeight: FontWeight.w400,
-                  ),
-                ),
-              ],
+              ),
+            ],
+          ),
+          SizedBox(height: isMobile ? 12 : 16),
+          // Description
+          Text(
+            experience['desc']!,
+            style: TextStyle(
+              color: Theme.of(
+                context,
+              ).colorScheme.onSurface.withValues(alpha: 0.8),
+              fontSize: isMobile ? 13 : (isWide ? 15 : 14),
+              height: 1.6,
+              fontWeight: FontWeight.w400,
             ),
           ),
         ],

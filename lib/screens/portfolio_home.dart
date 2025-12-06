@@ -10,9 +10,11 @@ import '../widgets/sections/certifications_section.dart';
 import '../widgets/sections/skills_section.dart';
 import '../widgets/sections/contact_section.dart';
 import '../widgets/sections/footer_section.dart';
+import '../utils/theme_provider.dart';
 
 class PortfolioHome extends StatefulWidget {
-  const PortfolioHome({super.key});
+  final ThemeProvider themeProvider;
+  const PortfolioHome({super.key, required this.themeProvider});
 
   @override
   State<PortfolioHome> createState() => _PortfolioHomeState();
@@ -84,52 +86,54 @@ class _PortfolioHomeState extends State<PortfolioHome> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
-      body: SingleChildScrollView(
-        controller: _scrollController,
-        padding: EdgeInsets.zero,
-        child: Column(
-          children: [
-            Container(
-              key: _sectionKeys['home'],
-              child: Stack(
-                children: [
-                  HeroHeader(onSectionTap: _scrollToSection),
-                  StickyNavigationBar(
-                    activeSection: _activeSection,
-                    onSectionTap: _scrollToSection,
-                  ),
-                ],
-              ),
+      body: Stack(
+        children: [
+          // Scrollable content
+          SingleChildScrollView(
+            controller: _scrollController,
+            padding: EdgeInsets.zero,
+            child: Column(
+              children: [
+                Container(
+                  key: _sectionKeys['home'],
+                  child: HeroHeader(onSectionTap: _scrollToSection),
+                ),
+                Container(
+                  key: _sectionKeys['about'],
+                  child: const AnimatedReveal(child: AboutSection()),
+                ),
+                Container(
+                  key: _sectionKeys['projects'],
+                  child: const AnimatedReveal(child: ProjectsSection()),
+                ),
+                Container(
+                  key: _sectionKeys['experience'],
+                  child: const AnimatedReveal(child: ExperienceSection()),
+                ),
+                Container(
+                  key: _sectionKeys['education'],
+                  child: const AnimatedReveal(child: EducationSection()),
+                ),
+                const AnimatedReveal(child: CertificationsSection()),
+                Container(
+                  key: _sectionKeys['skills'],
+                  child: const AnimatedReveal(child: SkillsSection()),
+                ),
+                Container(
+                  key: _sectionKeys['contact'],
+                  child: const AnimatedReveal(child: ContactSection()),
+                ),
+                const FooterSection(),
+              ],
             ),
-            Container(
-              key: _sectionKeys['about'],
-              child: const AnimatedReveal(child: AboutSection()),
-            ),
-            Container(
-              key: _sectionKeys['projects'],
-              child: const AnimatedReveal(child: ProjectsSection()),
-            ),
-            Container(
-              key: _sectionKeys['experience'],
-              child: const AnimatedReveal(child: ExperienceSection()),
-            ),
-            Container(
-              key: _sectionKeys['education'],
-              child: const AnimatedReveal(child: EducationSection()),
-            ),
-            const AnimatedReveal(child: CertificationsSection()),
-            Container(
-              key: _sectionKeys['skills'],
-              child: const AnimatedReveal(child: SkillsSection()),
-            ),
-            Container(
-              key: _sectionKeys['contact'],
-              child: const AnimatedReveal(child: ContactSection()),
-            ),
-            const SizedBox(height: 60),
-            const FooterSection(),
-          ],
-        ),
+          ),
+          // Sticky navigation bar at the top
+          StickyNavigationBar(
+            activeSection: _activeSection,
+            onSectionTap: _scrollToSection,
+            themeProvider: widget.themeProvider,
+          ),
+        ],
       ),
     );
   }

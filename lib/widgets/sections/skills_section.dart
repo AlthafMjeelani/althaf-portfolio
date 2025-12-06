@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../common/section_title.dart';
-import '../hero/animated_background.dart';
 
 class SkillsSection extends StatelessWidget {
   const SkillsSection({super.key});
@@ -9,6 +8,7 @@ class SkillsSection extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final isWide = screenWidth >= 800;
+    final isMobile = screenWidth < 600;
 
     final skills = [
       'Flutter Development',
@@ -43,182 +43,214 @@ class SkillsSection extends StatelessWidget {
 
     return Container(
       width: double.infinity,
-      constraints: const BoxConstraints(minHeight: 600),
-      child: Stack(
-        children: [
-          // Animated background (same as home)
-          const AnimatedBackground(),
-
-          // Content - Centered
-          Center(
-            child: ConstrainedBox(
-              constraints: const BoxConstraints(maxWidth: 1000),
-              child: Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: isWide ? 60 : 24,
-                  vertical: 80,
+      padding: EdgeInsets.symmetric(
+        horizontal: isMobile ? 16 : (isWide ? 60 : 24),
+        vertical: isMobile ? 40 : 80,
+      ),
+      child: Center(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 1000),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              sectionTitle(
+                context,
+                'Technical Skills',
+                icon: Icons.code_outlined,
+              ),
+              SizedBox(height: isMobile ? 16 : 20),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: isMobile ? 8 : 0),
+                child: Text(
+                  'Technologies I work with',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Theme.of(
+                      context,
+                    ).colorScheme.onSurface.withValues(alpha: 0.6),
+                    fontSize: isMobile ? 13 : (isWide ? 16 : 14),
+                    fontWeight: FontWeight.w400,
+                    letterSpacing: 1,
+                  ),
                 ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    sectionTitle(
-                      context,
-                      'Technical Skills',
-                      icon: Icons.code_outlined,
+              ),
+              SizedBox(height: isMobile ? 32 : 60),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: isMobile ? 4 : 0),
+                child: Wrap(
+                  spacing: isMobile ? 12 : 20,
+                  runSpacing: isMobile ? 12 : 20,
+                  alignment: WrapAlignment.center,
+                  children: skills
+                      .map((s) => _buildSkillChip(s, isMobile))
+                      .toList(),
+                ),
+              ),
+              SizedBox(height: isMobile ? 40 : 60),
+              // Languages Section
+              sectionTitle(context, 'Languages', icon: Icons.language_outlined),
+              SizedBox(height: isMobile ? 16 : 20),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: isMobile ? 4 : 0),
+                child: Wrap(
+                  spacing: isMobile ? 12 : 16,
+                  runSpacing: isMobile ? 12 : 16,
+                  alignment: WrapAlignment.center,
+                  children: languages
+                      .map((lang) => _buildLanguageChip(lang, isMobile))
+                      .toList(),
+                ),
+              ),
+              SizedBox(height: isMobile ? 20 : 40),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildSkillChip(String skill, bool isMobile) {
+    return Builder(
+      builder: (context) {
+        return Container(
+          padding: EdgeInsets.symmetric(
+            horizontal: isMobile ? 16 : 24,
+            vertical: isMobile ? 12 : 16,
+          ),
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [
+                Theme.of(context).colorScheme.surface.withValues(alpha: 0.9),
+                Theme.of(context).colorScheme.surface.withValues(alpha: 0.95),
+              ],
+            ),
+            borderRadius: BorderRadius.circular(14),
+            border: Border.all(
+              color: Theme.of(
+                context,
+              ).colorScheme.primary.withValues(alpha: 0.4),
+              width: 1.5,
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: Theme.of(
+                  context,
+                ).colorScheme.primary.withValues(alpha: 0.15),
+                blurRadius: 12,
+                spreadRadius: 0,
+                offset: const Offset(0, 6),
+              ),
+              BoxShadow(
+                color: Theme.of(context).brightness == Brightness.dark
+                    ? Colors.black.withValues(alpha: 0.2)
+                    : Colors.grey.withValues(alpha: 0.15),
+                blurRadius: 8,
+                spreadRadius: 0,
+                offset: const Offset(0, 4),
+              ),
+            ],
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                width: isMobile ? 6 : 8,
+                height: isMobile ? 6 : 8,
+                decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.primary,
+                  shape: BoxShape.circle,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Theme.of(
+                        context,
+                      ).colorScheme.primary.withValues(alpha: 0.6),
+                      blurRadius: 6,
+                      spreadRadius: 0,
                     ),
-                    const SizedBox(height: 20),
-                    Text(
-                      'Technologies I work with',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: Colors.white.withValues(alpha: 0.6),
-                        fontSize: isWide ? 16 : 14,
-                        fontWeight: FontWeight.w400,
-                        letterSpacing: 1,
-                      ),
-                    ),
-                    const SizedBox(height: 60),
-                    Wrap(
-                      spacing: 20,
-                      runSpacing: 20,
-                      alignment: WrapAlignment.center,
-                      children: skills.map((s) => _buildSkillChip(s)).toList(),
-                    ),
-                    const SizedBox(height: 60),
-                    // Languages Section
-                    sectionTitle(
-                      context,
-                      'Languages',
-                      icon: Icons.language_outlined,
-                    ),
-                    const SizedBox(height: 20),
-                    Wrap(
-                      spacing: 16,
-                      runSpacing: 16,
-                      alignment: WrapAlignment.center,
-                      children: languages
-                          .map((lang) => _buildLanguageChip(lang))
-                          .toList(),
-                    ),
-                    const SizedBox(height: 40),
                   ],
                 ),
               ),
-            ),
+              SizedBox(width: isMobile ? 8 : 12),
+              Flexible(
+                child: Text(
+                  skill,
+                  style: TextStyle(
+                    color: Theme.of(context).colorScheme.onSurface,
+                    fontSize: isMobile ? 13 : 15,
+                    fontWeight: FontWeight.w600,
+                    letterSpacing: 0.3,
+                  ),
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+            ],
           ),
-        ],
-      ),
+        );
+      },
     );
   }
 
-  Widget _buildSkillChip(String skill) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [
-            const Color(0xFF1A1F2E).withValues(alpha: 0.9),
-            const Color(0xFF0F1419).withValues(alpha: 0.95),
-          ],
-        ),
-        borderRadius: BorderRadius.circular(14),
-        border: Border.all(
-          color: const Color(0xFF00D9FF).withValues(alpha: 0.4),
-          width: 1.5,
-        ),
-        boxShadow: [
-          BoxShadow(
-            color: const Color(0xFF00D9FF).withValues(alpha: 0.15),
-            blurRadius: 12,
-            spreadRadius: 0,
-            offset: const Offset(0, 6),
+  Widget _buildLanguageChip(String language, bool isMobile) {
+    return Builder(
+      builder: (context) {
+        return Container(
+          padding: EdgeInsets.symmetric(
+            horizontal: isMobile ? 16 : 20,
+            vertical: isMobile ? 10 : 12,
           ),
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.2),
-            blurRadius: 8,
-            spreadRadius: 0,
-            offset: const Offset(0, 4),
-          ),
-        ],
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Container(
-            width: 8,
-            height: 8,
-            decoration: BoxDecoration(
-              color: const Color(0xFF00D9FF),
-              shape: BoxShape.circle,
-              boxShadow: [
-                BoxShadow(
-                  color: const Color(0xFF00D9FF).withValues(alpha: 0.6),
-                  blurRadius: 6,
-                  spreadRadius: 0,
-                ),
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [
+                Theme.of(context).colorScheme.primary.withValues(alpha: 0.15),
+                Theme.of(context).colorScheme.primary.withValues(alpha: 0.1),
               ],
             ),
-          ),
-          const SizedBox(width: 12),
-          Text(
-            skill,
-            style: const TextStyle(
-              color: Colors.white,
-              fontSize: 15,
-              fontWeight: FontWeight.w600,
-              letterSpacing: 0.3,
+            borderRadius: BorderRadius.circular(12),
+            border: Border.all(
+              color: Theme.of(
+                context,
+              ).colorScheme.primary.withValues(alpha: 0.5),
+              width: 1.5,
             ),
+            boxShadow: [
+              BoxShadow(
+                color: Theme.of(
+                  context,
+                ).colorScheme.primary.withValues(alpha: 0.2),
+                blurRadius: 8,
+                spreadRadius: 0,
+                offset: const Offset(0, 4),
+              ),
+            ],
           ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildLanguageChip(String language) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [
-            const Color(0xFF00D9FF).withValues(alpha: 0.15),
-            const Color(0xFF0099CC).withValues(alpha: 0.1),
-          ],
-        ),
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(
-          color: const Color(0xFF00D9FF).withValues(alpha: 0.5),
-          width: 1.5,
-        ),
-        boxShadow: [
-          BoxShadow(
-            color: const Color(0xFF00D9FF).withValues(alpha: 0.2),
-            blurRadius: 8,
-            spreadRadius: 0,
-            offset: const Offset(0, 4),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(
+                Icons.translate,
+                color: Theme.of(context).colorScheme.primary,
+                size: isMobile ? 16 : 18,
+              ),
+              SizedBox(width: isMobile ? 6 : 8),
+              Text(
+                language,
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.onSurface,
+                  fontSize: isMobile ? 13 : 14,
+                  fontWeight: FontWeight.w600,
+                  letterSpacing: 0.5,
+                ),
+              ),
+            ],
           ),
-        ],
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(Icons.translate, color: const Color(0xFF00D9FF), size: 18),
-          const SizedBox(width: 8),
-          Text(
-            language,
-            style: const TextStyle(
-              color: Colors.white,
-              fontSize: 14,
-              fontWeight: FontWeight.w600,
-              letterSpacing: 0.5,
-            ),
-          ),
-        ],
-      ),
+        );
+      },
     );
   }
 }

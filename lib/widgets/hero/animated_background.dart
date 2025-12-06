@@ -12,15 +12,34 @@ class _AnimatedBackgroundState extends State<AnimatedBackground>
     with TickerProviderStateMixin {
   late List<AnimationController> _controllers;
   late List<Animation<double>> _animations;
+  late AnimationController _planetRotationController;
+  late AnimationController _starTwinkleController;
+  final List<Star> _stars = [];
+  final List<Planet> _planets = [];
+  final List<Particle> _particles = [];
+  final List<GeometricShape> _shapes = [];
 
   @override
   void initState() {
     super.initState();
-    // More controllers for richer animations
-    _controllers = List.generate(25, (index) {
+
+    // Planet rotation controller
+    _planetRotationController = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 30),
+    )..repeat();
+
+    // Star twinkle controller
+    _starTwinkleController = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 2),
+    )..repeat();
+
+    // Minimal controllers for subtle animations
+    _controllers = List.generate(5, (index) {
       final controller = AnimationController(
         vsync: this,
-        duration: Duration(milliseconds: 2000 + (index * 150)),
+        duration: Duration(milliseconds: 3000 + (index * 500)),
       )..repeat();
       return controller;
     });
@@ -31,6 +50,82 @@ class _AnimatedBackgroundState extends State<AnimatedBackground>
         end: 1,
       ).animate(CurvedAnimation(parent: controller, curve: Curves.easeInOut));
     }).toList();
+
+    // Initialize stars
+    _initializeStars();
+    // Initialize planets
+    _initializePlanets();
+    // Initialize particles
+    _initializeParticles();
+    // Initialize geometric shapes
+    _initializeShapes();
+  }
+
+  void _initializeStars() {
+    final random = math.Random();
+    for (int i = 0; i < 50; i++) {
+      _stars.add(
+        Star(
+          x: random.nextDouble(),
+          y: random.nextDouble(),
+          size: 0.5 + random.nextDouble() * 1,
+          twinkleSpeed: 0.3 + random.nextDouble() * 0.7,
+          baseOpacity: 0.1 + random.nextDouble() * 0.3,
+        ),
+      );
+    }
+  }
+
+  void _initializePlanets() {
+    _planets.add(
+      Planet(
+        type: PlanetType.earth,
+        x: 0.15,
+        y: 0.3,
+        size: 40,
+        rotationSpeed: 0.005,
+      ),
+    );
+    _planets.add(
+      Planet(
+        type: PlanetType.mars,
+        x: 0.85,
+        y: 0.7,
+        size: 30,
+        rotationSpeed: 0.006,
+      ),
+    );
+  }
+
+  void _initializeParticles() {
+    final random = math.Random();
+    for (int i = 0; i < 30; i++) {
+      _particles.add(
+        Particle(
+          x: random.nextDouble(),
+          y: random.nextDouble(),
+          size: 2 + random.nextDouble() * 3,
+          speed: 0.2 + random.nextDouble() * 0.3,
+          opacity: 0.1 + random.nextDouble() * 0.2,
+        ),
+      );
+    }
+  }
+
+  void _initializeShapes() {
+    final random = math.Random();
+    for (int i = 0; i < 15; i++) {
+      _shapes.add(
+        GeometricShape(
+          x: random.nextDouble(),
+          y: random.nextDouble(),
+          size: 8 + random.nextDouble() * 12,
+          type: random.nextBool() ? ShapeType.circle : ShapeType.square,
+          rotation: random.nextDouble() * 2 * math.pi,
+          opacity: 0.05 + random.nextDouble() * 0.15,
+        ),
+      );
+    }
   }
 
   @override
@@ -38,11 +133,15 @@ class _AnimatedBackgroundState extends State<AnimatedBackground>
     for (final controller in _controllers) {
       controller.dispose();
     }
+    _planetRotationController.dispose();
+    _starTwinkleController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return LayoutBuilder(
       builder: (context, constraints) {
         final screenSize = MediaQuery.of(context).size;
@@ -57,223 +156,351 @@ class _AnimatedBackgroundState extends State<AnimatedBackground>
         return SizedBox(
           width: width > 0 ? width : screenSize.width,
           height: height > 0 ? height : screenSize.height,
-          child: CustomPaint(painter: _AnimatedBackgroundPainter(_animations)),
+          child: AnimatedBuilder(
+            animation: Listenable.merge([
+              _planetRotationController,
+              _starTwinkleController,
+              ..._animations,
+            ]),
+            builder: (context, child) {
+              return CustomPaint(
+                painter: _SpaceBackgroundPainter(
+                  _animations,
+                  _stars,
+                  _planets,
+                  _particles,
+                  _shapes,
+                  _planetRotationController.value,
+                  _starTwinkleController.value,
+                  isDark,
+                ),
+              );
+            },
+          ),
         );
       },
     );
   }
 }
 
-class _AnimatedBackgroundPainter extends CustomPainter {
-  final List<Animation<double>> animations;
+class Star {
+  final double x;
+  final double y;
+  final double size;
+  final double twinkleSpeed;
+  final double baseOpacity;
 
-  _AnimatedBackgroundPainter(this.animations)
-    : super(repaint: Listenable.merge(animations));
+  Star({
+    required this.x,
+    required this.y,
+    required this.size,
+    required this.twinkleSpeed,
+    required this.baseOpacity,
+  });
+}
+
+enum PlanetType { earth, mars }
+
+class Planet {
+  final PlanetType type;
+  final double x;
+  final double y;
+  final double size;
+  final double rotationSpeed;
+
+  Planet({
+    required this.type,
+    required this.x,
+    required this.y,
+    required this.size,
+    required this.rotationSpeed,
+  });
+}
+
+class Particle {
+  final double x;
+  final double y;
+  final double size;
+  final double speed;
+  final double opacity;
+
+  Particle({
+    required this.x,
+    required this.y,
+    required this.size,
+    required this.speed,
+    required this.opacity,
+  });
+}
+
+enum ShapeType { circle, square }
+
+class GeometricShape {
+  final double x;
+  final double y;
+  final double size;
+  final ShapeType type;
+  final double rotation;
+  final double opacity;
+
+  GeometricShape({
+    required this.x,
+    required this.y,
+    required this.size,
+    required this.type,
+    required this.rotation,
+    required this.opacity,
+  });
+}
+
+class _SpaceBackgroundPainter extends CustomPainter {
+  final List<Animation<double>> animations;
+  final List<Star> stars;
+  final List<Planet> planets;
+  final List<Particle> particles;
+  final List<GeometricShape> shapes;
+  final double planetRotation;
+  final double starTwinkle;
+  final bool isDark;
+
+  _SpaceBackgroundPainter(
+    this.animations,
+    this.stars,
+    this.planets,
+    this.particles,
+    this.shapes,
+    this.planetRotation,
+    this.starTwinkle,
+    this.isDark,
+  ) : super(repaint: Listenable.merge(animations));
+
+  @override
+  bool shouldRebuildSemantics(_SpaceBackgroundPainter oldDelegate) {
+    return oldDelegate.isDark != isDark ||
+        oldDelegate.planetRotation != planetRotation ||
+        oldDelegate.starTwinkle != starTwinkle;
+  }
 
   @override
   void paint(Canvas canvas, Size size) {
-    // Enhanced animated gradient mesh background
-    final gradient1 = LinearGradient(
-      begin: Alignment.topLeft,
-      end: Alignment.bottomRight,
-      colors: [
-        const Color(
-          0xFF00D9FF,
-        ).withValues(alpha: 0.15 + (animations[0].value * 0.1)),
-        const Color(
-          0xFF0099CC,
-        ).withValues(alpha: 0.08 + (animations[1].value * 0.05)),
-        Colors.transparent,
-        const Color(
-          0xFF00B8E6,
-        ).withValues(alpha: 0.05 + (animations[2].value * 0.03)),
-      ],
-      stops: [
-        0.0,
-        0.2 + (animations[0].value * 0.3),
-        0.6 + (animations[1].value * 0.2),
-        1.0,
-      ],
-    );
-
-    final gradient2 = RadialGradient(
-      center: Alignment(-0.5 + animations[3].value, -0.3 + animations[4].value),
-      radius: 1.5,
-      colors: [
-        const Color(0xFF00D9FF).withValues(alpha: 0.12),
-        Colors.transparent,
-      ],
-    );
-
-    final gradient3 = LinearGradient(
-      begin: Alignment.bottomLeft,
-      end: Alignment.topRight,
-      colors: [
-        const Color(0xFF0099CC).withValues(alpha: 0.1),
-        Colors.transparent,
-        const Color(0xFF00D9FF).withValues(alpha: 0.08),
-      ],
-      stops: [0.0, 0.4 + (animations[5].value * 0.3), 1.0],
+    // Background gradient
+    final backgroundGradient = LinearGradient(
+      begin: Alignment.topCenter,
+      end: Alignment.bottomCenter,
+      colors: isDark
+          ? [
+              const Color(0xFF000000),
+              const Color(0xFF0A0E1A),
+              const Color(0xFF000510),
+            ]
+          : [
+              const Color(0xFF87CEEB),
+              const Color(0xFFB0E0E6),
+              const Color(0xFFE0F6FF),
+            ],
     );
 
     canvas.drawRect(
       Rect.fromLTWH(0, 0, size.width, size.height),
       Paint()
-        ..shader = gradient1.createShader(
+        ..shader = backgroundGradient.createShader(
           Rect.fromLTWH(0, 0, size.width, size.height),
         ),
     );
 
-    canvas.drawRect(
-      Rect.fromLTWH(0, 0, size.width, size.height),
-      Paint()
-        ..shader = gradient2.createShader(
-          Rect.fromLTWH(0, 0, size.width, size.height),
+    // Draw stars with smooth movement
+    for (int i = 0; i < stars.length; i++) {
+      final star = stars[i];
+      final phase = (starTwinkle + (i * 0.1)) % 1.0;
+      final twinkle =
+          (math.sin(phase * 2 * math.pi * star.twinkleSpeed) + 1) / 2;
+      final opacity = star.baseOpacity * (0.7 + twinkle * 0.3);
+      final starOpacity = isDark ? opacity * 0.5 : opacity * 0.2;
+
+      // Add subtle movement
+      final moveX = math.sin(phase * math.pi * 0.5) * 3;
+      final moveY = math.cos(phase * math.pi * 0.3) * 3;
+
+      canvas.drawCircle(
+        Offset(star.x * size.width + moveX, star.y * size.height + moveY),
+        star.size * (0.9 + twinkle * 0.2),
+        Paint()
+          ..color = Colors.white.withValues(alpha: starOpacity)
+          ..style = PaintingStyle.fill,
+      );
+    }
+
+    // Draw planets with floating animation
+    for (int i = 0; i < planets.length; i++) {
+      final planet = planets[i];
+      // Use different animation phases for each planet
+      final animationPhase = (planetRotation + (i * 0.3)) % 1.0;
+      _drawPlanet(canvas, size, planet, animationPhase);
+    }
+
+    // Draw particles
+    for (int i = 0; i < particles.length; i++) {
+      final particle = particles[i];
+      final phase = (starTwinkle + (i * 0.15)) % 1.0;
+      final moveX = math.sin(phase * 2 * math.pi * particle.speed) * 10;
+      final moveY = math.cos(phase * 2 * math.pi * particle.speed * 0.7) * 10;
+
+      canvas.drawCircle(
+        Offset(
+          particle.x * size.width + moveX,
+          particle.y * size.height + moveY,
         ),
-    );
-
-    canvas.drawRect(
-      Rect.fromLTWH(0, 0, size.width, size.height),
-      Paint()
-        ..shader = gradient3.createShader(
-          Rect.fromLTWH(0, 0, size.width, size.height),
-        ),
-    );
-
-    // Enhanced animated particles with varying sizes and movements
-    for (int i = 6; i < animations.length - 5; i++) {
-      final progress = animations[i].value;
-      final baseX = (size.width * 0.1) + (size.width * 0.8 * ((i * 0.618) % 1));
-      final baseY =
-          (size.height * 0.1) + (size.height * 0.8 * ((i * 0.382) % 1));
-
-      // Circular motion
-      final radius = 40 + (30 * (i % 4));
-      final offsetX = radius * (i % 2 == 0 ? 1 : -1) * (progress * 2 - 1);
-      final offsetY =
-          radius * 0.6 * ((i % 3 == 0 ? 1 : -1)) * (progress * 2 - 1);
-
-      final x = baseX + offsetX * 0.5;
-      final y = baseY + offsetY * 0.5;
-
-      final particleRadius =
-          (15 + (25 * (i % 3))) * (0.6 + 0.4 * (progress * 2 - 1).abs());
-      final alpha = 0.04 + 0.08 * (1 - (progress * 2 - 1).abs());
-
-      // Outer glow
-      canvas.drawCircle(
-        Offset(x, y),
-        particleRadius * 1.5,
+        particle.size,
         Paint()
-          ..color = const Color(0xFF00D9FF).withValues(alpha: alpha * 0.3)
-          ..style = PaintingStyle.fill,
-      );
-
-      // Main particle
-      canvas.drawCircle(
-        Offset(x, y),
-        particleRadius,
-        Paint()
-          ..color = const Color(0xFF00D9FF).withValues(alpha: alpha)
-          ..style = PaintingStyle.fill,
-      );
-
-      // Inner highlight
-      canvas.drawCircle(
-        Offset(x - particleRadius * 0.3, y - particleRadius * 0.3),
-        particleRadius * 0.4,
-        Paint()
-          ..color = Colors.white.withValues(alpha: alpha * 0.5)
+          ..color = isDark
+              ? Colors.white.withValues(alpha: particle.opacity)
+              : Colors.blue.withValues(alpha: particle.opacity * 0.3)
           ..style = PaintingStyle.fill,
       );
     }
 
-    // Animated grid lines with varying opacity
-    for (int i = 0; i < 15; i++) {
-      final gridProgress = animations[animations.length - 5 + (i % 5)].value;
-      final gridPaint = Paint()
-        ..color = const Color(
-          0xFF00D9FF,
-        ).withValues(alpha: 0.03 + 0.04 * (1 - (gridProgress * 2 - 1).abs()))
-        ..strokeWidth = 0.5;
+    // Draw geometric shapes
+    for (int i = 0; i < shapes.length; i++) {
+      final shape = shapes[i];
+      final phase = (planetRotation + (i * 0.2)) % 1.0;
+      final rotation = shape.rotation + phase * 0.1;
+      final floatY = math.sin(phase * 2 * math.pi) * 5;
 
-      final offset = (gridProgress * 80) % 100;
-      final y = (i * size.height / 15) + offset;
-      if (y >= 0 && y <= size.height) {
-        canvas.drawLine(Offset(0, y), Offset(size.width, y), gridPaint);
-      }
-    }
+      canvas.save();
+      canvas.translate(shape.x * size.width, shape.y * size.height + floatY);
+      canvas.rotate(rotation);
 
-    for (int i = 0; i < 15; i++) {
-      final gridProgress = animations[animations.length - 10 + (i % 5)].value;
-      final gridPaint = Paint()
-        ..color = const Color(
-          0xFF00D9FF,
-        ).withValues(alpha: 0.03 + 0.04 * (1 - (gridProgress * 2 - 1).abs()))
-        ..strokeWidth = 0.5;
+      final shapePaint = Paint()
+        ..color = isDark
+            ? const Color(0xFF00D9FF).withValues(alpha: shape.opacity)
+            : const Color(0xFF00B8E6).withValues(alpha: shape.opacity * 0.5)
+        ..style = PaintingStyle.fill;
 
-      final offset = (gridProgress * 80) % 100;
-      final x = (i * size.width / 15) + offset;
-      if (x >= 0 && x <= size.width) {
-        canvas.drawLine(Offset(x, 0), Offset(x, size.height), gridPaint);
-      }
-    }
-
-    // Floating geometric shapes
-    for (int i = 0; i < 8; i++) {
-      final shapeProgress = animations[animations.length - 15 + (i % 10)].value;
-      final shapeX = size.width * (0.1 + (i * 0.12) % 0.8);
-      final shapeY = size.height * (0.15 + (i * 0.15) % 0.7);
-      final shapeSize = 20 + (15 * (i % 3));
-      final rotation = shapeProgress * 2 * 3.14159;
-
-      // Draw hexagons or triangles
-      final path = Path();
-      if (i % 2 == 0) {
-        // Hexagon
-        for (int j = 0; j < 6; j++) {
-          final angle = (j * math.pi / 3) + rotation;
-          final px =
-              shapeX +
-              shapeSize * 0.5 * (1 + shapeProgress * 0.3) * math.cos(angle);
-          final py =
-              shapeY +
-              shapeSize * 0.5 * (1 + shapeProgress * 0.3) * math.sin(angle);
-          if (j == 0) {
-            path.moveTo(px, py);
-          } else {
-            path.lineTo(px, py);
-          }
-        }
-        path.close();
+      if (shape.type == ShapeType.circle) {
+        canvas.drawCircle(Offset.zero, shape.size, shapePaint);
       } else {
-        // Triangle
-        for (int j = 0; j < 3; j++) {
-          final angle = (j * 2 * math.pi / 3) + rotation;
-          final px =
-              shapeX +
-              shapeSize * 0.4 * (1 + shapeProgress * 0.2) * math.cos(angle);
-          final py =
-              shapeY +
-              shapeSize * 0.4 * (1 + shapeProgress * 0.2) * math.sin(angle);
-          if (j == 0) {
-            path.moveTo(px, py);
-          } else {
-            path.lineTo(px, py);
-          }
-        }
-        path.close();
+        canvas.drawRect(
+          Rect.fromCenter(
+            center: Offset.zero,
+            width: shape.size * 2,
+            height: shape.size * 2,
+          ),
+          shapePaint,
+        );
       }
 
-      canvas.drawPath(
-        path,
-        Paint()
-          ..color = const Color(
-            0xFF00D9FF,
-          ).withValues(alpha: 0.06 + 0.04 * (1 - (shapeProgress * 2 - 1).abs()))
-          ..style = PaintingStyle.stroke
-          ..strokeWidth = 1.5,
-      );
+      canvas.restore();
+    }
+
+    // Draw subtle grid lines
+    _drawGridLines(canvas, size);
+
+    // Draw nebula clouds (subtle gradient overlays)
+    if (isDark) {
+      _drawNebula(canvas, size);
+    } else {
+      _drawClouds(canvas, size);
+    }
+  }
+
+  void _drawPlanet(Canvas canvas, Size size, Planet planet, double rotation) {
+    // Enhanced floating movement with smooth animation
+    final floatOffset = math.sin(rotation * 2 * math.pi * 0.5) * 20;
+    final horizontalDrift = math.cos(rotation * 2 * math.pi * 0.3) * 15;
+    final centerX = planet.x * size.width + horizontalDrift;
+    final centerY = planet.y * size.height + floatOffset;
+    final radius =
+        planet.size * (1 + math.sin(rotation * 2 * math.pi * 0.4) * 0.1);
+
+    canvas.save();
+    canvas.translate(centerX, centerY);
+    canvas.rotate(rotation * 2 * math.pi * planet.rotationSpeed);
+
+    switch (planet.type) {
+      case PlanetType.earth:
+        _drawEarth(canvas, radius, isDark);
+        break;
+      case PlanetType.mars:
+        _drawMars(canvas, radius, isDark);
+        break;
+    }
+
+    canvas.restore();
+  }
+
+  void _drawEarth(Canvas canvas, double radius, bool isDark) {
+    // Subtle Earth
+    canvas.drawCircle(
+      Offset.zero,
+      radius,
+      Paint()
+        ..color = isDark
+            ? const Color(0xFF4A90E2).withValues(alpha: 0.15)
+            : const Color(0xFF6BB6FF).withValues(alpha: 0.1)
+        ..style = PaintingStyle.fill,
+    );
+  }
+
+  void _drawMars(Canvas canvas, double radius, bool isDark) {
+    // Subtle Mars
+    canvas.drawCircle(
+      Offset.zero,
+      radius,
+      Paint()
+        ..color = isDark
+            ? const Color(0xFFCD5C5C).withValues(alpha: 0.12)
+            : const Color(0xFFE9967A).withValues(alpha: 0.08)
+        ..style = PaintingStyle.fill,
+    );
+  }
+
+  void _drawNebula(Canvas canvas, Size size) {
+    // Very subtle nebula for dark mode
+    final nebulaPaint = Paint()
+      ..shader = RadialGradient(
+        colors: [
+          const Color(0xFF00D9FF).withValues(alpha: 0.02),
+          Colors.transparent,
+        ],
+      ).createShader(Rect.fromLTWH(0, 0, size.width, size.height));
+
+    canvas.drawRect(Rect.fromLTWH(0, 0, size.width, size.height), nebulaPaint);
+  }
+
+  void _drawGridLines(Canvas canvas, Size size) {
+    final linePaint = Paint()
+      ..color = isDark
+          ? Colors.white.withValues(alpha: 0.03)
+          : Colors.blue.withValues(alpha: 0.05)
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 1;
+
+    // Vertical lines
+    for (int i = 1; i < 8; i++) {
+      final x = size.width * (i / 8);
+      canvas.drawLine(Offset(x, 0), Offset(x, size.height), linePaint);
+    }
+
+    // Horizontal lines
+    for (int i = 1; i < 6; i++) {
+      final y = size.height * (i / 6);
+      canvas.drawLine(Offset(0, y), Offset(size.width, y), linePaint);
+    }
+  }
+
+  void _drawClouds(Canvas canvas, Size size) {
+    // Very subtle clouds for light mode
+    final cloudPaint = Paint()
+      ..color = Colors.white.withValues(alpha: 0.05)
+      ..style = PaintingStyle.fill;
+
+    // Draw minimal cloud shapes
+    for (int i = 0; i < 3; i++) {
+      final x = size.width * 0.3 * (i + 1.0);
+      final y = size.height * (0.2 + (i * 0.2));
+      final cloudSize = 60.0;
+
+      canvas.drawCircle(Offset(x, y), cloudSize, cloudPaint);
     }
   }
 

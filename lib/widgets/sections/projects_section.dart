@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import '../../models/project.dart';
 import '../common/section_title.dart';
 import '../common/project_card.dart';
-import '../hero/animated_background.dart';
 
 class ProjectsSection extends StatelessWidget {
   const ProjectsSection({super.key});
@@ -204,72 +203,65 @@ class ProjectsSection extends StatelessWidget {
     return Container(
       width: double.infinity,
       constraints: const BoxConstraints(minHeight: 600),
-      child: Stack(
-        children: [
-          // Animated background (same as home)
-          const AnimatedBackground(),
-
-          // Content - Centered
-          Center(
-            child: ConstrainedBox(
-              constraints: const BoxConstraints(maxWidth: 1400),
-              child: Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: isWide ? 60 : 24,
-                  vertical: 80,
+      child: Center(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 1400),
+          child: Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: isWide ? 60 : 24,
+              vertical: 80,
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                sectionTitle(context, 'Projects', icon: Icons.work_outline),
+                const SizedBox(height: 20),
+                Text(
+                  'Showcasing my best work',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Theme.of(
+                      context,
+                    ).colorScheme.onSurface.withValues(alpha: 0.6),
+                    fontSize: isWide ? 16 : 14,
+                    fontWeight: FontWeight.w400,
+                    letterSpacing: 1,
+                  ),
                 ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    sectionTitle(context, 'Projects', icon: Icons.work_outline),
-                    const SizedBox(height: 20),
-                    Text(
-                      'Showcasing my best work',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: Colors.white.withValues(alpha: 0.6),
-                        fontSize: isWide ? 16 : 14,
-                        fontWeight: FontWeight.w400,
-                        letterSpacing: 1,
-                      ),
-                    ),
-                    const SizedBox(height: 60),
-                    LayoutBuilder(
-                      builder: (context, constraints) {
-                        final maxW = constraints.maxWidth;
-                        int columns;
-                        if (screenWidth >= 1200) {
-                          columns = 3;
-                        } else if (screenWidth >= 800) {
-                          columns = 2;
-                        } else {
-                          columns = 1;
-                        }
-                        const gap = 24.0;
-                        final cardWidth =
-                            (maxW - (gap * (columns - 1))) / columns;
-                        return Wrap(
-                          spacing: gap,
-                          runSpacing: gap,
-                          alignment: WrapAlignment.center,
-                          children: [
-                            for (final p in projects)
-                              SizedBox(
-                                width: cardWidth,
-                                child: ProjectCard(project: p),
-                              ),
-                          ],
-                        );
-                      },
-                    ),
-                    const SizedBox(height: 40),
-                  ],
+                const SizedBox(height: 60),
+                LayoutBuilder(
+                  builder: (context, constraints) {
+                    final maxW = constraints.maxWidth;
+                    int columns;
+                    if (screenWidth >= 1200) {
+                      columns = 3;
+                    } else if (screenWidth >= 800) {
+                      columns = 2;
+                    } else {
+                      columns = 1;
+                    }
+                    const gap = 24.0;
+                    final cardWidth = (maxW - (gap * (columns - 1))) / columns;
+                    return Wrap(
+                      spacing: gap,
+                      runSpacing: gap,
+                      alignment: WrapAlignment.center,
+                      children: [
+                        for (final p in projects)
+                          SizedBox(
+                            width: cardWidth,
+                            child: ProjectCard(project: p),
+                          ),
+                      ],
+                    );
+                  },
                 ),
-              ),
+                const SizedBox(height: 40),
+              ],
             ),
           ),
-        ],
+        ),
       ),
     );
   }

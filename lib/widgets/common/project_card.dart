@@ -30,31 +30,45 @@ class _ProjectCardState extends State<ProjectCard> {
               end: Alignment.bottomRight,
               colors: _hovering
                   ? [
-                      const Color(0xFF1A1F2E).withValues(alpha: 0.95),
-                      const Color(0xFF0F1419).withValues(alpha: 0.98),
+                      Theme.of(
+                        context,
+                      ).colorScheme.surface.withValues(alpha: 0.95),
+                      Theme.of(
+                        context,
+                      ).colorScheme.surface.withValues(alpha: 0.98),
                     ]
                   : [
-                      const Color(0xFF1A1F2E).withValues(alpha: 0.7),
-                      const Color(0xFF0F1419).withValues(alpha: 0.85),
+                      Theme.of(
+                        context,
+                      ).colorScheme.surface.withValues(alpha: 0.7),
+                      Theme.of(
+                        context,
+                      ).colorScheme.surface.withValues(alpha: 0.85),
                     ],
             ),
             borderRadius: BorderRadius.circular(24),
             border: Border.all(
               color: _hovering
-                  ? const Color(0xFF00D9FF).withValues(alpha: 0.6)
-                  : const Color(0xFF1A1F2E).withValues(alpha: 0.4),
+                  ? Theme.of(context).colorScheme.primary.withValues(alpha: 0.6)
+                  : Theme.of(
+                      context,
+                    ).colorScheme.surface.withValues(alpha: 0.4),
               width: _hovering ? 2 : 1.5,
             ),
             boxShadow: _hovering
                 ? [
                     BoxShadow(
-                      color: const Color(0xFF00D9FF).withValues(alpha: 0.4),
+                      color: Theme.of(
+                        context,
+                      ).colorScheme.primary.withValues(alpha: 0.4),
                       blurRadius: 30,
                       spreadRadius: 0,
                       offset: const Offset(0, 12),
                     ),
                     BoxShadow(
-                      color: Colors.black.withValues(alpha: 0.3),
+                      color: Theme.of(context).brightness == Brightness.dark
+                          ? Colors.black.withValues(alpha: 0.3)
+                          : Colors.grey.withValues(alpha: 0.2),
                       blurRadius: 20,
                       spreadRadius: 0,
                       offset: const Offset(0, 8),
@@ -62,7 +76,9 @@ class _ProjectCardState extends State<ProjectCard> {
                   ]
                 : [
                     BoxShadow(
-                      color: Colors.black.withValues(alpha: 0.3),
+                      color: Theme.of(context).brightness == Brightness.dark
+                          ? Colors.black.withValues(alpha: 0.3)
+                          : Colors.grey.withValues(alpha: 0.2),
                       blurRadius: 15,
                       spreadRadius: 0,
                       offset: const Offset(0, 6),
@@ -105,9 +121,9 @@ class _ProjectCardState extends State<ProjectCard> {
                                   ),
                                   borderRadius: BorderRadius.circular(16),
                                 ),
-                                child: const Icon(
+                                child: Icon(
                                   Icons.image_outlined,
-                                  color: Color(0xFF00D9FF),
+                                  color: Theme.of(context).colorScheme.primary,
                                   size: 48,
                                 ),
                               );
@@ -123,8 +139,13 @@ class _ProjectCardState extends State<ProjectCard> {
                               vertical: 6,
                             ),
                             decoration: BoxDecoration(
-                              gradient: const LinearGradient(
-                                colors: [Color(0xFF00D9FF), Color(0xFF0099CC)],
+                              gradient: LinearGradient(
+                                colors: [
+                                  Theme.of(context).colorScheme.primary,
+                                  Theme.of(
+                                    context,
+                                  ).colorScheme.primary.withValues(alpha: 0.8),
+                                ],
                               ),
                               borderRadius: BorderRadius.circular(8),
                               boxShadow: [
@@ -135,19 +156,23 @@ class _ProjectCardState extends State<ProjectCard> {
                                 ),
                               ],
                             ),
-                            child: const Row(
+                            child: Row(
                               mainAxisSize: MainAxisSize.min,
                               children: [
                                 Icon(
                                   Icons.visibility,
-                                  color: Colors.white,
+                                  color: Theme.of(
+                                    context,
+                                  ).colorScheme.onPrimary,
                                   size: 16,
                                 ),
-                                SizedBox(width: 4),
+                                const SizedBox(width: 4),
                                 Text(
                                   'View Details',
                                   style: TextStyle(
-                                    color: Colors.white,
+                                    color: Theme.of(
+                                      context,
+                                    ).colorScheme.onPrimary,
                                     fontSize: 12,
                                     fontWeight: FontWeight.w600,
                                   ),
@@ -165,10 +190,10 @@ class _ProjectCardState extends State<ProjectCard> {
                   onTap: _handleOpenStore,
                   child: Text(
                     widget.project.title,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 22,
                       fontWeight: FontWeight.w900,
-                      color: Colors.white,
+                      color: Theme.of(context).colorScheme.onSurface,
                       letterSpacing: -0.5,
                       height: 1.3,
                     ),
@@ -181,17 +206,21 @@ class _ProjectCardState extends State<ProjectCard> {
                     vertical: 6,
                   ),
                   decoration: BoxDecoration(
-                    color: const Color(0xFF00D9FF).withValues(alpha: 0.15),
+                    color: Theme.of(
+                      context,
+                    ).colorScheme.primary.withValues(alpha: 0.15),
                     borderRadius: BorderRadius.circular(8),
                     border: Border.all(
-                      color: const Color(0xFF00D9FF).withValues(alpha: 0.3),
+                      color: Theme.of(
+                        context,
+                      ).colorScheme.primary.withValues(alpha: 0.3),
                       width: 1,
                     ),
                   ),
                   child: Text(
                     widget.project.tech,
-                    style: const TextStyle(
-                      color: Color(0xFF00D9FF),
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.primary,
                       fontSize: 13,
                       fontWeight: FontWeight.w600,
                       letterSpacing: 0.5,
@@ -202,7 +231,9 @@ class _ProjectCardState extends State<ProjectCard> {
                 Text(
                   widget.project.period,
                   style: TextStyle(
-                    color: Colors.white.withValues(alpha: 0.5),
+                    color: Theme.of(
+                      context,
+                    ).colorScheme.onSurface.withValues(alpha: 0.5),
                     fontSize: 13,
                     fontWeight: FontWeight.w500,
                   ),
@@ -219,7 +250,7 @@ class _ProjectCardState extends State<ProjectCard> {
                           width: 6,
                           height: 6,
                           decoration: BoxDecoration(
-                            color: const Color(0xFF00D9FF),
+                            color: Theme.of(context).colorScheme.primary,
                             shape: BoxShape.circle,
                           ),
                         ),
@@ -227,7 +258,9 @@ class _ProjectCardState extends State<ProjectCard> {
                           child: Text(
                             pt,
                             style: TextStyle(
-                              color: Colors.white.withValues(alpha: 0.85),
+                              color: Theme.of(
+                                context,
+                              ).colorScheme.onSurface.withValues(alpha: 0.85),
                               fontSize: 14,
                               height: 1.6,
                               fontWeight: FontWeight.w400,
@@ -290,7 +323,7 @@ class _ProjectCardState extends State<ProjectCard> {
   void _showStoreChooser() {
     showModalBottomSheet(
       context: context,
-      backgroundColor: const Color(0xFF151923),
+      backgroundColor: Theme.of(context).colorScheme.surface,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
       ),
@@ -326,7 +359,9 @@ class _ProjectCardState extends State<ProjectCard> {
   void _showProjectDetails(BuildContext context) {
     showDialog(
       context: context,
-      barrierColor: Colors.black.withValues(alpha: 0.9),
+      barrierColor: Theme.of(context).brightness == Brightness.dark
+          ? Colors.black.withValues(alpha: 0.9)
+          : Colors.grey.withValues(alpha: 0.7),
       builder: (context) => ProjectDetailsModal(project: widget.project),
     );
   }
@@ -348,9 +383,13 @@ class StoreButton extends StatelessWidget {
     return ElevatedButton.icon(
       onPressed: onTap,
       style: ElevatedButton.styleFrom(
-        foregroundColor: Colors.white,
-        backgroundColor: const Color(0xFF1A1F2E).withValues(alpha: 0.8),
-        side: BorderSide(color: const Color(0xFF00D9FF).withValues(alpha: 0.3)),
+        foregroundColor: Theme.of(context).colorScheme.onSurface,
+        backgroundColor: Theme.of(
+          context,
+        ).colorScheme.surface.withValues(alpha: 0.8),
+        side: BorderSide(
+          color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.3),
+        ),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
         padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
       ),

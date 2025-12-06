@@ -25,13 +25,13 @@ class ProjectDetailsModal extends StatelessWidget {
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
             colors: [
-              const Color(0xFF1A1F2E).withValues(alpha: 0.98),
-              const Color(0xFF0F1419).withValues(alpha: 0.98),
+              Theme.of(context).colorScheme.surface.withValues(alpha: 0.98),
+              Theme.of(context).colorScheme.surface.withValues(alpha: 0.98),
             ],
           ),
           borderRadius: BorderRadius.circular(24),
           border: Border.all(
-            color: const Color(0xFF00D9FF).withValues(alpha: 0.3),
+            color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.3),
             width: 1.5,
           ),
         ),
@@ -46,13 +46,19 @@ class ProjectDetailsModal extends StatelessWidget {
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     colors: [
-                      const Color(0xFF00D9FF).withValues(alpha: 0.1),
-                      const Color(0xFF0099CC).withValues(alpha: 0.05),
+                      Theme.of(
+                        context,
+                      ).colorScheme.primary.withValues(alpha: 0.1),
+                      Theme.of(
+                        context,
+                      ).colorScheme.primary.withValues(alpha: 0.05),
                     ],
                   ),
                   border: Border(
                     bottom: BorderSide(
-                      color: const Color(0xFF1A1F2E).withValues(alpha: 0.5),
+                      color: Theme.of(
+                        context,
+                      ).colorScheme.surface.withValues(alpha: 0.5),
                       width: 1,
                     ),
                   ),
@@ -66,7 +72,7 @@ class ProjectDetailsModal extends StatelessWidget {
                           Text(
                             project.title,
                             style: TextStyle(
-                              color: Colors.white,
+                              color: Theme.of(context).colorScheme.onSurface,
                               fontSize: isWide ? 32 : 24,
                               fontWeight: FontWeight.w900,
                               letterSpacing: -0.5,
@@ -79,20 +85,20 @@ class ProjectDetailsModal extends StatelessWidget {
                               vertical: 6,
                             ),
                             decoration: BoxDecoration(
-                              color: const Color(
-                                0xFF00D9FF,
-                              ).withValues(alpha: 0.15),
+                              color: Theme.of(
+                                context,
+                              ).colorScheme.primary.withValues(alpha: 0.15),
                               borderRadius: BorderRadius.circular(8),
                               border: Border.all(
-                                color: const Color(
-                                  0xFF00D9FF,
-                                ).withValues(alpha: 0.3),
+                                color: Theme.of(
+                                  context,
+                                ).colorScheme.primary.withValues(alpha: 0.3),
                               ),
                             ),
                             child: Text(
                               project.tech,
-                              style: const TextStyle(
-                                color: Color(0xFF00D9FF),
+                              style: TextStyle(
+                                color: Theme.of(context).colorScheme.primary,
                                 fontSize: 14,
                                 fontWeight: FontWeight.w600,
                               ),
@@ -102,7 +108,9 @@ class ProjectDetailsModal extends StatelessWidget {
                           Text(
                             project.period,
                             style: TextStyle(
-                              color: Colors.white.withValues(alpha: 0.6),
+                              color: Theme.of(
+                                context,
+                              ).colorScheme.onSurface.withValues(alpha: 0.6),
                               fontSize: 14,
                             ),
                           ),
@@ -113,12 +121,14 @@ class ProjectDetailsModal extends StatelessWidget {
                       icon: Container(
                         padding: const EdgeInsets.all(8),
                         decoration: BoxDecoration(
-                          color: Colors.black.withValues(alpha: 0.3),
+                          color: Theme.of(context).brightness == Brightness.dark
+                              ? Colors.black.withValues(alpha: 0.3)
+                              : Colors.grey.withValues(alpha: 0.3),
                           shape: BoxShape.circle,
                         ),
-                        child: const Icon(
+                        child: Icon(
                           Icons.close,
-                          color: Colors.white,
+                          color: Theme.of(context).colorScheme.onSurface,
                           size: 24,
                         ),
                       ),
@@ -141,15 +151,19 @@ class ProjectDetailsModal extends StatelessWidget {
                             borderRadius: BorderRadius.circular(20),
                             boxShadow: [
                               BoxShadow(
-                                color: const Color(
-                                  0xFF00D9FF,
-                                ).withValues(alpha: 0.3),
+                                color: Theme.of(
+                                  context,
+                                ).colorScheme.primary.withValues(alpha: 0.3),
                                 blurRadius: 30,
                                 spreadRadius: 0,
                                 offset: const Offset(0, 15),
                               ),
                               BoxShadow(
-                                color: Colors.black.withValues(alpha: 0.5),
+                                color:
+                                    Theme.of(context).brightness ==
+                                        Brightness.dark
+                                    ? Colors.black.withValues(alpha: 0.5)
+                                    : Colors.grey.withValues(alpha: 0.4),
                                 blurRadius: 20,
                                 spreadRadius: 0,
                                 offset: const Offset(0, 10),
@@ -178,19 +192,23 @@ class ProjectDetailsModal extends StatelessWidget {
                                             begin: Alignment.topLeft,
                                             end: Alignment.bottomRight,
                                             colors: [
-                                              const Color(
-                                                0xFF00D9FF,
-                                              ).withValues(alpha: 0.2),
-                                              const Color(
-                                                0xFF0099CC,
-                                              ).withValues(alpha: 0.1),
+                                              Theme.of(context)
+                                                  .colorScheme
+                                                  .primary
+                                                  .withValues(alpha: 0.2),
+                                              Theme.of(context)
+                                                  .colorScheme
+                                                  .primary
+                                                  .withValues(alpha: 0.1),
                                             ],
                                           ),
                                         ),
-                                        child: const Center(
+                                        child: Center(
                                           child: Icon(
                                             Icons.image_outlined,
-                                            color: Color(0xFF00D9FF),
+                                            color: Theme.of(
+                                              context,
+                                            ).colorScheme.primary,
                                             size: 64,
                                           ),
                                         ),
@@ -207,7 +225,14 @@ class ProjectDetailsModal extends StatelessWidget {
                                         end: Alignment.bottomCenter,
                                         colors: [
                                           Colors.transparent,
-                                          Colors.black.withValues(alpha: 0.1),
+                                          Theme.of(context).brightness ==
+                                                  Brightness.dark
+                                              ? Colors.black.withValues(
+                                                  alpha: 0.1,
+                                                )
+                                              : Colors.grey.withValues(
+                                                  alpha: 0.05,
+                                                ),
                                         ],
                                       ),
                                     ),
@@ -247,7 +272,9 @@ class ProjectDetailsModal extends StatelessWidget {
                                   project.description ??
                                   '',
                               style: TextStyle(
-                                color: Colors.white.withValues(alpha: 0.85),
+                                color: Theme.of(
+                                  context,
+                                ).colorScheme.onSurface.withValues(alpha: 0.85),
                                 fontSize: 16,
                                 height: 1.8,
                               ),
@@ -272,8 +299,8 @@ class ProjectDetailsModal extends StatelessWidget {
                                 ),
                                 width: 8,
                                 height: 8,
-                                decoration: const BoxDecoration(
-                                  color: Color(0xFF00D9FF),
+                                decoration: BoxDecoration(
+                                  color: Theme.of(context).colorScheme.primary,
                                   shape: BoxShape.circle,
                                 ),
                               ),
@@ -281,7 +308,10 @@ class ProjectDetailsModal extends StatelessWidget {
                                 child: Text(
                                   point,
                                   style: TextStyle(
-                                    color: Colors.white.withValues(alpha: 0.85),
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .onSurface
+                                        .withValues(alpha: 0.85),
                                     fontSize: 15,
                                     height: 1.6,
                                   ),
@@ -314,9 +344,10 @@ class ProjectDetailsModal extends StatelessWidget {
                                       width: 6,
                                       height: 6,
                                       decoration: BoxDecoration(
-                                        color: const Color(
-                                          0xFF00D9FF,
-                                        ).withValues(alpha: 0.7),
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .primary
+                                            .withValues(alpha: 0.7),
                                         shape: BoxShape.circle,
                                       ),
                                     ),
@@ -324,9 +355,10 @@ class ProjectDetailsModal extends StatelessWidget {
                                       child: Text(
                                         task,
                                         style: TextStyle(
-                                          color: Colors.white.withValues(
-                                            alpha: 0.8,
-                                          ),
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .onSurface
+                                              .withValues(alpha: 0.8),
                                           fontSize: 14,
                                           height: 1.6,
                                         ),
@@ -368,13 +400,17 @@ class ProjectDetailsModal extends StatelessWidget {
                                               width: isWide ? 200 : 150,
                                               height: isWide ? 350 : 260,
                                               decoration: BoxDecoration(
-                                                color: const Color(0xFF1A1F2E),
+                                                color: Theme.of(
+                                                  context,
+                                                ).colorScheme.surface,
                                                 borderRadius:
                                                     BorderRadius.circular(12),
                                               ),
-                                              child: const Icon(
+                                              child: Icon(
                                                 Icons.image_outlined,
-                                                color: Color(0xFF00D9FF),
+                                                color: Theme.of(
+                                                  context,
+                                                ).colorScheme.primary,
                                                 size: 48,
                                               ),
                                             );
@@ -433,14 +469,18 @@ class ProjectDetailsModal extends StatelessWidget {
   }
 
   Widget _buildSectionTitle(String title) {
-    return Text(
-      title,
-      style: const TextStyle(
-        color: Color(0xFF00D9FF),
-        fontSize: 20,
-        fontWeight: FontWeight.w700,
-        letterSpacing: 0.5,
-      ),
+    return Builder(
+      builder: (context) {
+        return Text(
+          title,
+          style: TextStyle(
+            color: Theme.of(context).colorScheme.primary,
+            fontSize: 20,
+            fontWeight: FontWeight.w700,
+            letterSpacing: 0.5,
+          ),
+        );
+      },
     );
   }
 
@@ -453,10 +493,12 @@ class ProjectDetailsModal extends StatelessWidget {
     return ElevatedButton.icon(
       onPressed: () => _openUrl(url),
       style: ElevatedButton.styleFrom(
-        foregroundColor: Colors.white,
-        backgroundColor: const Color(0xFF1A1F2E).withValues(alpha: 0.8),
+        foregroundColor: Theme.of(context).colorScheme.onSurface,
+        backgroundColor: Theme.of(
+          context,
+        ).colorScheme.surface.withValues(alpha: 0.8),
         side: BorderSide(
-          color: const Color(0xFF00D9FF).withValues(alpha: 0.5),
+          color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.5),
           width: 1.5,
         ),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
@@ -497,21 +539,24 @@ class ProjectDetailsModal extends StatelessWidget {
                     return Container(
                       padding: const EdgeInsets.all(40),
                       decoration: BoxDecoration(
-                        color: const Color(0xFF1A1F2E),
+                        color: Theme.of(context).colorScheme.surface,
                         borderRadius: BorderRadius.circular(16),
                       ),
-                      child: const Column(
+                      child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Icon(
                             Icons.error_outline,
-                            color: Color(0xFF00D9FF),
+                            color: Theme.of(context).colorScheme.primary,
                             size: 48,
                           ),
-                          SizedBox(height: 16),
+                          const SizedBox(height: 16),
                           Text(
                             'Image not found',
-                            style: TextStyle(color: Colors.white, fontSize: 16),
+                            style: TextStyle(
+                              color: Theme.of(context).colorScheme.onSurface,
+                              fontSize: 16,
+                            ),
                           ),
                         ],
                       ),
@@ -527,10 +572,16 @@ class ProjectDetailsModal extends StatelessWidget {
                 icon: Container(
                   padding: const EdgeInsets.all(8),
                   decoration: BoxDecoration(
-                    color: Colors.black.withValues(alpha: 0.6),
+                    color: Theme.of(context).brightness == Brightness.dark
+                        ? Colors.black.withValues(alpha: 0.6)
+                        : Colors.grey.withValues(alpha: 0.5),
                     shape: BoxShape.circle,
                   ),
-                  child: const Icon(Icons.close, color: Colors.white, size: 24),
+                  child: Icon(
+                    Icons.close,
+                    color: Theme.of(context).colorScheme.onSurface,
+                    size: 24,
+                  ),
                 ),
                 onPressed: () => Navigator.of(context).pop(),
               ),
