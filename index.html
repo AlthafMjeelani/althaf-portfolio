@@ -370,6 +370,7 @@ dialog.sheet[open]{animation:pop .35s cubic-bezier(.2,.7,.1,1)}
 .three{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:18px}
 @media (max-width:960px){.three{grid-template-columns:minmax(0,1fr)}}
 .about{padding:18px;display:flex;flex-direction:column;gap:12px}
+.about-photo{display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:50% 15%;border-radius:12px;border:1px solid var(--line)}
 .about p{color:var(--muted);font-size:15.5px}
 .about .langs{display:flex;flex-wrap:wrap;gap:6px}
 .about .langs span{font-family:var(--f-mono);font-size:12px;padding:5px 10px;border-radius:999px;background:var(--accent-soft)}
@@ -736,6 +737,7 @@ dialog.sheet[open]{animation:pop .35s cubic-bezier(.2,.7,.1,1)}
         <div class="win reveal">
           <div class="win-bar"><i></i><i></i><i></i><span class="ttl">about.md</span></div>
           <div class="about">
+            <img class="about-photo" src="assets/images/portrait.jpg" alt="Althaf M in the office" width="640" height="921" loading="lazy">
             <h3>Who I am</h3>
             <p>I'm Althaf, a software engineer from Kozhikode, Kerala. I like turning ideas into products people actually use, and I keep learning as I build.</p>
             <p>I built my first app, an e-commerce store, in May 2022. Since then I've shipped 15+ apps and grown from Flutter into the full stack: backend, data, cloud and AI.</p>
