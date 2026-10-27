@@ -38,10 +38,10 @@
 
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
 #mesh{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
-.page{position:relative;z-index:1}
+.page{position:relative;z-index:1;overflow-x:clip}
 a{color:var(--accent)}
 :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
 .wrap{max-width:1180px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
@@ -137,7 +137,7 @@ p{margin:0}
 /* motion extras */
 .spot{position:fixed;inset:0;pointer-events:none;z-index:0;background:radial-gradient(420px circle at var(--mx,50%) var(--my,30%),color-mix(in oklab,var(--leaf) 14%,transparent),transparent 70%);transition:opacity .4s}
 .progress{position:fixed;left:0;top:env(safe-area-inset-top,0px);height:3px;width:100%;transform-origin:0 50%;transform:scaleX(var(--sp,0));background:linear-gradient(90deg,var(--leaf),var(--ts));z-index:25}
-.orbit-wrap{position:relative;width:min(340px,86vw);aspect-ratio:1;display:grid;place-items:center;--r:min(160px,40vw)}
+.orbit-wrap{position:relative;width:min(340px,78vw);aspect-ratio:1;display:grid;place-items:center;--r:min(160px,35vw)}
 .orbit{position:absolute;inset:6%;border:1px dashed color-mix(in oklab,var(--leaf) 55%,transparent);border-radius:50%;animation:spin 46s linear infinite}
 .orbit.o2{inset:20%;animation-duration:30s;animation-direction:reverse;border-style:dotted}
 .orbit span{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) rotate(calc(var(--i)*45deg)) translateY(calc(var(--r)*-.88)) rotate(calc(var(--i)*-45deg))}
@@ -266,6 +266,99 @@ p{margin:0}
 .sheet-phone .scr{display:flex;height:100%;border-radius:20px;overflow:hidden;background:var(--surface)}
 .sheet-phone .ui{font-size:11px;padding:14px 11px}
 @media (prefers-reduced-motion: reduce){.ui .row,.ui .bub,.ui .g2 .c{opacity:1!important;transform:none!important}}
+
+
+/* ---- responsive polish ---- */
+.brand{min-height:44px;padding-right:6px}
+.tabs button{min-height:40px;padding:0 12px}
+.tags .tag{min-height:40px}
+.chip{min-height:44px}
+.skill-note button{min-height:44px}
+.insp .k,.stage span,.proj .stack span,.proj .count,.arrow-in{font-size:12px}
+.hist ol,.gitlog,.term{font-size:clamp(12.5px,1.6vw,13.5px)}
+.menu-btn{display:none}
+@media (max-width:760px){
+  .menu-btn{display:grid}
+  .nav a{display:none}
+  .hero{padding-block:44px 28px;gap:14px}
+  .hero .lede{font-size:17px}
+  .hero .ctas{width:100%}
+  .hero .ctas .btn{flex:1 1 140px;justify-content:center}
+  h2{font-size:clamp(22px,7vw,30px)}
+  .sec-head p{font-size:16px}
+  section.blk{padding-block:56px 12px}
+  .desk{gap:32px}
+  .term{min-height:260px;padding:14px}
+  .dchip{min-width:0;flex:1 1 calc(50% - 8px)}
+  .dchip b{font-size:20px}
+  .agent-ctl .btn,#maRun,.form .actions .btn{width:100%;justify-content:center}
+  .mailrow .btn{flex:1 1 30%;justify-content:center}
+  .stages{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .princ div{padding:14px}
+  .layers-legend div{padding:12px}
+  .sheet-body{padding:18px}
+  .sheet-phone{width:150px;height:264px}
+  .win-bar .ttl{font-size:12px}
+  .tabs{width:100%;margin-left:0;overflow-x:auto;flex-wrap:nowrap}
+}
+@media (max-width:400px){
+  .hero h1{font-size:clamp(32px,11vw,44px)}
+  .roles-line{font-size:14px}
+  .orbit span b{font-size:10.5px;padding:4px 8px}
+}
+.swipe{display:none;font-family:var(--f-mono);font-size:12px;color:var(--muted);padding:8px 14px 0}
+@media (max-width:760px){.swipe{display:block}}
+.swipe::after{content:" →";display:inline-block;animation:nudge 1.4s ease-in-out infinite}
+@keyframes nudge{50%{transform:translateX(6px)}}
+
+/* mobile menu */
+.mmenu{position:fixed;inset:0;z-index:40;background:color-mix(in oklab,var(--bg) 94%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);display:flex;flex-direction:column;justify-content:center;gap:6px;padding:calc(72px + env(safe-area-inset-top,0px)) max(24px,env(safe-area-inset-right,0px)) calc(32px + env(safe-area-inset-bottom,0px)) max(24px,env(safe-area-inset-left,0px));clip-path:circle(0 at calc(100% - 38px) 36px);transition:clip-path .55s cubic-bezier(.7,0,.2,1);visibility:hidden}
+.mmenu.open{clip-path:circle(150% at calc(100% - 38px) 36px);visibility:visible}
+.mmenu a{font-family:var(--f-display);font-size:clamp(26px,8vw,38px);font-weight:600;text-transform:uppercase;color:var(--ink);text-decoration:none;min-height:52px;display:flex;align-items:center;gap:14px;opacity:0;transform:translateY(14px);transition:opacity .35s,transform .35s}
+.mmenu a span{font-family:var(--f-mono);font-size:13px;color:var(--leaf);font-weight:400}
+.mmenu.open a{opacity:1;transform:none}
+.mmenu.open a:nth-child(2){transition-delay:.05s}.mmenu.open a:nth-child(3){transition-delay:.1s}.mmenu.open a:nth-child(4){transition-delay:.15s}.mmenu.open a:nth-child(5){transition-delay:.2s}.mmenu.open a:nth-child(6){transition-delay:.25s}.mmenu.open a:nth-child(7){transition-delay:.3s}.mmenu.open a:nth-child(8){transition-delay:.35s}.mmenu.open a:nth-child(9){transition-delay:.4s}
+.mmenu-close{position:absolute;top:calc(12px + env(safe-area-inset-top,0px));right:max(16px,env(safe-area-inset-right,0px))}
+.menu-btn span,.menu-btn span::before,.menu-btn span::after{display:block;width:18px;height:2px;border-radius:2px;background:currentColor;position:relative;transition:transform .3s}
+.menu-btn span::before,.menu-btn span::after{content:"";position:absolute;left:0}
+.menu-btn span::before{top:-6px}.menu-btn span::after{top:6px}
+
+/* ---- more motion ---- */
+.ticker{overflow:hidden;border-block:1px solid var(--line);background:color-mix(in oklab,var(--surface) 60%,transparent);margin-block:48px 8px;-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+.ticker div{display:flex;gap:36px;width:max-content;padding-block:14px;animation:mq 38s linear infinite}
+.ticker span{font-family:var(--f-display);font-size:clamp(16px,2.4vw,24px);font-weight:600;text-transform:uppercase;color:var(--muted);white-space:nowrap;display:flex;align-items:center;gap:36px}
+.ticker span::after{content:"◆";font-size:.6em;color:var(--leaf)}
+.ticker.rev div{animation-direction:reverse;animation-duration:44s}
+.ticker:hover div{animation-play-state:paused}
+.btn{position:relative;overflow:hidden}
+.btn .rip{position:absolute;border-radius:50%;transform:scale(0);background:currentColor;opacity:.25;pointer-events:none;animation:rip .6s ease-out forwards}
+@keyframes rip{to{transform:scale(1);opacity:0}}
+.win{transition:transform .35s cubic-bezier(.2,.7,.1,1),box-shadow .35s,border-color .35s}
+.win:not(.proj):hover{box-shadow:0 30px 60px -32px color-mix(in oklab,var(--forest) 70%,transparent),0 0 0 1px color-mix(in oklab,var(--leaf) 45%,transparent)}
+.desk .win{animation:bob 7s ease-in-out infinite}
+.desk .win:nth-child(3){animation-delay:-2.3s}.desk .win:nth-child(4){animation-delay:-4.6s}
+@keyframes bob{50%{transform:translateY(-6px)}}
+.tag,.princ div,.layers-legend div,.dchip{transition:transform .25s cubic-bezier(.2,.7,.1,1),background .15s,color .15s,border-color .15s}
+.tag:hover{transform:translateY(-2px)}
+.dchip:hover{transform:translateY(-3px) rotate(-.6deg)}
+.pop .tag{animation:tagpop .5s cubic-bezier(.2,1.4,.4,1) both;animation-delay:calc(var(--k,0)*35ms)}
+@keyframes tagpop{from{transform:scale(.6);opacity:0}to{transform:none;opacity:1}}
+.sec-head h2{position:relative;padding-bottom:12px}
+.sec-head h2::after{bottom:0!important}
+.btn{white-space:nowrap}
+@media (max-width:760px){
+  .sec-head{flex-direction:column;align-items:stretch}
+  .filters{width:100%}
+  .filters .chip{flex:1 1 auto}
+}
+@media (max-width:480px){
+  .hero .ctas{flex-direction:column}
+  .hero .ctas .btn{flex:none;width:100%}
+}
+.sec-head h2::after{content:"";position:absolute;left:0;bottom:-10px;height:3px;width:56px;border-radius:2px;background:linear-gradient(90deg,var(--leaf),var(--ts));transform-origin:left;transform:scaleX(var(--ul,1));transition:transform .9s cubic-bezier(.2,.7,.1,1)}
+.sec-head h2.pre::after{--ul:0}
+.status{animation:glyph .8s .8s both}
+@media (prefers-reduced-motion: reduce){.ticker div{animation:none}.desk .win{animation:none}}
 
 section.blk{padding-block:72px 16px}
 .sec-head{display:flex;justify-content:space-between;align-items:end;gap:16px;flex-wrap:wrap;margin-bottom:28px}
@@ -435,6 +528,7 @@ dialog.sheet[open]{animation:pop .35s cubic-bezier(.2,.7,.1,1)}
       <a href="#skills">skills</a>
       <a href="#projects">projects</a>
       <a href="#contact">contact</a>
+      <button class="iconbtn menu-btn" id="menuBtn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mmenu"><span></span></button>
       <button class="iconbtn" id="themeBtn" type="button" aria-label="Switch colour theme">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"></path></svg>
       </button>
@@ -442,6 +536,10 @@ dialog.sheet[open]{animation:pop .35s cubic-bezier(.2,.7,.1,1)}
   </div>
 </header>
 
+<nav class="mmenu" id="mmenu" aria-label="Sections" hidden>
+  <button class="iconbtn mmenu-close" id="menuClose" type="button" aria-label="Close menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8"></path></svg></button>
+  <a href="#desk"><span>01</span>workspace</a><a href="#agent"><span>02</span>agents</a><a href="#multi"><span>03</span>architecture</a><a href="#craft"><span>04</span>code</a><a href="#skills"><span>05</span>skills</a><a href="#projects"><span>06</span>projects</a><a href="#about"><span>07</span>about</a><a href="#timeline"><span>08</span>experience</a><a href="#contact"><span>09</span>contact</a>
+</nav>
 <main id="top">
   <div class="wrap">
     <section class="hero">
@@ -496,6 +594,8 @@ dialog.sheet[open]{animation:pop .35s cubic-bezier(.2,.7,.1,1)}
       </div>
     </section>
 
+    <div class="ticker" aria-hidden="true"><div><span>Flutter</span><span>Go</span><span>Python</span><span>TypeScript</span><span>React</span><span>FastAPI</span><span>PostgreSQL</span><span>Redis</span><span>LangChain</span><span>RAG</span><span>AI agents</span><span>MCP</span><span>AWS</span><span>Docker</span><span>Kubernetes</span><span>Snowflake</span><span>dbt</span><span>CI/CD</span><span>Flutter</span><span>Go</span><span>Python</span><span>TypeScript</span><span>React</span><span>FastAPI</span><span>PostgreSQL</span><span>Redis</span><span>LangChain</span><span>RAG</span><span>AI agents</span><span>MCP</span><span>AWS</span><span>Docker</span><span>Kubernetes</span><span>Snowflake</span><span>dbt</span><span>CI/CD</span></div></div>
+
     <section class="blk" id="agent">
       <div class="sec-head"><div>
         <span class="eyebrow">AI agents</span>
@@ -505,6 +605,7 @@ dialog.sheet[open]{animation:pop .35s cubic-bezier(.2,.7,.1,1)}
       <div class="agent">
         <div class="win reveal">
           <div class="win-bar"><i></i><i></i><i></i><span class="ttl">agent.graph</span></div>
+          <p class="swipe">swipe to see the full graph</p>
           <div class="graph">
             <svg id="graph" viewBox="0 0 760 340" role="img" aria-label="Agent pipeline: the query goes to a planner, which uses a retriever, tools and memory; their results combine into a response.">
               <path class="gwire" id="g1" d="M 150 170 L 210 170"></path>
@@ -547,6 +648,7 @@ dialog.sheet[open]{animation:pop .35s cubic-bezier(.2,.7,.1,1)}
       <div class="ma-grid">
         <div class="win ma reveal">
           <div class="win-bar"><i></i><i></i><i></i><span class="ttl">multi_agent.system</span></div>
+          <p class="swipe">swipe to see all agents</p>
           <div class="graph">
             <svg id="maSvg" viewBox="0 0 900 540" role="img" aria-label="Multi-agent architecture: the user's request goes to an orchestrator, which routes tasks to research, code, data and ops agents. Each agent uses its own tools. A reviewer checks the combined result before the response returns to the user. All agents share memory.">
               <rect class="band" x="392" y="14" width="206" height="452" rx="16"></rect>
@@ -694,6 +796,8 @@ dialog.sheet[open]{animation:pop .35s cubic-bezier(.2,.7,.1,1)}
       </div>
       <div class="skill-note" id="skillNote" aria-live="polite">pick a skill to highlight matching projects</div>
     </section>
+
+    <div class="ticker rev" aria-hidden="true"><div><span>Offline-first</span><span>Multi-app platforms</span><span>Payments</span><span>Voice & translation</span><span>ERP</span><span>HR & attendance</span><span>Fintech</span><span>Logistics</span><span>10 products</span><span>15+ apps</span><span>Offline-first</span><span>Multi-app platforms</span><span>Payments</span><span>Voice & translation</span><span>ERP</span><span>HR & attendance</span><span>Fintech</span><span>Logistics</span><span>10 products</span><span>15+ apps</span></div></div>
 
     <section class="blk" id="projects">
       <div class="sec-head">
@@ -1107,6 +1211,35 @@ dialog.sheet[open]{animation:pop .35s cubic-bezier(.2,.7,.1,1)}
       for(var i=0;i<stages.length;i++){var st=stages[i]; st.classList.add('run'); st.querySelector('i').style.setProperty('--w','100%'); await w(650); st.classList.remove('run'); st.classList.add('done');}
       $('pipeState').textContent='✓ passed in 4m 12s'; } }
   if(!reduce) pipeline();
+
+
+  /* ---------- menu ---------- */
+  var mm=$('mmenu'), mb=$('menuBtn');
+  function setMenu(o){ if(o){mm.hidden=false; requestAnimationFrame(function(){mm.classList.add('open');}); document.body.style.overflow='hidden'; $('menuClose').focus();}
+    else{mm.classList.remove('open'); document.body.style.overflow=''; setTimeout(function(){ if(!mm.classList.contains('open')) mm.hidden=true; },reduce?0:560); mb.focus();}
+    mb.setAttribute('aria-expanded',String(o)); }
+  mb.addEventListener('click',function(){setMenu(true);}); $('menuClose').addEventListener('click',function(){setMenu(false);});
+  mm.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){setMenu(false);});});
+  addEventListener('keydown',function(e){ if(e.key==='Escape' && mm.classList.contains('open')) setMenu(false); });
+
+  /* ---------- ripple ---------- */
+  document.addEventListener('pointerdown',function(e){ var b=e.target.closest('.btn'); if(!b||reduce) return; var r=b.getBoundingClientRect(), d=Math.max(r.width,r.height)*2.2, s=document.createElement('span');
+    s.className='rip'; s.style.width=s.style.height=d+'px'; s.style.left=(e.clientX-r.left-d/2)+'px'; s.style.top=(e.clientY-r.top-d/2)+'px'; b.appendChild(s); setTimeout(function(){s.remove();},650); });
+
+  /* ---------- heading scramble + underline, tag pop ---------- */
+  if(!reduce && 'IntersectionObserver' in window){
+    var GL='ABCDEFGHIJKLMNOPQRSTUVWXYZ01<>/{}#$';
+    var heads=[].slice.call(document.querySelectorAll('.sec-head h2'));
+    var hio=new IntersectionObserver(function(es){es.forEach(function(en){ if(!en.isIntersecting) return; hio.unobserve(en.target); var h=en.target, fin=h.textContent, n=0, steps=18;
+      h.setAttribute('aria-label',fin); h.classList.remove('pre');
+      var iv=setInterval(function(){ n++; h.textContent=fin.split('').map(function(c,i){ if(c===' '||i< (n/steps)*fin.length) return c; return GL[(Math.random()*GL.length)|0]; }).join(''); if(n>=steps){clearInterval(iv); h.textContent=fin;} },38); });},{threshold:.6});
+    heads.forEach(function(h){ var r=h.getBoundingClientRect(); if(r.top>innerHeight){h.classList.add('pre'); hio.observe(h);} });
+    var tio=new IntersectionObserver(function(es){es.forEach(function(en){ if(!en.isIntersecting) return; tio.unobserve(en.target); en.target.classList.add('pop'); });},{threshold:.3});
+    document.querySelectorAll('.mod .tags').forEach(function(t){ [].forEach.call(t.children,function(c,i){c.style.setProperty('--k',i);}); var r=t.getBoundingClientRect(); if(r.top>innerHeight) tio.observe(t); });
+  }
+
+  /* ---------- mesh parallax ---------- */
+  if(!reduce && matchMedia('(pointer:fine)').matches){ var mx=0,my=0; addEventListener('pointermove',function(e){ mx=(e.clientX/innerWidth-.5)*14; my=(e.clientY/innerHeight-.5)*14; cv.style.transform='translate('+(-mx)+'px,'+(-my)+'px)'; },{passive:true}); }
 
   /* projects */
   function g2(n,dot){var s='';for(var i=0;i<n;i++)s+='<span class="c">'+(dot?'<span class="dot"></span>':'')+'<span class="ln"></span><span class="ln s"></span></span>';return '<span class="g2">'+s+'</span>';}
