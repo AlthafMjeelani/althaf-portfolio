@@ -133,6 +133,99 @@ p{margin:0}
 .agent-ctl{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:14px}
 .agent-ctl p{font-size:14px;color:var(--muted);flex:1 1 220px}
 
+
+/* motion extras */
+.spot{position:fixed;inset:0;pointer-events:none;z-index:0;background:radial-gradient(420px circle at var(--mx,50%) var(--my,30%),color-mix(in oklab,var(--leaf) 14%,transparent),transparent 70%);transition:opacity .4s}
+.progress{position:fixed;left:0;top:env(safe-area-inset-top,0px);height:3px;width:100%;transform-origin:0 50%;transform:scaleX(var(--sp,0));background:linear-gradient(90deg,var(--leaf),var(--ts));z-index:25}
+.orbit-wrap{position:relative;width:min(340px,86vw);aspect-ratio:1;display:grid;place-items:center;--r:min(160px,40vw)}
+.orbit{position:absolute;inset:6%;border:1px dashed color-mix(in oklab,var(--leaf) 55%,transparent);border-radius:50%;animation:spin 46s linear infinite}
+.orbit.o2{inset:20%;animation-duration:30s;animation-direction:reverse;border-style:dotted}
+.orbit span{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) rotate(calc(var(--i)*45deg)) translateY(calc(var(--r)*-.88)) rotate(calc(var(--i)*-45deg))}
+.orbit span b{display:block;font-family:var(--f-mono);font-size:11.5px;font-weight:500;padding:5px 10px;border-radius:999px;background:var(--surface);border:1px solid var(--line);white-space:nowrap;box-shadow:0 6px 14px -10px var(--forest);animation:spin 46s linear infinite reverse}
+.orbit span:nth-child(even) b{background:var(--forest);color:var(--term-ink);border-color:var(--forest)}
+.orbit-wrap .avatar{position:relative;z-index:2}
+.roles-line{font-family:var(--f-mono);font-size:clamp(15px,2vw,19px);color:var(--muted)}
+.roles-line b{color:var(--accent);font-weight:600}
+.roles-line i{display:inline-block;width:9px;height:1.1em;background:var(--accent);vertical-align:-.15em;margin-left:2px;animation:blink 1s steps(2) infinite}
+.btn.mag{transition:transform .2s cubic-bezier(.2,.7,.1,1)}
+.proj{transform-style:preserve-3d;will-change:transform}
+
+/* multi-agent */
+.ma-grid{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(0,1fr);gap:20px;align-items:start}
+@media (max-width:980px){.ma-grid{grid-template-columns:minmax(0,1fr)}}
+.ma svg{display:block;width:100%;min-width:720px;height:auto}
+.ma .graph{padding:10px}
+.band{fill:color-mix(in oklab,var(--accent-soft) 55%,transparent);stroke:var(--line);stroke-dasharray:4 6}
+.blabel{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.12em;fill:var(--muted)}
+.mwire{fill:none;stroke:var(--leaf);stroke-width:1.5;opacity:.5}
+.mwire.flow{stroke-dasharray:3 7;animation:flow 1.2s linear infinite;opacity:.75}
+.mnode{cursor:pointer}
+.mnode rect{fill:var(--surface);stroke:var(--line);stroke-width:1.2;transition:fill .3s,stroke .3s}
+.mnode text{font-family:var(--f-mono);font-size:12.5px;fill:var(--ink);pointer-events:none}
+.mnode text.sub{font-size:10.5px;fill:var(--muted)}
+.mnode .ic{fill:var(--leaf)}
+.mnode.core rect{fill:var(--forest);stroke:var(--forest)} .mnode.core text{fill:var(--term-ink)} .mnode.core text.sub{fill:var(--term-dim)} .mnode.core .ic{fill:var(--ts)}
+.mnode.tool rect{fill:var(--paper);stroke-dasharray:4 3}
+.mnode:hover rect,.mnode.sel rect{stroke:var(--accent);stroke-width:2}
+.mnode.on rect{fill:var(--forest);stroke:var(--ts)} .mnode.on text{fill:var(--term-ink)} .mnode.on text.sub{fill:var(--term-dim)} .mnode.on .ic{fill:var(--ts)}
+.mnode:focus-visible{outline:none} .mnode:focus-visible rect{stroke:var(--accent);stroke-width:3}
+.mpk{fill:var(--accent)} .mpk.b{fill:var(--ts)}
+.insp{padding:16px 18px;display:flex;flex-direction:column;gap:10px}
+.insp .k{font-family:var(--f-mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.insp h3{font-family:var(--f-display);font-size:18px;text-transform:uppercase;font-weight:600}
+.insp p{color:var(--muted);font-size:15px}
+.insp .chips2{display:flex;flex-wrap:wrap;gap:6px}
+.insp .chips2 span{font-family:var(--f-mono);font-size:12px;padding:4px 10px;border-radius:999px;background:var(--accent-soft)}
+.ma-side{display:flex;flex-direction:column;gap:16px}
+.ma-log .term{min-height:210px;max-height:300px;overflow:auto}
+.layers-legend{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:18px}
+@media (max-width:760px){.layers-legend{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.layers-legend div{padding:14px;border-radius:12px;border:1px solid var(--line);background:var(--surface);display:flex;flex-direction:column;gap:4px}
+.layers-legend b{font-family:var(--f-mono);font-size:13px;color:var(--accent)}
+.layers-legend span{font-size:14px;color:var(--muted)}
+
+/* craft */
+.craft{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:20px}
+@media (max-width:980px){.craft{grid-template-columns:minmax(0,1fr)}}
+.rings{position:relative;aspect-ratio:1;max-width:420px;width:100%;margin:12px auto;display:grid;place-items:center}
+.ring{position:absolute;border-radius:50%;display:flex;justify-content:center;align-items:flex-start;padding-top:14px;font-family:var(--f-mono);font-size:12px;transition:transform .3s}
+.ring b{background:var(--paper);padding:2px 8px;border-radius:6px;font-weight:500}
+.ring.r1{inset:0;background:color-mix(in oklab,var(--accent-soft) 60%,transparent);border:1px solid var(--line)}
+.ring.r2{inset:13%;background:color-mix(in oklab,var(--accent-soft) 100%,transparent);border:1px solid var(--line)}
+.ring.r3{inset:27%;background:color-mix(in oklab,var(--leaf) 30%,var(--paper));border:1px solid var(--line)}
+.ring.r4{inset:40%;background:var(--forest);color:var(--term-ink);align-items:center;padding:0;text-align:center}
+.ring.r4 b{background:transparent;color:var(--term-ink)}
+.ring:hover{transform:scale(1.02)}
+.ring-dash{position:absolute;inset:-3%;border-radius:50%;border:1.5px dashed var(--leaf);animation:spin 30s linear infinite;opacity:.6}
+.arrow-in{position:absolute;font-family:var(--f-mono);font-size:11px;color:var(--accent);background:var(--paper);padding:2px 8px;border-radius:999px;border:1px solid var(--line)}
+.rings-cap{text-align:center;font-size:14px;color:var(--muted);padding:0 18px 18px}
+.diff{display:flex;flex-direction:column}
+.diff .code li.del{background:color-mix(in oklab,#E0675A 14%,transparent)}
+.diff .code li.add{background:color-mix(in oklab,var(--leaf) 18%,transparent)}
+.diff .code li.del::after{content:"−";margin-left:auto;padding-left:12px;color:#C2544A}
+.diff .code li.add::after{content:"+";margin-left:auto;padding-left:12px;color:var(--accent)}
+.diff-note{padding:0 18px 16px;font-size:14px;color:var(--muted)}
+.princ{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:20px}
+@media (max-width:900px){.princ{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.princ{grid-template-columns:minmax(0,1fr)}}
+.princ div{padding:16px;border-radius:14px;background:var(--surface);border:1px solid var(--line);display:flex;flex-direction:column;gap:6px;transition:transform .25s,border-color .25s}
+.princ div:hover{transform:translateY(-3px);border-color:var(--leaf)}
+.princ .n{font-family:var(--f-mono);font-size:12px;color:var(--leaf)}
+.princ b{font-size:17px}
+.princ span{font-size:14.5px;color:var(--muted)}
+.pipe{margin-top:20px;padding:18px}
+.stages{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px;position:relative}
+@media (max-width:760px){.stages{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.stage{position:relative;padding:12px;border-radius:12px;background:color-mix(in oklab,var(--term-ink) 6%,transparent);border:1px solid color-mix(in oklab,var(--term-ink) 16%,transparent);display:flex;flex-direction:column;gap:6px;overflow:hidden}
+.stage b{font-family:var(--f-mono);font-size:12.5px;color:var(--term-ink);font-weight:500}
+.stage span{font-family:var(--f-mono);font-size:11px;color:var(--term-dim)}
+.stage .bar{height:4px;border-radius:2px;background:color-mix(in oklab,var(--term-ink) 14%,transparent);overflow:hidden}
+.stage .bar i{display:block;height:100%;width:var(--w,100%);background:var(--leaf);transition:width .5s linear}
+.stage.run{border-color:var(--ts)} .stage.run b::after{content:" ◌";color:var(--ts)}
+.stage.done b::after{content:" ✓";color:var(--leaf)}
+.pipe-head{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:12px;font-family:var(--f-mono);font-size:13px;color:var(--term-dim)}
+.pipe-head b{color:var(--ts);font-weight:500}
+
 section.blk{padding-block:72px 16px}
 .sec-head{display:flex;justify-content:space-between;align-items:end;gap:16px;flex-wrap:wrap;margin-bottom:28px}
 .sec-head > div{display:flex;flex-direction:column;gap:10px;max-width:680px}
@@ -286,6 +379,8 @@ dialog.sheet[open]{animation:pop .35s cubic-bezier(.2,.7,.1,1)}
 <body>
 
 <canvas id="mesh" aria-hidden="true"></canvas>
+<div class="spot" aria-hidden="true"></div>
+<div class="progress" aria-hidden="true"></div>
 <div class="page">
 <header class="top">
   <div class="wrap">
@@ -293,6 +388,8 @@ dialog.sheet[open]{animation:pop .35s cubic-bezier(.2,.7,.1,1)}
     <nav class="nav" aria-label="Main">
       <a href="#desk" class="hide-sm">workspace</a>
       <a href="#agent" class="hide-sm">agents</a>
+      <a href="#multi" class="hide-sm">architecture</a>
+      <a href="#craft" class="hide-sm">code</a>
       <a href="#skills">skills</a>
       <a href="#projects">projects</a>
       <a href="#contact">contact</a>
@@ -306,12 +403,17 @@ dialog.sheet[open]{animation:pop .35s cubic-bezier(.2,.7,.1,1)}
 <main id="top">
   <div class="wrap">
     <section class="hero">
-      <div class="avatar"><img src="assets/images/profile.jpg" alt="Photo of Althaf M" width="116" height="116"></div>
+      <div class="orbit-wrap">
+        <div class="orbit" aria-hidden="true"><span style="--i:0"><b>Flutter</b></span><span style="--i:1"><b>Go</b></span><span style="--i:2"><b>Python</b></span><span style="--i:3"><b>LLM · RAG</b></span><span style="--i:4"><b>AWS</b></span><span style="--i:5"><b>Docker</b></span><span style="--i:6"><b>PostgreSQL</b></span><span style="--i:7"><b>AI agents</b></span></div>
+        <div class="orbit o2" aria-hidden="true"></div>
+        <div class="avatar"><img src="assets/images/profile.jpg" alt="Photo of Althaf M" width="116" height="116"></div>
+      </div>
       <p class="sys">System: <b>Senior Full-Stack Engineer</b></p>
       <h1 id="title" aria-label="Althaf M">Althaf M</h1>
-      <p class="lede">I build complete software solutions: web and mobile apps, APIs and data platforms, AI agents and RAG, and secure cloud infrastructure. Ten products and 15+ apps shipped since 2022. I lead the engineering team at Texol World and live in Kozhikode, Kerala.</p>
+      <p class="roles-line" aria-live="off">I build <b id="roleTxt">mobile apps</b><i aria-hidden="true"></i></p>
+      <p class="lede">From web and mobile apps to APIs, data platforms, AI agents and secure cloud infrastructure, I design and ship the whole product. Ten products and 15+ apps shipped since 2022. I lead the engineering team at Texol World and live in Kozhikode, Kerala.</p>
       <div class="ctas">
-        <a class="btn primary" href="#projects">$ open projects</a>
+        <a class="btn primary mag" href="#projects">$ open projects</a>
         <a class="btn ghost" href="#skills">view skills</a>
         <a class="btn ghost" href="assets/files/Althaf_M_Resume.pdf" download="Althaf_M_Resume.pdf">↓ resume</a>
       </div>
@@ -390,6 +492,126 @@ dialog.sheet[open]{animation:pop .35s cubic-bezier(.2,.7,.1,1)}
       <div class="agent-ctl">
         <p>A sample run on an example question. Each step lights up as the agent works.</p>
         <button class="btn primary" type="button" id="runAgent">▶ Run agent</button>
+      </div>
+    </section>
+
+
+    <section class="blk" id="multi">
+      <div class="sec-head"><div>
+        <span class="eyebrow">Multi-agent architecture</span>
+        <h2>A team of agents, one answer</h2>
+        <p>How I design multi-agent systems: an orchestrator plans and routes work to specialist agents, each with its own tools over MCP, while a reviewer checks every answer before it reaches the user. Tap any node to inspect it.</p>
+      </div></div>
+      <div class="ma-grid">
+        <div class="win ma reveal">
+          <div class="win-bar"><i></i><i></i><i></i><span class="ttl">multi_agent.system</span></div>
+          <div class="graph">
+            <svg id="maSvg" viewBox="0 0 900 540" role="img" aria-label="Multi-agent architecture: the user's request goes to an orchestrator, which routes tasks to research, code, data and ops agents. Each agent uses its own tools. A reviewer checks the combined result before the response returns to the user. All agents share memory.">
+              <rect class="band" x="392" y="14" width="206" height="452" rx="16"></rect>
+              <rect class="band" x="626" y="14" width="258" height="452" rx="16"></rect>
+              <text class="blabel" x="404" y="34">SPECIALIST AGENTS</text>
+              <text class="blabel" x="638" y="34">TOOLS · MCP SERVERS</text>
+              <path class="mwire flow" id="mw1" d="M 130 160 C 160 160, 150 250, 180 250"></path>
+              <path class="mwire" id="mwR" d="M 340 250 C 375 250, 370 82, 410 82"></path>
+              <path class="mwire" id="mwC" d="M 340 250 C 375 250, 370 186, 410 186"></path>
+              <path class="mwire" id="mwD" d="M 340 250 C 375 250, 370 290, 410 290"></path>
+              <path class="mwire" id="mwO" d="M 340 250 C 375 250, 370 394, 410 394"></path>
+              <path class="mwire flow" id="mtR" d="M 580 82 L 646 82"></path>
+              <path class="mwire flow" id="mtC" d="M 580 186 L 646 186"></path>
+              <path class="mwire flow" id="mtD" d="M 580 290 L 646 290"></path>
+              <path class="mwire flow" id="mtO" d="M 580 394 L 646 394"></path>
+              <path class="mwire" id="mbR" d="M 410 92 C 360 100, 380 420, 340 432"></path>
+              <path class="mwire" id="mbC" d="M 410 196 C 370 205, 380 425, 340 432"></path>
+              <path class="mwire" id="mbD" d="M 410 300 C 375 310, 380 428, 340 432"></path>
+              <path class="mwire" id="mbO" d="M 410 404 C 380 412, 370 432, 340 432"></path>
+              <path class="mwire" id="mwV" d="M 180 432 C 150 432, 160 352, 130 352"></path>
+              <path class="mwire" d="M 495 466 L 495 486" ></path>
+              <path class="mwire" d="M 260 464 L 260 500 L 420 500"></path>
+              <g class="mnode" tabindex="0" data-n="user" transform="translate(20,128)"><rect width="110" height="64" rx="12"></rect><circle class="ic" cx="22" cy="32" r="7"></circle><text x="38" y="29">User</text><text class="sub" x="38" y="45">question</text></g>
+              <g class="mnode core" tabindex="0" data-n="orch" id="maO" transform="translate(180,210)"><rect width="160" height="80" rx="14"></rect><path class="ic" d="M22 30l8-8 8 8-8 8z"></path><text x="46" y="36">Orchestrator</text><text class="sub" x="46" y="54">plan · route · merge</text></g>
+              <g class="mnode" tabindex="0" data-n="research" id="maR" transform="translate(410,50)"><rect width="170" height="64" rx="12"></rect><circle class="ic" cx="22" cy="32" r="7"></circle><text x="38" y="29">Research agent</text><text class="sub" x="38" y="45">RAG · retrieval</text></g>
+              <g class="mnode" tabindex="0" data-n="code" id="maC" transform="translate(410,154)"><rect width="170" height="64" rx="12"></rect><circle class="ic" cx="22" cy="32" r="7"></circle><text x="38" y="29">Code agent</text><text class="sub" x="38" y="45">write · test · PR</text></g>
+              <g class="mnode" tabindex="0" data-n="data" id="maD" transform="translate(410,258)"><rect width="170" height="64" rx="12"></rect><circle class="ic" cx="22" cy="32" r="7"></circle><text x="38" y="29">Data agent</text><text class="sub" x="38" y="45">SQL · analytics</text></g>
+              <g class="mnode" tabindex="0" data-n="ops" id="maP" transform="translate(410,362)"><rect width="170" height="64" rx="12"></rect><circle class="ic" cx="22" cy="32" r="7"></circle><text x="38" y="29">Ops agent</text><text class="sub" x="38" y="45">deploy · monitor</text></g>
+              <g class="mnode tool" tabindex="0" data-n="vec" id="mtVr" transform="translate(646,50)"><rect width="222" height="64" rx="12"></rect><text x="16" y="29">Vector DB</text><text class="sub" x="16" y="45">pgvector · Pinecone · docs</text></g>
+              <g class="mnode tool" tabindex="0" data-n="repo" id="mtRp" transform="translate(646,154)"><rect width="222" height="64" rx="12"></rect><text x="16" y="29">Repo &amp; CI</text><text class="sub" x="16" y="45">GitHub · tests · Actions</text></g>
+              <g class="mnode tool" tabindex="0" data-n="wh" id="mtWh" transform="translate(646,258)"><rect width="222" height="64" rx="12"></rect><text x="16" y="29">Warehouse</text><text class="sub" x="16" y="45">Postgres · Snowflake · dbt</text></g>
+              <g class="mnode tool" tabindex="0" data-n="cloud" id="mtCl" transform="translate(646,362)"><rect width="222" height="64" rx="12"></rect><text x="16" y="29">Cloud</text><text class="sub" x="16" y="45">AWS · logs · alerts</text></g>
+              <g class="mnode core" tabindex="0" data-n="review" id="maV" transform="translate(180,400)"><rect width="160" height="64" rx="12"></rect><circle class="ic" cx="28" cy="32" r="7"></circle><text x="46" y="29">Reviewer</text><text class="sub" x="46" y="45">facts · safety · tests</text></g>
+              <g class="mnode" tabindex="0" data-n="resp" id="maA" transform="translate(20,320)"><rect width="110" height="64" rx="12"></rect><circle class="ic" cx="22" cy="32" r="7"></circle><text x="38" y="29">Answer</text><text class="sub" x="38" y="45">with sources</text></g>
+              <g class="mnode tool" tabindex="0" data-n="mem" transform="translate(420,486)"><rect width="448" height="40" rx="10"></rect><text x="16" y="25">Shared memory · context · audit log</text></g>
+              <g id="mpk"></g>
+            </svg>
+          </div>
+        </div>
+        <div class="ma-side">
+          <div class="win reveal">
+            <div class="win-bar"><i></i><i></i><i></i><span class="ttl">inspector</span></div>
+            <div class="insp" id="insp" aria-live="polite"></div>
+          </div>
+          <div class="win dark ma-log reveal">
+            <div class="win-bar"><i></i><i></i><i></i><span class="ttl">agents.log</span></div>
+            <div class="term" id="malog"><span class="d">press Run scenario to watch the agents work in parallel.</span></div>
+          </div>
+          <button class="btn primary mag" type="button" id="maRun">▶ Run scenario</button>
+        </div>
+      </div>
+      <div class="layers-legend reveal">
+        <div><b>Orchestration</b><span>Plans the task, splits it and merges results</span></div>
+        <div><b>Specialists</b><span>Small agents with one job and narrow permissions</span></div>
+        <div><b>Tools · MCP</b><span>Every capability is an explicit, audited tool</span></div>
+        <div><b>Guardrails</b><span>Reviewer checks facts, safety and tests before replying</span></div>
+      </div>
+    </section>
+
+    <section class="blk" id="craft">
+      <div class="sec-head"><div>
+        <span class="eyebrow">Coding style</span>
+        <h2>How I write code</h2>
+        <p>Clean architecture, small typed units, errors handled as values, and a pipeline that checks every change before it ships.</p>
+      </div></div>
+      <div class="craft">
+        <div class="win reveal">
+          <div class="win-bar"><i></i><i></i><i></i><span class="ttl">architecture.layers</span></div>
+          <div class="rings" aria-label="Clean architecture layers: presentation, application, data and domain at the centre. Dependencies point inward.">
+            <span class="ring-dash" aria-hidden="true"></span>
+            <div class="ring r1"><b>Presentation · UI, widgets, pages</b></div>
+            <div class="ring r2"><b>Application · use cases, BLoC</b></div>
+            <div class="ring r3"><b>Data · repositories, APIs, DB</b></div>
+            <div class="ring r4"><b>Domain<br>entities · rules</b></div>
+            <span class="arrow-in" style="right:2%;bottom:18%">deps point inward →</span>
+          </div>
+          <p class="rings-cap">The domain knows nothing about Flutter, HTTP or SQL, so business rules stay testable and frameworks stay swappable.</p>
+        </div>
+        <div class="win diff reveal">
+          <div class="win-bar"><i></i><i></i><i></i><span class="ttl" id="diffTitle">sync_service.dart — refactor</span>
+            <div class="tabs" role="tablist" aria-label="Refactor view">
+              <button type="button" role="tab" aria-selected="false" data-d="0">before</button>
+              <button type="button" role="tab" aria-selected="true" data-d="1">after</button>
+            </div>
+          </div>
+          <div class="code" id="diffCode"></div>
+          <p class="diff-note" id="diffNote"></p>
+        </div>
+      </div>
+      <div class="princ">
+        <div class="reveal"><span class="n">01</span><b>Typed and tested</b><span>Strict types, unit tests for every use case, integration tests for every API.</span></div>
+        <div class="reveal"><span class="n">02</span><b>Small, named units</b><span>Functions do one thing and read like the sentence that describes them.</span></div>
+        <div class="reveal"><span class="n">03</span><b>Errors as values</b><span>Result types and explicit failure states instead of silent catches.</span></div>
+        <div class="reveal"><span class="n">04</span><b>Reviewed, always</b><span>Every change goes through a pull request and a checklist: naming, tests, security.</span></div>
+        <div class="reveal"><span class="n">05</span><b>Conventional commits</b><span>feat, fix, refactor: a history you can read and release notes that write themselves.</span></div>
+        <div class="reveal"><span class="n">06</span><b>Observable by default</b><span>Structured logs, metrics and alerts ship with the feature, not after the outage.</span></div>
+      </div>
+      <div class="win dark pipe reveal">
+        <div class="pipe-head"><span>github actions · <b id="pipeRun">run #412</b></span><span id="pipeState">idle</span></div>
+        <div class="stages" id="stages">
+          <div class="stage"><b>lint</b><span>dart analyze · golangci</span><div class="bar"><i></i></div></div>
+          <div class="stage"><b>test</b><span>unit · widget · api</span><div class="bar"><i></i></div></div>
+          <div class="stage"><b>build</b><span>apk · ipa · docker</span><div class="bar"><i></i></div></div>
+          <div class="stage"><b>scan</b><span>deps · secrets · SAST</span><div class="bar"><i></i></div></div>
+          <div class="stage"><b>review</b><span>PR approved</span><div class="bar"><i></i></div></div>
+          <div class="stage"><b>deploy</b><span>AWS · stores</span><div class="bar"><i></i></div></div>
+        </div>
       </div>
     </section>
 
@@ -731,6 +953,118 @@ dialog.sheet[open]{animation:pop .35s cubic-bezier(.2,.7,.1,1)}
   }
   $('runAgent').addEventListener('click',run);
 
+
+  /* ---------- motion extras ---------- */
+  var spot=document.querySelector('.spot'), prog=document.querySelector('.progress');
+  if(!reduce){ addEventListener('pointermove',function(e){root.style.setProperty('--mx',e.clientX+'px');root.style.setProperty('--my',e.clientY+'px');},{passive:true}); }
+  function onScroll(){var h=document.documentElement; var max=h.scrollHeight-innerHeight; prog.style.setProperty('--sp',max>0?(scrollY/max).toFixed(4):0);}
+  addEventListener('scroll',onScroll,{passive:true}); onScroll();
+  /* rotating role */
+  var roles=['mobile apps','web platforms','REST & Go APIs','data pipelines','RAG search','AI agents','cloud infrastructure'], ri=0, rEl=$('roleTxt');
+  if(!reduce){ (function cycle(){ var target=roles[ri=(ri+1)%roles.length], cur=rEl.textContent;
+      (function del(){ if(cur.length){cur=cur.slice(0,-1); rEl.textContent=cur; setTimeout(del,28);} else (function add(i){ rEl.textContent=target.slice(0,i); if(i<target.length) setTimeout(function(){add(i+1)},55); else setTimeout(cycle,1900); })(1); })();
+    })(); }
+  /* magnetic buttons */
+  if(!reduce && matchMedia('(pointer:fine)').matches){ document.querySelectorAll('.mag').forEach(function(b){
+    b.addEventListener('pointermove',function(e){var r=b.getBoundingClientRect(); b.style.transform='translate('+((e.clientX-r.left-r.width/2)*.18)+'px,'+((e.clientY-r.top-r.height/2)*.25)+'px)';});
+    b.addEventListener('pointerleave',function(){b.style.transform='';}); }); }
+  /* count up */
+  if(!reduce && 'IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(en){ if(!en.isIntersecting) return; io.unobserve(en.target);
+      var el=en.target, raw=el.textContent, m=raw.match(/^(\d+)(.*)$/); if(!m) return; var end=+m[1], suf=m[2], t0=performance.now();
+      (function f(now){var p=Math.min(1,(now-t0)/900); el.textContent=Math.round(end*(1-Math.pow(1-p,3)))+suf; if(p<1) requestAnimationFrame(f);})(t0); });},{threshold:.6});
+    document.querySelectorAll('.dchip b').forEach(function(b){io.observe(b);});
+  }
+
+  /* ---------- multi-agent ---------- */
+  var MA={
+    user:{t:'User',k:'entry point',d:'Asks a question or files a task in plain language, from a chat, an app or Slack.',c:['chat','app','API']},
+    orch:{t:'Orchestrator',k:'planner · router',d:'An LLM planner that breaks the task into steps, routes each to the right specialist, runs them in parallel and merges the results.',c:['LLM','planning','routing','retries']},
+    research:{t:'Research agent',k:'specialist',d:'Answers from the company’s own documents with retrieval-augmented generation, always returning its sources.',c:['RAG','embeddings','pgvector','citations']},
+    code:{t:'Code agent',k:'specialist',d:'Reads the repo, writes the fix with tests, and opens a pull request. It never pushes to main.',c:['GitHub','tests','PRs','sandbox']},
+    data:{t:'Data agent',k:'specialist',d:'Turns questions into SQL on the warehouse, checks the numbers and returns a table or chart.',c:['SQL','Snowflake','dbt','read-only']},
+    ops:{t:'Ops agent',k:'specialist',d:'Checks deploys, logs and alerts on AWS, and can roll back with human approval.',c:['AWS','CloudWatch','Docker','approval']},
+    vec:{t:'Vector DB',k:'tool · MCP',d:'Stores document chunks as embeddings for semantic search.',c:['pgvector','Pinecone']},
+    repo:{t:'Repo & CI',k:'tool · MCP',d:'Git access and the CI pipeline, scoped to branches and pull requests.',c:['GitHub','Actions']},
+    wh:{t:'Warehouse',k:'tool · MCP',d:'Read-only access to analytics tables through a governed SQL tool.',c:['Postgres','Snowflake','dbt']},
+    cloud:{t:'Cloud',k:'tool · MCP',d:'Deploy status, logs and metrics; write actions need a human approval step.',c:['AWS','IAM','logs']},
+    review:{t:'Reviewer',k:'guardrail',d:'A separate agent that checks facts against sources, runs tests and blocks unsafe actions before anything reaches the user.',c:['fact check','tests','policy']},
+    resp:{t:'Answer',k:'output',d:'One merged answer with sources, a linked pull request and an audit trail of every tool call.',c:['sources','PR link','audit log']},
+    mem:{t:'Shared memory',k:'state',d:'Conversation context, intermediate results and a full audit log that every agent reads and writes.',c:['context','Redis','audit']}
+  };
+  var insp=$('insp'), mnodes=[].slice.call(document.querySelectorAll('.mnode'));
+  function inspect(k){var d=MA[k]; if(!d) return; mnodes.forEach(function(n){n.classList.toggle('sel',n.dataset.n===k);});
+    insp.innerHTML='<span class="k">'+esc(d.k)+'</span><h3>'+esc(d.t)+'</h3><p>'+esc(d.d)+'</p><div class="chips2">'+d.c.map(function(c){return '<span>'+esc(c)+'</span>';}).join('')+'</div>';}
+  mnodes.forEach(function(n){ n.addEventListener('click',function(){inspect(n.dataset.n);}); n.addEventListener('mouseenter',function(){inspect(n.dataset.n);}); n.addEventListener('focus',function(){inspect(n.dataset.n);});
+    n.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();inspect(n.dataset.n);}}); });
+  inspect('orch');
+  var mpk=$('mpk'), malog=$('malog'), maBusy=false;
+  function mpulse(id,ms,cls){return new Promise(function(res){ if(reduce){res();return;} var path=$(id),L=path.getTotalLength(); var c=document.createElementNS(NS,'circle'); c.setAttribute('r','5'); c.setAttribute('class','mpk '+(cls||'')); mpk.appendChild(c);
+    var t0=performance.now(); (function f(now){var p=Math.min(1,(now-t0)/ms),q=path.getPointAtLength(L*p); c.setAttribute('cx',q.x); c.setAttribute('cy',q.y); if(p<1) requestAnimationFrame(f); else {c.remove(); res();}})(t0); });}
+  function mon(ids){mnodes.forEach(function(n){n.classList.toggle('on',ids.indexOf(n.id)>-1);});}
+  function mlog(cls,t){malog.innerHTML+='\n<span class="'+cls+'">'+esc(t)+'</span>'; malog.scrollTop=malog.scrollHeight;}
+  function w(ms){return new Promise(function(r){setTimeout(r,reduce?0:ms);});}
+  async function maRun(){
+    if(maBusy) return; maBusy=true; $('maRun').disabled=true;
+    malog.innerHTML='<span class="p">$</span> task "Why did van sales drop yesterday? Fix the sync bug."';
+    mon([]); await mpulse('mw1',600); mon(['maO']); inspect('orch');
+    mlog('d','orchestrator → plan: 4 subtasks, run in parallel'); await w(500);
+    await Promise.all([mpulse('mwR',700),mpulse('mwC',700),mpulse('mwD',700),mpulse('mwO',700)]);
+    mon(['maR','maC','maD','maP']);
+    await Promise.all([mpulse('mtR',500,'b'),mpulse('mtC',500,'b'),mpulse('mtD',500,'b'),mpulse('mtO',500,'b')]);
+    mlog('d','data     → SQL: sales −18% on 3 routes, orders stuck "pending"'); await w(500);
+    mlog('d','research → runbook: pending orders = failed outbox retries'); await w(500);
+    mlog('d','ops      → logs: 502s from sync API after 14:05 deploy'); await w(500);
+    mlog('d','code     → fix retry backoff + test · PR #231 opened'); await w(500);
+    await Promise.all([mpulse('mbR',700),mpulse('mbC',700),mpulse('mbD',700),mpulse('mbO',700)]);
+    mon(['maV']); inspect('review'); mlog('d','reviewer → sources check out · tests pass · rollback needs approval'); await w(700);
+    await mpulse('mwV',600); mon(['maA']); inspect('resp');
+    mlog('o','answer   → Sync API errors after the 14:05 deploy left orders pending. Fix in PR #231.');
+    mlog('d','(sample scenario)'); malog.innerHTML+='\n<span class="p">$</span> <span class="cur"></span>';
+    await w(1600); mon([]); maBusy=false; $('maRun').disabled=false;
+  }
+  $('maRun').addEventListener('click',maRun);
+
+  /* ---------- refactor diff ---------- */
+  var DIFF=[
+   {note:'Before: one function fetches, parses, writes to the database and swallows every error.',l:[
+    ['del','<span class="ty">Future</span>&lt;<span class="k">void</span>&gt; <span class="fn">syncOrders</span>() <span class="k">async</span> {'],
+    ['del','  <span class="k">try</span> {'],
+    ['del','    <span class="k">final</span> res = <span class="k">await</span> http.<span class="fn">get</span>(<span class="ty">Uri</span>.<span class="fn">parse</span>(<span class="s">\'$baseUrl/orders\'</span>));'],
+    ['del','    <span class="k">final</span> list = jsonDecode(res.body) <span class="k">as</span> <span class="ty">List</span>;'],
+    ['del','    <span class="k">for</span> (<span class="k">final</span> o <span class="k">in</span> list) { <span class="k">await</span> db.<span class="fn">insert</span>(<span class="s">\'orders\'</span>, o); }'],
+    ['del','  } <span class="k">catch</span> (e) {'],
+    ['del','    <span class="fn">print</span>(e); <span class="cm">// ¯\\_(ツ)_/¯</span>'],
+    ['del','  }'],
+    ['del','}']]},
+   {note:'After: the use case depends on an interface, failures are typed values, and each piece is testable alone.',l:[
+    ['add','<span class="k">class</span> <span class="ty">SyncOrders</span> {'],
+    ['add','  <span class="k">const</span> <span class="ty">SyncOrders</span>(<span class="k">this</span>._remote, <span class="k">this</span>._local);'],
+    ['add','  <span class="k">final</span> <span class="ty">OrdersApi</span> _remote;'],
+    ['add','  <span class="k">final</span> <span class="ty">OrdersStore</span> _local;'],
+    ['',''],
+    ['add','  <span class="ty">Future</span>&lt;<span class="ty">Result</span>&lt;<span class="ty">int</span>, <span class="ty">SyncFailure</span>&gt;&gt; <span class="fn">call</span>() <span class="k">async</span> {'],
+    ['add','    <span class="k">final</span> fetched = <span class="k">await</span> _remote.<span class="fn">fetchPending</span>();'],
+    ['add','    <span class="k">return</span> fetched.<span class="fn">flatMapAsync</span>(_local.<span class="fn">upsertAll</span>);'],
+    ['add','  }'],
+    ['add','}']]}
+  ];
+  var dTabs=[].slice.call(document.querySelectorAll('[data-d]')), dCode=$('diffCode');
+  function renderDiff(i){ var d=DIFF[i]; dTabs.forEach(function(b){b.setAttribute('aria-selected',String(+b.dataset.d===i));});
+    dCode.innerHTML='<ol>'+d.l.map(function(x){return '<li class="'+x[0]+'"><span>'+(x[1]||' ')+'</span></li>';}).join('')+'</ol>'; $('diffNote').textContent=d.note;
+    if(!reduce){ [].forEach.call(dCode.querySelectorAll('li'),function(li,k){li.animate([{opacity:0,transform:'translateX(-8px)'},{opacity:1,transform:'none'}],{duration:260,delay:k*40,fill:'backwards'});}); } }
+  dTabs.forEach(function(b){b.addEventListener('click',function(){renderDiff(+b.dataset.d);});});
+  renderDiff(1);
+
+  /* ---------- CI pipeline loop ---------- */
+  var stages=[].slice.call(document.querySelectorAll('.stage')), runN=412;
+  function setAll(state){stages.forEach(function(st){st.classList.remove('run');st.classList.toggle('done',state==='done');st.querySelector('i').style.setProperty('--w',state==='done'?'100%':'0%');});}
+  setAll('done'); $('pipeState').textContent='✓ passed';
+  async function pipeline(){ while(true){ await w(2600); if(document.hidden) continue; runN++; $('pipeRun').textContent='run #'+runN; setAll('reset'); $('pipeState').textContent='running';
+      for(var i=0;i<stages.length;i++){var st=stages[i]; st.classList.add('run'); st.querySelector('i').style.setProperty('--w','100%'); await w(650); st.classList.remove('run'); st.classList.add('done');}
+      $('pipeState').textContent='✓ passed in 4m 12s'; } }
+  if(!reduce) pipeline();
+
   /* projects */
   function g2(n,dot){var s='';for(var i=0;i<n;i++)s+='<span class="c">'+(dot?'<span class="dot"></span>':'')+'<span class="ln"></span><span class="ln s"></span></span>';return '<span class="g2">'+s+'</span>';}
   var R='<span class="row"><span class="dot"></span><span class="ln"></span><span class="ln s"></span></span>';
@@ -793,6 +1127,9 @@ dialog.sheet[open]{animation:pop .35s cubic-bezier(.2,.7,.1,1)}
     if(names.length){var go=document.createElement('button');go.type='button';go.textContent='show projects';go.addEventListener('click',function(){$('projects').scrollIntoView({behavior:reduce?'auto':'smooth'});});note.appendChild(go);}
   });});
 
+  if(!reduce && matchMedia('(pointer:fine)').matches){ cards.forEach(function(c){
+    c.addEventListener('pointermove',function(e){var r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5; c.style.transform='perspective(900px) rotateX('+(-y*6)+'deg) rotateY('+(x*8)+'deg) translateY(-4px)';});
+    c.addEventListener('pointerleave',function(){c.style.transform='';}); }); }
   var chips=[].slice.call(document.querySelectorAll('[data-f]'));
   chips.forEach(function(c){c.addEventListener('click',function(){
     chips.forEach(function(x){x.setAttribute('aria-pressed',x===c?'true':'false')});
