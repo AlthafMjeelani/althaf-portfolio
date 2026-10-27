@@ -1,42 +1,807 @@
-<!DOCTYPE html>
-<html>
-
+<!doctype html>
+<html lang="en">
 <head>
-  <!--
-    If you are serving your web app in a path other than the root, change the
-    href value below to reflect the base path you are serving from.
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Althaf M · Senior Full-Stack Engineer</title>
+<meta name="description" content="Althaf M — senior full-stack engineer at Texol World. Apps, backend, data, cloud and AI.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Martian+Mono:wdth,wght@87.5..112.5,300..800&family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap">
+<style>
+/* Layout: "cyber-natural" workspace. Centered identity hero over a living wire mesh, then a desk of connected windows (terminal, dashboard, code), an agent pipeline, skill modules, project windows, git log, history, contact shell. */
+:root{
+  --bg:#EDF2E8; --surface:#FAFCF6; --paper:#F7F4E7; --sunk:#E3EBDD; --ink:#1C281D; --muted:#526352; --line:#CFDBCB;
+  --forest:#3C573E; --forest-2:#324A34; --term-ink:#E3EEDB; --term-dim:#A8BDA4;
+  --accent:#4C7A49; --accent-ink:#FFFFFF; --accent-soft:#D9E7D2; --leaf:#5E8F55;
+  --mesh:rgba(76,122,73,.22);
+  --k:#8549A0; --s:#946410; --f:#2F6E8C; --c:#6F7D6C; --t:#3F6E3C; --ts:#F0D58C;
+  --tl:.92; --tc2l:.62; --tch:.05; --tch2:.12;
+  --f-display:'Martian Mono','JetBrains Mono',ui-monospace,Menlo,monospace;
+  --f-body:'Instrument Sans','Helvetica Neue',Arial,system-ui,sans-serif;
+  --f-mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0E140F; --surface:#141C15; --paper:#18211A; --sunk:#111912; --ink:#E2EBDC; --muted:#9CB09A; --line:#263428;
+  --forest:#0A100B; --forest-2:#0F1710; --term-ink:#DDE9D5; --term-dim:#8FA58C;
+  --accent:#8FC48A; --accent-ink:#0E140F; --accent-soft:#1E2E1F; --leaf:#7DB574;
+  --mesh:rgba(143,196,138,.16);
+  --k:#C9A6E6; --s:#E9C97A; --f:#8CCBE3; --c:#7E917B; --t:#9ED09A; --ts:#F0D58C;
+  --tl:.27; --tc2l:.72; --tch:.04; --tch2:.11; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0E140F; --surface:#141C15; --paper:#18211A; --sunk:#111912; --ink:#E2EBDC; --muted:#9CB09A; --line:#263428;
+  --forest:#0A100B; --forest-2:#0F1710; --term-ink:#DDE9D5; --term-dim:#8FA58C;
+  --accent:#8FC48A; --accent-ink:#0E140F; --accent-soft:#1E2E1F; --leaf:#7DB574;
+  --mesh:rgba(143,196,138,.16);
+  --k:#C9A6E6; --s:#E9C97A; --f:#8CCBE3; --c:#7E917B; --t:#9ED09A; --ts:#F0D58C;
+  --tl:.27; --tc2l:.72; --tch:.04; --tch2:.11; color-scheme:dark}
 
-    The path provided below has to start and end with a slash "/" in order for
-    it to work correctly.
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+#mesh{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+.page{position:relative;z-index:1}
+a{color:var(--accent)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+h1,h2,h3{margin:0;text-wrap:balance}
+h2{font-family:var(--f-display);font-size:clamp(24px,3.2vw,38px);line-height:1.12;letter-spacing:-.02em;font-weight:600;text-transform:uppercase}
+h3{font-family:var(--f-body);font-size:20px;line-height:1.2;font-weight:700;letter-spacing:-.01em}
+p{margin:0}
+.btn{display:inline-flex;align-items:center;gap:10px;min-height:48px;padding:0 20px;border-radius:12px;font-weight:600;font-size:15px;text-decoration:none;border:1px solid transparent;cursor:pointer;font-family:var(--f-mono);transition:transform .15s ease}
+.btn:hover{transform:translateY(-1px)}
+.btn:disabled{opacity:.6;cursor:default;transform:none}
+.btn.primary{background:var(--forest);color:var(--term-ink);box-shadow:0 10px 24px -14px var(--forest)}
+.btn.ghost{background:var(--surface);color:var(--ink);border-color:var(--line)}
 
-    For more details:
-    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in oklab,var(--bg) 82%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:12px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px;color:var(--ink);text-decoration:none;font-family:var(--f-display);font-size:14px;font-weight:600;letter-spacing:.02em}
+.brand i{width:10px;height:10px;border-radius:3px;background:var(--leaf);transform:rotate(45deg)}
+.nav{display:flex;align-items:center;gap:2px;flex-wrap:wrap}
+.nav a{color:var(--muted);text-decoration:none;font-family:var(--f-mono);font-size:13px;padding:10px 10px;border-radius:8px}
+.nav a:hover{color:var(--ink);background:var(--sunk)}
+.iconbtn{display:grid;place-items:center;width:44px;height:44px;border-radius:10px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer}
+@media (max-width:760px){.nav a.hide-sm{display:none}}
 
-    This is a placeholder for base href that will be replaced by the value of
-    the `--base-href` argument provided to `flutter build`.
-  -->
-  <base href="/althaf-portfolio/">
+.hero{padding-block:72px 40px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:18px}
+.avatar{width:128px;height:128px;border-radius:50%;padding:6px;background:conic-gradient(from 0deg,var(--leaf),var(--accent-soft),var(--leaf));animation:spin 14s linear infinite}
+.avatar img{display:block;width:100%;height:100%;border-radius:50%;object-fit:cover;border:4px solid var(--bg);animation:spin 14s linear infinite reverse}
+.avatar span{display:grid;place-items:center;width:100%;height:100%;border-radius:50%;background:var(--accent-soft);border:4px solid var(--bg);font-family:var(--f-display);font-size:34px;font-weight:600;color:var(--accent);animation:spin 14s linear infinite reverse}
+@keyframes spin{to{transform:rotate(360deg)}}
+.sys{font-family:var(--f-display);font-size:14px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+.sys b{color:var(--accent);font-weight:600}
+.hero h1{font-family:var(--f-display);font-size:clamp(38px,7vw,88px);line-height:1;letter-spacing:-.03em;font-weight:700;text-transform:uppercase}
+.hero h1 .ch{display:inline-block;animation:glyph .7s cubic-bezier(.2,.7,.1,1) both}
+@keyframes glyph{from{opacity:0;transform:translateY(.3em);filter:blur(6px)}to{opacity:1;transform:none;filter:none}}
+.hero .lede{max-width:62ch;font-size:19px;color:var(--muted);animation:glyph .8s .5s both}
+.hero .ctas{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:8px;animation:glyph .8s .65s both}
+.status{display:inline-flex;align-items:center;gap:8px;font-family:var(--f-mono);font-size:12.5px;padding:7px 12px;border-radius:999px;border:1px solid var(--line);background:var(--surface)}
+.status i{width:8px;height:8px;border-radius:50%;background:var(--leaf);animation:ping 2s infinite}
+@keyframes ping{0%{box-shadow:0 0 0 0 color-mix(in oklab,var(--leaf) 60%,transparent)}100%{box-shadow:0 0 0 10px transparent}}
 
-  <meta charset="UTF-8">
-  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-  <meta name="description" content="Althaf Portfolio">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+.win{background:var(--paper);border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 22px 44px -28px color-mix(in oklab,var(--forest) 55%,transparent);display:flex;flex-direction:column;min-width:0}
+.win-bar{display:flex;align-items:center;gap:7px;padding:11px 14px;background:color-mix(in oklab,var(--accent-soft) 70%,var(--paper));border-bottom:1px solid var(--line);flex-wrap:wrap}
+.win-bar i{width:11px;height:11px;border-radius:50%;background:#E0675A;flex:none}
+.win-bar i:nth-child(2){background:#E6B648} .win-bar i:nth-child(3){background:#6FB35E}
+.win-bar .ttl{margin-left:8px;font-family:var(--f-mono);font-size:12px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.win.dark{background:var(--forest);border-color:var(--forest)}
+.win.dark .win-bar{background:var(--forest-2);border-bottom-color:color-mix(in oklab,var(--term-ink) 12%,transparent)}
+.win.dark .win-bar .ttl{color:var(--term-dim)}
+.term{padding:16px 18px;font-family:var(--f-mono);font-size:13.5px;line-height:1.7;color:var(--term-ink);min-height:320px;overflow:hidden;white-space:pre-wrap;word-break:break-word}
+.term .p{color:var(--leaf)} .term .d{color:var(--term-dim)} .term .o{color:var(--ts)}
+.term .cur{display:inline-block;width:8px;height:16px;background:var(--term-ink);vertical-align:-3px;animation:blink 1s steps(2) infinite}
+@keyframes blink{50%{opacity:0}}
+.code{padding:14px 0;font-family:var(--f-mono);font-size:13px;line-height:1.75;overflow-x:auto;color:var(--ink);flex:1}
+.code ol{margin:0;padding:0 18px 0 0;list-style:none;counter-reset:ln;min-width:max-content}
+.code li{counter-increment:ln;display:flex;white-space:pre;padding-left:12px;border-left:2px solid transparent;transition:background .3s}
+.code li::before{content:counter(ln);width:30px;flex:none;text-align:right;margin-right:16px;color:var(--c)}
+.code li.hot{background:color-mix(in oklab,var(--accent-soft) 70%,transparent);border-left-color:var(--accent)}
+.k{color:var(--k)} .s{color:var(--s)} .fn{color:var(--f)} .cm{color:var(--c);font-style:italic} .ty{color:var(--t)}
+.tabs{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.tabs button{min-height:32px;padding:0 10px;border-radius:7px;border:1px solid transparent;background:transparent;font-family:var(--f-mono);font-size:12px;color:var(--muted);cursor:pointer}
+.tabs button[aria-selected="true"]{background:var(--surface);border-color:var(--line);color:var(--ink)}
 
-  <!-- iOS meta tags & icons -->
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="Althaf Portfolio">
-  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+.desk{position:relative;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:56px 48px;padding-block:24px 40px}
+@media (max-width:900px){.desk{grid-template-columns:minmax(0,1fr);gap:40px}}
+#wires{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}
+#wires path{fill:none;stroke:var(--leaf);stroke-width:1.5;opacity:.6;stroke-dasharray:4 8;animation:flow 1.4s linear infinite}
+@keyframes flow{to{stroke-dashoffset:-24}}
+.dash{padding:18px;display:flex;flex-direction:column;gap:14px}
+.dash .chips{display:flex;flex-wrap:wrap;gap:8px}
+.dchip{display:flex;flex-direction:column;gap:2px;padding:12px 14px;border-radius:12px;background:var(--surface);border:1px solid var(--line);box-shadow:0 6px 14px -10px color-mix(in oklab,var(--forest) 40%,transparent);min-width:120px;flex:1 1 120px}
+.dchip b{font-family:var(--f-display);font-size:22px;font-weight:600;color:var(--accent)}
+.dchip span{font-size:13px;color:var(--muted)}
+.stackline{display:flex;flex-wrap:wrap;gap:6px}
+.stackline span{font-family:var(--f-mono);font-size:12px;padding:5px 10px;border-radius:999px;background:var(--accent-soft);color:var(--ink)}
 
-  <!-- Favicon - Circular Profile Image -->
-  <link rel="icon" type="image/png" href="favicon.png" />
+.agent{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:24px;align-items:stretch}
+@media (max-width:900px){.agent{grid-template-columns:minmax(0,1fr)}}
+.graph{padding:8px;overflow-x:auto}
+.graph svg{display:block;width:100%;min-width:560px;height:auto}
+.gwire{fill:none;stroke:var(--leaf);stroke-width:1.6;opacity:.55}
+.gnode rect{fill:var(--surface);stroke:var(--line);stroke-width:1.2;transition:fill .3s,stroke .3s}
+.gnode text{font-family:var(--f-mono);font-size:12.5px;fill:var(--ink)}
+.gnode text.sub{font-size:10.5px;fill:var(--muted)}
+.gnode .leaf{fill:var(--leaf);transition:fill .3s}
+.gnode.on rect{fill:var(--forest);stroke:var(--forest)}
+.gnode.on text{fill:var(--term-ink)} .gnode.on text.sub{fill:var(--term-dim)} .gnode.on .leaf{fill:var(--ts)}
+.gpulse{fill:var(--accent)}
+.alog .term{min-height:240px}
+.agent-ctl{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:14px}
+.agent-ctl p{font-size:14px;color:var(--muted);flex:1 1 220px}
 
-  <title>Althaf M | Flutter Developer</title>
-  <link rel="manifest" href="manifest.json">
+section.blk{padding-block:72px 16px}
+.sec-head{display:flex;justify-content:space-between;align-items:end;gap:16px;flex-wrap:wrap;margin-bottom:28px}
+.sec-head > div{display:flex;flex-direction:column;gap:10px;max-width:680px}
+.sec-head p{color:var(--muted);font-size:17px}
+.sec-head .eyebrow::before{content:"// ";color:var(--leaf)}
+
+.skills{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+@media (max-width:960px){.skills{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:600px){.skills{grid-template-columns:minmax(0,1fr)}}
+.mod .body{padding:18px;display:flex;flex-direction:column;gap:12px;flex:1}
+.mod .body p{color:var(--muted);font-size:15px}
+.mod.dark .body p{color:var(--term-dim)} .mod.dark h3{color:var(--term-ink)}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tag{min-height:36px;padding:0 12px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink);font-family:var(--f-mono);font-size:12.5px;cursor:pointer;transition:background .15s,color .15s,border-color .15s}
+.mod.dark .tag{background:transparent;color:var(--term-ink);border-color:color-mix(in oklab,var(--term-ink) 25%,transparent)}
+.tag:hover{border-color:var(--leaf)}
+.tag[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.mod.dark .tag[aria-pressed="true"]{background:var(--ts);color:#1C281D;border-color:var(--ts)}
+.skill-note{margin-top:16px;display:flex;flex-wrap:wrap;gap:10px;align-items:center;font-family:var(--f-mono);font-size:13.5px;color:var(--muted);min-height:44px}
+.skill-note::before{content:"> ";color:var(--leaf)}
+.skill-note button{min-height:40px;padding:0 14px;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer;font-family:var(--f-mono);font-size:13px}
+
+.filters{display:flex;flex-wrap:wrap;gap:8px}
+.chip{min-height:40px;padding:0 14px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink);font-family:var(--f-mono);font-size:13px;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--forest);color:var(--term-ink);border-color:var(--forest)}
+.gallery{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+@media (max-width:980px){.gallery{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:620px){.gallery{grid-template-columns:minmax(0,1fr)}}
+.proj{padding:0;font:inherit;color:inherit;text-align:left;cursor:pointer;transition:transform .3s cubic-bezier(.2,.7,.1,1),opacity .3s}
+.proj:hover{transform:translateY(-4px)}
+.proj .art{height:220px;position:relative;overflow:hidden;background:oklch(var(--tl) var(--tch) var(--hue));display:flex;justify-content:center;align-items:flex-end}
+.proj .art::before{content:"";position:absolute;inset:0;background-image:linear-gradient(color-mix(in oklab,var(--ink) 6%,transparent) 1px,transparent 1px),linear-gradient(90deg,color-mix(in oklab,var(--ink) 6%,transparent) 1px,transparent 1px);background-size:22px 22px}
+.proj .mini{position:relative;width:150px;height:196px;border-radius:22px 22px 0 0;background:var(--forest);padding:6px 6px 0;transform:translateY(14px);transition:transform .45s cubic-bezier(.2,.7,.1,1);display:block}
+.proj:hover .mini{transform:translateY(4px)}
+.proj .mini .scr{height:100%;border-radius:16px 16px 0 0;overflow:hidden;background:var(--surface);display:flex}
+.proj .mini .scr img{width:100%;height:auto;display:block;object-fit:cover;object-position:top}
+.proj .pt{font-size:20px;font-weight:700;letter-spacing:-.01em;line-height:1.2}
+.proj .count{position:absolute;top:12px;right:12px;font-family:var(--f-mono);font-size:11px;padding:4px 9px;border-radius:999px;background:var(--forest);color:var(--term-ink)}
+.proj .info{padding:16px 18px 18px;display:flex;flex-direction:column;gap:8px;flex:1}
+.proj .pt{font-size:20px;font-weight:700;letter-spacing:-.01em;line-height:1.2}
+.proj .info .ps{color:var(--muted);font-size:15px}
+.proj .stack{margin-top:auto;display:flex;flex-wrap:wrap;gap:5px;padding-top:6px}
+.proj .stack span{font-family:var(--f-mono);font-size:11px;padding:4px 8px;border-radius:6px;background:var(--sunk);color:var(--muted)}
+.proj .open{font-family:var(--f-mono);font-size:13px;color:var(--accent)}
+.proj.dim{opacity:.3}
+.emptyp{padding:28px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:14px}
+
+.ui{flex:1;display:flex;flex-direction:column;gap:6px;padding:11px 9px;font-size:10px;color:var(--ink);min-height:0;font-family:var(--f-body)}
+.ui .bar{display:flex;justify-content:space-between;align-items:center;font-weight:700;font-size:12px}
+.ui .bar span:last-child{width:18px;height:18px;border-radius:50%;background:oklch(var(--tc2l) var(--tch2) var(--hue))}
+.ui .ht{border-radius:10px;padding:9px;background:oklch(var(--tl) var(--tch) var(--hue));display:flex;flex-direction:column;gap:3px}
+.ui .ht b{font-size:16px}
+.ui .row{display:flex;align-items:center;gap:6px;padding:6px;border-radius:8px;border:1px solid var(--line)}
+.ui .dot{width:18px;height:18px;border-radius:6px;flex:none;background:oklch(var(--tl) var(--tch) var(--hue))}
+.ui .ln{height:5px;border-radius:3px;background:var(--line);flex:1} .ui .ln.s{flex:.5}
+.ui .cta{margin-top:auto;border-radius:8px;padding:8px;text-align:center;font-weight:700;background:var(--forest);color:var(--term-ink)}
+.ui .chipr{display:flex;gap:4px;flex-wrap:wrap}.ui .chipr span{padding:3px 7px;border-radius:999px;border:1px solid var(--line);font-size:9px}
+.ui .chipr span.on{background:oklch(var(--tc2l) var(--tch2) var(--hue));color:var(--surface);border-color:transparent}
+.ui .g2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:5px}.ui .g2 span.c{border-radius:8px;padding:7px;border:1px solid var(--line);display:flex;flex-direction:column;gap:4px}
+.ui .wave{display:flex;align-items:center;justify-content:center;gap:3px;height:44px}
+.ui .wave i{width:3px;border-radius:2px;background:oklch(var(--tc2l) var(--tch2) var(--hue));animation:wv 1.1s ease-in-out infinite}
+@keyframes wv{0%,100%{height:8px}50%{height:36px}}
+.ui .bub{max-width:85%;padding:6px 8px;border-radius:9px;background:var(--sunk)}.ui .bub.me{align-self:flex-end;background:oklch(var(--tl) var(--tch) var(--hue))}
+.ui .ring{width:66px;height:66px;border-radius:50%;margin:4px auto;border:7px solid var(--line);border-top-color:oklch(var(--tc2l) var(--tch2) var(--hue));border-right-color:oklch(var(--tc2l) var(--tch2) var(--hue));display:grid;place-items:center;font-weight:700;font-size:11px}
+.ui .bars{display:flex;align-items:end;gap:4px;height:44px}.ui .bars i{flex:1;border-radius:3px 3px 0 0;background:oklch(var(--tc2l) var(--tch2) var(--hue))}
+.ui .scan{position:relative;height:74px;border-radius:9px;border:1px dashed oklch(var(--tc2l) var(--tch2) var(--hue));overflow:hidden;display:flex;flex-direction:column;gap:5px;padding:8px}
+.ui .scan::after{content:"";position:absolute;left:0;right:0;height:2px;background:oklch(var(--tc2l) var(--tch2) var(--hue));animation:scan 2.2s ease-in-out infinite}
+@keyframes scan{0%,100%{top:8%}50%{top:88%}}
+.ui .kan{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px}.ui .kan span.k2{display:flex;flex-direction:column;gap:4px}
+.ui .kan i{height:18px;border-radius:5px;border:1px solid var(--line);display:block}.ui .kan i.c{background:oklch(var(--tl) var(--tch) var(--hue));border-color:transparent}
+
+dialog.sheet{border:0;padding:0;border-radius:18px;max-width:min(760px,calc(100% - 32px));width:100%;background:var(--paper);color:var(--ink);box-shadow:0 40px 80px -30px rgba(0,0,0,.5)}
+dialog.sheet::backdrop{background:color-mix(in oklab,var(--forest) 55%,transparent);backdrop-filter:blur(3px)}
+dialog.sheet[open]{animation:pop .35s cubic-bezier(.2,.7,.1,1)}
+@keyframes pop{from{transform:translateY(16px) scale(.98);opacity:0}to{transform:none;opacity:1}}
+.sheet-shot{display:block;width:100%;max-width:220px;border-radius:16px;border:6px solid var(--forest);margin-bottom:16px}
+.stores{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.stores a{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 14px;border-radius:10px;background:var(--forest);color:var(--term-ink);text-decoration:none;font-family:var(--f-mono);font-size:13px}
+.sheet-art{height:130px;background:oklch(var(--tl) var(--tch) var(--hue));display:flex;align-items:flex-end;padding:20px 24px;position:relative}
+.sheet-art h3{font-family:var(--f-display);font-size:clamp(22px,3.4vw,32px);text-transform:uppercase;font-weight:600}
+.sheet-close{position:absolute;top:12px;right:12px}
+.sheet-body{padding:22px 24px 26px;display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:24px;max-height:min(60vh,560px);overflow:auto}
+@media (max-width:640px){.sheet-body{grid-template-columns:minmax(0,1fr)}}
+.sheet-body h4{margin:0 0 8px;font-family:var(--f-mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:500}
+.sheet-body ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:6px}
+.sheet-body .kv{display:flex;flex-direction:column;gap:14px}.sheet-body .kv div{display:flex;flex-direction:column;gap:3px}
+
+.two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px}
+@media (max-width:860px){.two{grid-template-columns:minmax(0,1fr)}}
+.gitlog{padding:16px 18px;font-family:var(--f-mono);font-size:13.5px;line-height:1.8;display:flex;flex-direction:column}
+.gitlog .h{color:var(--s)} .gitlog a{margin-top:10px}
+.hist ol{margin:0;padding:8px 0;list-style:none;font-family:var(--f-mono);font-size:13.5px}
+.hist li{display:grid;grid-template-columns:44px minmax(0,1fr);gap:4px 12px;padding:12px 18px;border-bottom:1px dashed color-mix(in oklab,var(--term-ink) 14%,transparent);color:var(--term-ink)}
+.hist li:last-child{border-bottom:0}
+.hist .n{color:var(--term-dim)} .hist .w{color:var(--ts)} .hist .x{grid-column:2;color:var(--term-dim)}
+.practice{padding:18px;display:flex;flex-direction:column;gap:14px}
+.practice div{display:flex;flex-direction:column;gap:4px;padding-bottom:14px;border-bottom:1px solid var(--line)}
+.practice div:last-child{border-bottom:0;padding-bottom:0}
+.practice b{font-weight:700} .practice span{color:var(--muted);font-size:15px}
+
+.three{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:18px}
+@media (max-width:960px){.three{grid-template-columns:minmax(0,1fr)}}
+.about{padding:18px;display:flex;flex-direction:column;gap:12px}
+.about p{color:var(--muted);font-size:15.5px}
+.about .langs{display:flex;flex-wrap:wrap;gap:6px}
+.about .langs span{font-family:var(--f-mono);font-size:12px;padding:5px 10px;border-radius:999px;background:var(--accent-soft)}
+.edu{padding:6px 18px 12px;list-style:none;margin:0}
+.edu li{display:flex;flex-direction:column;gap:2px;padding:12px 0;border-bottom:1px solid var(--line)}
+.edu li:last-child{border-bottom:0}
+.edu b{font-weight:700} .edu span{color:var(--muted);font-size:14.5px} .edu em{font-style:normal;font-family:var(--f-mono);font-size:12px;color:var(--accent)}
+.form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;padding:18px}
+@media (max-width:640px){.form{grid-template-columns:minmax(0,1fr)}}
+.form .full{grid-column:1/-1}
+.form label{display:flex;flex-direction:column;gap:6px;font-family:var(--f-mono);font-size:12px;color:var(--term-dim)}
+.form input,.form textarea{font:inherit;font-family:var(--f-body);font-size:16px;color:var(--term-ink);background:color-mix(in oklab,var(--term-ink) 6%,transparent);border:1px solid color-mix(in oklab,var(--term-ink) 22%,transparent);border-radius:10px;padding:12px 14px;min-height:48px}
+.form textarea{min-height:130px;resize:vertical}
+.form input:focus,.form textarea:focus{outline:2px solid var(--ts);outline-offset:1px}
+.form .err{color:var(--ts);font-size:12.5px;min-height:1em}
+.form .actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.form .msg{font-family:var(--f-mono);font-size:13px;color:var(--ts)}
+.contact{margin-top:72px;padding-block:0 8px}
+.contact .term{min-height:0}
+.mailrow{display:flex;flex-wrap:wrap;gap:10px;padding:0 18px 18px}
+.mailrow .btn.light{background:var(--term-ink);color:var(--forest)}
+.mailrow .btn.line{border-color:color-mix(in oklab,var(--term-ink) 30%,transparent);color:var(--term-ink);background:transparent}
+.foot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;padding-block:24px 32px;font-family:var(--f-mono);font-size:12.5px;color:var(--muted)}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--forest);color:var(--term-ink);padding:10px 16px;border-radius:10px;font-family:var(--f-mono);font-size:13px;z-index:30}
+
+@supports (animation-timeline: view()){
+  .reveal{animation:lift linear both;animation-timeline:view();animation-range:entry 0% entry 40%}
+  @keyframes lift{from{transform:translateY(28px);opacity:.35}to{transform:none;opacity:1}}
+}
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+}
+</style>
+<meta name="theme-color" content="#3C573E">
+<meta name="author" content="Althaf M">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Althaf M · Senior Full-Stack Engineer">
+<meta property="og:description" content="Apps, backend, data, cloud and AI. Senior full-stack engineer at Texol World, Kozhikode.">
+<meta property="og:image" content="https://althafmjeelani.github.io/althaf-portfolio/assets/images/og.jpg">
+<meta property="og:url" content="https://althafmjeelani.github.io/althaf-portfolio/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<script defer src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4.4.1/dist/email.min.js"></script>
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)} body{margin:0} img{max-width:100%} [hidden]{display:none!important}</style>
 </head>
-
 <body>
-  <script src="flutter_bootstrap.js" async></script>
-</body>
 
+<canvas id="mesh" aria-hidden="true"></canvas>
+<div class="page">
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#top"><i></i>ALTHAF.M</a>
+    <nav class="nav" aria-label="Main">
+      <a href="#desk" class="hide-sm">workspace</a>
+      <a href="#agent" class="hide-sm">agents</a>
+      <a href="#skills">skills</a>
+      <a href="#projects">projects</a>
+      <a href="#contact">contact</a>
+      <button class="iconbtn" id="themeBtn" type="button" aria-label="Switch colour theme">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"></path></svg>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <div class="wrap">
+    <section class="hero">
+      <div class="avatar"><img src="assets/images/profile.jpg" alt="Photo of Althaf M" width="116" height="116"></div>
+      <p class="sys">System: <b>Senior Full-Stack Engineer</b></p>
+      <h1 id="title" aria-label="Althaf M">Althaf M</h1>
+      <p class="lede">I build complete software solutions: web and mobile apps, APIs and data platforms, AI agents and RAG, and secure cloud infrastructure. Ten products and 15+ apps shipped since 2022. I lead the engineering team at Texol World and live in Kozhikode, Kerala.</p>
+      <div class="ctas">
+        <a class="btn primary" href="#projects">$ open projects</a>
+        <a class="btn ghost" href="#skills">view skills</a>
+        <a class="btn ghost" href="assets/files/Althaf_M_Resume.pdf" download="Althaf_M_Resume.pdf">↓ resume</a>
+      </div>
+      <span class="status"><i></i>Texol World · Calicut, IST</span>
+    </section>
+
+    <section class="desk" id="desk" aria-label="Workspace">
+      <svg id="wires" aria-hidden="true"></svg>
+      <div class="win dark reveal" id="wTerm">
+        <div class="win-bar"><i></i><i></i><i></i><span class="ttl">althaf@texol: ~ — zsh</span></div>
+        <div class="term" id="term"><span class="p">$</span> whoami
+<span class="o">althaf m — senior full-stack engineer @ texol world</span>
+<span class="p">$</span> <span class="cur"></span></div>
+      </div>
+      <div class="win reveal" id="wDash">
+        <div class="win-bar"><i></i><i></i><i></i><span class="ttl">dashboard.app</span></div>
+        <div class="dash">
+          <div class="chips">
+            <div class="dchip"><b>10</b><span>products shipped</span></div>
+            <div class="dchip"><b>4+</b><span>years building</span></div>
+            <div class="dchip"><b>15+</b><span>apps built</span></div>
+            <div class="dchip"><b>EoM</b><span>Employee of the Month, many times</span></div>
+          </div>
+          <span class="eyebrow">Active stack</span>
+          <div class="stackline"><span>Python</span><span>Go</span><span>Dart · Flutter</span><span>TypeScript</span><span>LLM · RAG</span><span>LangChain</span><span>AWS</span><span>Docker</span><span>Snowflake</span></div>
+        </div>
+      </div>
+      <div class="win reveal" id="wCode" style="grid-column:1 / -1">
+        <div class="win-bar"><i></i><i></i><i></i><span class="ttl" id="codeTitle">rag_answer.py</span>
+          <div class="tabs" role="tablist" aria-label="Code samples">
+            <button type="button" role="tab" aria-selected="true" data-t="0">Python · RAG</button>
+            <button type="button" role="tab" aria-selected="false" data-t="1">Go API</button>
+            <button type="button" role="tab" aria-selected="false" data-t="2">Dart</button>
+            <button type="button" role="tab" aria-selected="false" data-t="3">SQL</button>
+          </div>
+        </div>
+        <div class="code" id="code" role="tabpanel" aria-labelledby="codeTitle"></div>
+      </div>
+    </section>
+
+    <section class="blk" id="agent">
+      <div class="sec-head"><div>
+        <span class="eyebrow">AI agents</span>
+        <h2>How an agent answers</h2>
+        <p>The pattern I use for AI features: plan the question, retrieve from the product's own data, call tools, keep context, then respond with sources.</p>
+      </div></div>
+      <div class="agent">
+        <div class="win reveal">
+          <div class="win-bar"><i></i><i></i><i></i><span class="ttl">agent.graph</span></div>
+          <div class="graph">
+            <svg id="graph" viewBox="0 0 760 340" role="img" aria-label="Agent pipeline: the query goes to a planner, which uses a retriever, tools and memory; their results combine into a response.">
+              <path class="gwire" id="g1" d="M 150 170 L 210 170"></path>
+              <path class="gwire" id="g2" d="M 350 170 C 380 170, 370 58, 400 58"></path>
+              <path class="gwire" id="g3" d="M 350 170 L 400 170"></path>
+              <path class="gwire" id="g4" d="M 350 170 C 380 170, 370 282, 400 282"></path>
+              <path class="gwire" id="g5" d="M 530 58 C 560 58, 560 170, 590 170"></path>
+              <path class="gwire" id="g6" d="M 530 170 L 590 170"></path>
+              <path class="gwire" id="g7" d="M 530 282 C 560 282, 560 170, 590 170"></path>
+              <g class="gnode" id="nQ" transform="translate(30,142)"><rect width="120" height="56" rx="12"></rect><path class="leaf" d="M18 34c0-9 7-15 16-15 0 9-7 15-16 15z"></path><text x="44" y="26">Query</text><text class="sub" x="44" y="42">user asks</text></g>
+              <g class="gnode" id="nP" transform="translate(210,142)"><rect width="140" height="56" rx="12"></rect><path class="leaf" d="M18 34c0-9 7-15 16-15 0 9-7 15-16 15z"></path><text x="44" y="26">Planner</text><text class="sub" x="44" y="42">LLM · steps</text></g>
+              <g class="gnode" id="nR" transform="translate(400,30)"><rect width="130" height="56" rx="12"></rect><path class="leaf" d="M18 34c0-9 7-15 16-15 0 9-7 15-16 15z"></path><text x="44" y="26">Retriever</text><text class="sub" x="44" y="42">RAG · vectors</text></g>
+              <g class="gnode" id="nT" transform="translate(400,142)"><rect width="130" height="56" rx="12"></rect><path class="leaf" d="M18 34c0-9 7-15 16-15 0 9-7 15-16 15z"></path><text x="44" y="26">Tools</text><text class="sub" x="44" y="42">APIs · SQL</text></g>
+              <g class="gnode" id="nM" transform="translate(400,254)"><rect width="130" height="56" rx="12"></rect><path class="leaf" d="M18 34c0-9 7-15 16-15 0 9-7 15-16 15z"></path><text x="44" y="26">Memory</text><text class="sub" x="44" y="42">context</text></g>
+              <g class="gnode" id="nA" transform="translate(590,142)"><rect width="140" height="56" rx="12"></rect><path class="leaf" d="M18 34c0-9 7-15 16-15 0 9-7 15-16 15z"></path><text x="44" y="26">Response</text><text class="sub" x="44" y="42">with sources</text></g>
+              <g id="gp"></g>
+            </svg>
+          </div>
+        </div>
+        <div class="alog">
+          <div class="win dark reveal" style="height:100%">
+            <div class="win-bar"><i></i><i></i><i></i><span class="ttl">agent.log</span></div>
+            <div class="term" id="alog" aria-live="polite"><span class="d">ready. press Run agent.</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="agent-ctl">
+        <p>A sample run on an example question. Each step lights up as the agent works.</p>
+        <button class="btn primary" type="button" id="runAgent">▶ Run agent</button>
+      </div>
+    </section>
+
+    <section class="blk" id="skills">
+      <div class="sec-head"><div>
+        <span class="eyebrow">Skills &amp; knowledge</span>
+        <h2>Modules I work with</h2>
+        <p>Nine areas, from code to cloud to AI. Tap any skill to see the projects it shipped in.</p>
+      </div></div>
+      <div class="skills">
+        <div class="win mod dark reveal" id="sk-lang"><div class="win-bar"><i></i><i></i><i></i><span class="ttl">languages.mod</span></div><div class="body">
+          <h3>Languages</h3><p>The languages I write production code in.</p>
+          <div class="tags"><button class="tag" type="button" data-s="python">Python</button><button class="tag" type="button" data-s="go">Go</button><button class="tag" type="button" data-s="dart">Dart</button><button class="tag" type="button" data-s="ts">TypeScript</button><button class="tag" type="button" data-s="js">JavaScript</button><button class="tag" type="button" data-s="kotlin">Kotlin</button><button class="tag" type="button" data-s="sql">SQL</button></div></div></div>
+        <div class="win mod reveal" id="sk-apps"><div class="win-bar"><i></i><i></i><i></i><span class="ttl">interfaces.mod</span></div><div class="body">
+          <h3>Apps &amp; interfaces</h3><p>Cross-platform products, web apps, admin portals and multi-role app sets.</p>
+          <div class="tags"><button class="tag" type="button" data-s="flutter">Flutter</button><button class="tag" type="button" data-s="state">Provider · Bloc · Riverpod</button><button class="tag" type="button" data-s="arch">Clean architecture · MVVM</button><button class="tag" type="button" data-s="native">Platform channels</button><button class="tag" type="button" data-s="react">React · Next.js</button><button class="tag" type="button" data-s="web">Admin portals</button><button class="tag" type="button" data-s="ios">iOS</button><button class="tag" type="button" data-s="android">Android</button><button class="tag" type="button" data-s="multiapp">Multi-app platforms</button><button class="tag" type="button" data-s="maps">Maps &amp; location</button><button class="tag" type="button" data-s="figma">UI/UX · Figma</button></div></div></div>
+        <div class="win mod reveal" id="sk-backend"><div class="win-bar"><i></i><i></i><i></i><span class="ttl">backend.mod</span></div><div class="body">
+          <h3>Backend &amp; databases</h3><p>APIs, services and storage that keep every client in step.</p>
+          <div class="tags"><button class="tag" type="button" data-s="rest">REST APIs</button><button class="tag" type="button" data-s="graphql">GraphQL</button><button class="tag" type="button" data-s="node">Node.js</button><button class="tag" type="button" data-s="fastapi">FastAPI</button><button class="tag" type="button" data-s="realtime">Real-time</button><button class="tag" type="button" data-s="offline">Offline sync</button><button class="tag" type="button" data-s="postgres">PostgreSQL</button><button class="tag" type="button" data-s="mongo">MongoDB</button><button class="tag" type="button" data-s="redis">Redis</button><button class="tag" type="button" data-s="sqlite">SQLite</button><button class="tag" type="button" data-s="firebase">Firebase</button></div></div></div>
+        <div class="win mod dark reveal" id="sk-ai"><div class="win-bar"><i></i><i></i><i></i><span class="ttl">intelligence.mod</span></div><div class="body">
+          <h3>AI &amp; ML</h3><p>LLM features grounded in a product's own data.</p>
+          <div class="tags"><button class="tag" type="button" data-s="llm">LLM integration</button><button class="tag" type="button" data-s="rag">RAG</button><button class="tag" type="button" data-s="vector">Embeddings &amp; vector search</button><button class="tag" type="button" data-s="agents">AI agents</button><button class="tag" type="button" data-s="prompt">Prompt engineering</button><button class="tag" type="button" data-s="finetune">Fine-tuning</button><button class="tag" type="button" data-s="ocr">Document extraction</button><button class="tag" type="button" data-s="voice">Speech &amp; translation</button></div></div></div>
+        <div class="win mod dark reveal" id="sk-aitools"><div class="win-bar"><i></i><i></i><i></i><span class="ttl">ai-tools.mod</span></div><div class="body">
+          <h3>AI tools &amp; frameworks</h3><p>The models, frameworks and stores behind those features.</p>
+          <div class="tags"><button class="tag" type="button" data-s="openai">OpenAI API</button><button class="tag" type="button" data-s="claude">Claude API</button><button class="tag" type="button" data-s="gemini">Gemini</button><button class="tag" type="button" data-s="langchain">LangChain</button><button class="tag" type="button" data-s="llamaindex">LlamaIndex</button><button class="tag" type="button" data-s="hf">Hugging Face</button><button class="tag" type="button" data-s="ollama">Ollama</button><button class="tag" type="button" data-s="mcp">MCP</button><button class="tag" type="button" data-s="pinecone">Pinecone</button><button class="tag" type="button" data-s="pgvector">pgvector</button><button class="tag" type="button" data-s="pytorch">PyTorch</button><button class="tag" type="button" data-s="tf">TensorFlow</button></div></div></div>
+        <div class="win mod reveal" id="sk-ds"><div class="win-bar"><i></i><i></i><i></i><span class="ttl">data-science.mod</span></div><div class="body">
+          <h3>Data science</h3><p>Analysing data and building models from it.</p>
+          <div class="tags"><button class="tag" type="button" data-s="pandas">Pandas</button><button class="tag" type="button" data-s="numpy">NumPy</button><button class="tag" type="button" data-s="sklearn">scikit-learn</button><button class="tag" type="button" data-s="jupyter">Jupyter</button><button class="tag" type="button" data-s="viz">Matplotlib · Plotly</button><button class="tag" type="button" data-s="stats">Statistics &amp; ML models</button></div></div></div>
+        <div class="win mod reveal" id="sk-dw"><div class="win-bar"><i></i><i></i><i></i><span class="ttl">data-engineering.mod</span></div><div class="body">
+          <h3>Data engineering &amp; warehousing</h3><p>Pipelines that move raw data into reliable, queryable tables.</p>
+          <div class="tags"><button class="tag" type="button" data-s="etl">ETL / ELT</button><button class="tag" type="button" data-s="snowflake">Snowflake</button><button class="tag" type="button" data-s="bigquery">BigQuery</button><button class="tag" type="button" data-s="redshift">Redshift</button><button class="tag" type="button" data-s="dbt">dbt</button><button class="tag" type="button" data-s="airflow">Apache Airflow</button><button class="tag" type="button" data-s="spark">Apache Spark</button><button class="tag" type="button" data-s="kafka">Kafka</button><button class="tag" type="button" data-s="bi">Power BI · Looker</button></div></div></div>
+        <div class="win mod reveal" id="sk-cloud"><div class="win-bar"><i></i><i></i><i></i><span class="ttl">cloud.mod</span></div><div class="body">
+          <h3>Cloud &amp; DevOps</h3><p>Hosting, deployment and release pipelines that run themselves.</p>
+          <div class="tags"><button class="tag" type="button" data-s="aws">AWS</button><button class="tag" type="button" data-s="gcp">Google Cloud</button><button class="tag" type="button" data-s="azure">Azure</button><button class="tag" type="button" data-s="hosting">Servers &amp; hosting</button><button class="tag" type="button" data-s="docker">Docker</button><button class="tag" type="button" data-s="k8s">Kubernetes</button><button class="tag" type="button" data-s="terraform">Terraform</button><button class="tag" type="button" data-s="cicd">CI/CD · GitHub Actions</button><button class="tag" type="button" data-s="linux">Linux · Nginx</button><button class="tag" type="button" data-s="testing">Testing &amp; debugging</button></div></div></div>
+        <div class="win mod reveal" id="sk-sec"><div class="win-bar"><i></i><i></i><i></i><span class="ttl">security.mod</span></div><div class="body">
+          <h3>Security &amp; payments</h3><p>Protecting accounts, data and money at every layer.</p>
+          <div class="tags"><button class="tag" type="button" data-s="auth">Auth · OAuth · JWT</button><button class="tag" type="button" data-s="bio">Biometric auth</button><button class="tag" type="button" data-s="apisec">API security · OWASP</button><button class="tag" type="button" data-s="iam">IAM &amp; secrets</button><button class="tag" type="button" data-s="push">Push notifications</button><button class="tag" type="button" data-s="pay">Secure payments</button><button class="tag" type="button" data-s="upi">Apple Pay · Telr · UPI</button></div></div></div>
+      </div>
+      <div class="skill-note" id="skillNote" aria-live="polite">pick a skill to highlight matching projects</div>
+    </section>
+
+    <section class="blk" id="projects">
+      <div class="sec-head">
+        <div>
+          <span class="eyebrow">Projects · newest first</span>
+          <h2>Ten products, end to end</h2>
+          <p>Open any window for features, my role and the stack.</p>
+        </div>
+        <div class="filters" role="group" aria-label="Filter projects">
+          <button class="chip" type="button" data-f="all" aria-pressed="true">all</button>
+          <button class="chip" type="button" data-f="Texol World" aria-pressed="false">texol world</button>
+          <button class="chip" type="button" data-f="BigWelt" aria-pressed="false">bigwelt</button>
+        </div>
+      </div>
+      <div class="gallery" id="gallery"></div>
+      <p class="emptyp" id="emptyP" hidden>No project matches this filter.</p>
+    </section>
+
+    <section class="blk" id="more">
+      <div class="two">
+        <div class="win reveal" id="oss">
+          <div class="win-bar"><i></i><i></i><i></i><span class="ttl">print_bluetooth_thermal — git log</span></div>
+          <div class="gitlog">
+            <span class="eyebrow" style="margin-bottom:8px">Open source · Flutter plugin fork</span>
+            <span><span class="h">a1f3c2e</span> [your commit: what you changed]</span>
+            <span><span class="h">7be901d</span> [your commit: the bug or feature]</span>
+            <span><span class="h">c44d8aa</span> fork from upstream</span>
+            <a href="https://github.com/AlthafMjeelani/print_bluetooth_thermal">→ view on GitHub</a>
+          </div>
+        </div>
+        <div class="win reveal">
+          <div class="win-bar"><i></i><i></i><i></i><span class="ttl">practice.md</span></div>
+          <div class="practice">
+            <div><b>Own the lifecycle</b><span>Analysis, architecture, coordination with design and backend teams, and deployment.</span></div>
+            <div><b>Automate releases</b><span>CI/CD with GitHub Actions so every build ships the same way.</span></div>
+            <div><b>Lead the team</b><span>Employee of the Month many times. [How you review code and mentor developers.]</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="three" id="about">
+        <div class="win reveal">
+          <div class="win-bar"><i></i><i></i><i></i><span class="ttl">about.md</span></div>
+          <div class="about">
+            <h3>Who I am</h3>
+            <p>I'm Althaf, a software engineer from Kozhikode, Kerala. I like turning ideas into products people actually use, and I keep learning as I build.</p>
+            <p>I built my first app, an e-commerce store, in May 2022. Since then I've shipped 15+ apps and grown from Flutter into the full stack: backend, data, cloud and AI.</p>
+            <span class="eyebrow">Languages I speak</span>
+            <div class="langs"><span>English</span><span>Malayalam</span><span>Hindi</span><span>Tamil</span></div>
+          </div>
+        </div>
+        <div class="win reveal">
+          <div class="win-bar"><i></i><i></i><i></i><span class="ttl">education.log</span></div>
+          <ul class="edu">
+            <li><em>Jun 2019 – Mar 2022</em><b>Bachelor of Computer Applications (BCA)</b><span>MET Arts and Science College, Nadapuram · Calicut University</span></li>
+            <li><em>Jun 2017 – Mar 2019</em><b>Higher Secondary Education</b><span>GHSS Avala Kuttoth, Calicut</span></li>
+          </ul>
+        </div>
+        <div class="win reveal">
+          <div class="win-bar"><i></i><i></i><i></i><span class="ttl">achievements.json</span></div>
+          <ul class="edu">
+            <li><em>Texol World</em><b>Employee of the Month, many times</b><span>Recognised for outstanding project delivery and innovation.</span></li>
+            <li><em>Open source</em><b>print_bluetooth_thermal</b><span>Fork of the Flutter Bluetooth printing plugin. [What you changed.]</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="win dark reveal" id="timeline" style="margin-top:18px">
+        <div class="win-bar"><i></i><i></i><i></i><span class="ttl">~/career — history</span></div>
+        <div class="hist"><ol>
+          <li><span class="n">04</span><span><span class="w">Senior Full-Stack Engineer</span> · Texol World, Calicut</span><span class="x">Jan 2024 – now · leads development, deployment and release pipelines across apps, backend, data, cloud and AI; CI/CD with GitHub Actions</span></li>
+          <li><span class="n">03</span><span><span class="w">Flutter Developer</span> · BigWelt Infotech, Bangalore</span><span class="x">Dec 2022 – Dec 2023 · cross-platform apps with optimised state management, with backend and UI/UX teams</span></li>
+          <li><span class="n">02</span><span><span class="w">Flutter Developer Intern</span> · Brototype, Calicut</span><span class="x">May – Dec 2022 · client projects end to end; state management, performance and deployment</span></li>
+          <li><span class="n">01</span><span><span class="w">BCA</span> · MET Arts and Science College, Nadapuram</span><span class="x">Jun 2019 – Mar 2022 · Calicut University</span></li>
+        </ol></div>
+      </div>
+    </section>
+
+    <section class="contact" id="contact">
+      <div class="win dark reveal">
+        <div class="win-bar"><i></i><i></i><i></i><span class="ttl">contact — zsh</span></div>
+        <div class="term"><span class="p">$</span> contact --althaf
+<span class="o">Building a product? Let's talk.</span>
+<span class="d">email    </span><span id="mail" style="user-select:all">althafmdev@gmail.com</span>
+<span class="d">linkedin </span>linkedin.com/in/althafm2002
+<span class="d">github   </span>github.com/AlthafMjeelani</div>
+        <form class="form" id="cform" novalidate>
+          <label>name<input id="fName" name="from_name" autocomplete="name" required></label>
+          <label>email<input id="fEmail" name="from_email" type="email" autocomplete="email" required></label>
+          <label class="full">subject (optional)<input id="fSubject" name="subject"></label>
+          <label class="full">message<textarea id="fMsg" name="message" required></textarea></label>
+          <span class="err full" id="fErr" role="alert"></span>
+          <div class="actions full"><button class="btn light" type="submit" id="fSend">$ send message</button><span class="msg" id="fMsgOut" role="status"></span></div>
+        </form>
+        <div class="mailrow">
+          <button class="btn line" type="button" id="copyBtn">copy email</button>
+          <a class="btn line" href="https://linkedin.com/in/althafm2002">linkedin</a>
+          <a class="btn line" href="https://github.com/AlthafMjeelani">github</a>
+        </div>
+      </div>
+      <div class="foot"><span>© 2026 Althaf M</span><span>Calicut, India · UTC+5:30</span></div>
+    </section>
+  </div>
+</main>
+</div>
+
+<dialog class="sheet" id="sheet" aria-labelledby="sheetTitle">
+  <div class="sheet-art" id="sheetArt">
+    <h3 id="sheetTitle">Project</h3>
+    <button class="iconbtn sheet-close" type="button" id="sheetClose" aria-label="Close">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8"></path></svg>
+    </button>
+  </div>
+  <div class="sheet-body">
+    <div><h4>What it does</h4><p id="sheetSum"></p><h4 style="margin-top:20px">Key features</h4><ul id="sheetFeat"></ul><div class="stores" id="sheetStores"></div></div>
+    <div class="kv">
+      <img class="sheet-shot" id="sheetShot" alt="" hidden>
+      <div><h4>Company</h4><b id="sheetOrg"></b></div>
+      <div><h4>When</h4><b id="sheetWhen"></b></div>
+      <div><h4>My role</h4><b id="sheetRole"></b></div>
+      <div><h4>Stack</h4><span id="sheetStack"></span></div>
+    </div>
+  </div>
+</dialog>
+<div class="toast" id="toast" role="status" hidden></div>
+
+<script>
+(function(){
+  function $(id){return document.getElementById(id);}
+  var root=document.documentElement, reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var esc=function(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});};
+  try{var saved=localStorage.getItem('theme'); if(saved) root.dataset.theme=saved;}catch(e){}
+
+  /* mesh */
+  var cv=$('mesh'), cx=cv.getContext('2d'), mc='rgba(76,122,73,.22)', W=0,H=0,DPR=Math.min(2,window.devicePixelRatio||1);
+  function meshColor(){mc=getComputedStyle(root).getPropertyValue('--mesh').trim()||mc; if(reduce) drawMesh(0);}
+  function size(){W=innerWidth;H=innerHeight;cv.width=W*DPR;cv.height=H*DPR;cx.setTransform(DPR,0,0,DPR,0,0);}
+  function drawMesh(t){
+    cx.clearRect(0,0,W,H); cx.strokeStyle=mc; cx.lineWidth=1;
+    var step=26, cols=Math.ceil(W/step)+2, rows=Math.ceil(H/step)+2;
+    function f(x,y){var a=Math.max(0,1-Math.hypot((x-W)/(W*.55),y/(H*.7))), b=Math.max(0,1-Math.hypot(x/(W*.5),(y-H)/(H*.6)));return Math.max(a,b);}
+    function pt(i,j){var x=i*step,y=j*step,k=f(x,y);return [x+Math.sin(y*.012+t*.0006)*28*k, y+Math.cos(x*.011+t*.0005)*30*k, k];}
+    var i,j,p;
+    for(j=0;j<rows;j++){for(i=1;i<cols;i++){var a=pt(i-1,j),b=pt(i,j); if(a[2]<=0&&b[2]<=0) continue; cx.globalAlpha=Math.min(1,(a[2]+b[2])*.9); cx.beginPath();cx.moveTo(a[0],a[1]);cx.lineTo(b[0],b[1]);cx.stroke();}}
+    for(i=0;i<cols;i++){for(j=1;j<rows;j++){var c=pt(i,j-1),d=pt(i,j); if(c[2]<=0&&d[2]<=0) continue; cx.globalAlpha=Math.min(1,(c[2]+d[2])*.9); cx.beginPath();cx.moveTo(c[0],c[1]);cx.lineTo(d[0],d[1]);cx.stroke();}}
+    cx.globalAlpha=1;
+  }
+  size(); meshColor();
+  matchMedia('(prefers-color-scheme: dark)').addEventListener('change',meshColor);
+  if(!reduce){var lastT=0;(function loop(t){ if(!document.hidden && t-lastT>33){drawMesh(t);lastT=t;} requestAnimationFrame(loop);})(0);} else drawMesh(0);
+
+  $('themeBtn').addEventListener('click',function(){
+    var cur=root.dataset.theme||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');
+    var n=cur==='dark'?'light':'dark'; root.dataset.theme=n; try{localStorage.setItem('theme',n);}catch(e){}
+    meshColor();
+  });
+  var tt; function say(m){var t=$('toast');t.textContent=m;t.hidden=false;clearTimeout(tt);tt=setTimeout(function(){t.hidden=true},1800);}
+  $('copyBtn').addEventListener('click',function(){
+    function fb(){var r=document.createRange();r.selectNodeContents($('mail'));var s=getSelection();s.removeAllRanges();s.addRange(r);say('email selected — press copy');}
+    try{navigator.clipboard.writeText('althafmdev@gmail.com').then(function(){say('email copied');},fb);}catch(e){fb();}
+  });
+
+  /* contact form: EmailJS, falls back to the visitor's mail app */
+  var EJ={service:'service_efd5qss',template:'template_jutw2cf',key:'ZL0an7FvYOxzrqlQ9',to:'althafmdev@gmail.com'};
+  var form=$('cform');
+  if(form){ form.addEventListener('submit',function(e){
+    e.preventDefault();
+    var n=$('fName').value.trim(), em=$('fEmail').value.trim(), sub=$('fSubject').value.trim(), m=$('fMsg').value.trim(), err=$('fErr'), out=$('fMsgOut');
+    err.textContent=''; out.textContent='';
+    if(!n){err.textContent='Enter your name.';$('fName').focus();return;}
+    if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em)){err.textContent='Enter a valid email address.';$('fEmail').focus();return;}
+    if(m.length<10){err.textContent='Write a message of at least 10 characters.';$('fMsg').focus();return;}
+    var btn=$('fSend'); btn.disabled=true; btn.textContent='sending…';
+    var params={from_name:n,from_email:em,subject:sub||'Contact from portfolio',message:m,user_name:n,user_email:em,reply_to:em};
+    function mailto(){ location.href='mailto:'+EJ.to+'?subject='+encodeURIComponent(params.subject)+'&body='+encodeURIComponent('Name: '+n+'\nEmail: '+em+'\n\n'+m); }
+    var send = window.emailjs ? window.emailjs.send(EJ.service,EJ.template,params,{publicKey:EJ.key}) : Promise.reject(new Error('emailjs unavailable'));
+    send.then(function(){ out.textContent='✓ Message sent. I\'ll reply to '+em+'.'; form.reset(); },
+      function(){ out.textContent='Could not send from here. Email me at '+EJ.to+' instead.'; mailto(); })
+      .then(function(){ btn.disabled=false; btn.textContent='$ send message'; });
+  }); }
+
+  /* title */
+  var h=$('title'), txt=h.textContent; h.textContent='';
+  txt.split('').forEach(function(c,i){var s=document.createElement('span');s.className='ch';s.setAttribute('aria-hidden','true');s.style.animationDelay=(i*0.05)+'s';s.textContent=c===' '?' ':c;h.appendChild(s);});
+
+  /* wires */
+  function drawWires(){
+    var svg=$('wires'), d=$('desk').getBoundingClientRect();
+    function box(id){var r=$(id).getBoundingClientRect();return {l:r.left-d.left,t:r.top-d.top,r:r.right-d.left,b:r.bottom-d.top,cx:(r.left+r.right)/2-d.left};}
+    var a=box('wTerm'), b=box('wDash'), c=box('wCode'), out=[];
+    if(b.l>a.r){ out.push('M '+a.r+' '+(a.t+70)+' C '+(a.r+30)+' '+(a.t+70)+', '+(b.l-30)+' '+(b.t+70)+', '+b.l+' '+(b.t+70)); }
+    else { out.push('M '+a.cx+' '+a.b+' C '+a.cx+' '+(a.b+20)+', '+b.cx+' '+(b.t-20)+', '+b.cx+' '+b.t); }
+    [a,b].forEach(function(s,k){ if(s.b<c.t-4){ var tx=c.l+(c.r-c.l)*(k?0.72:0.28); out.push('M '+s.cx+' '+s.b+' C '+s.cx+' '+(s.b+28)+', '+tx+' '+(c.t-28)+', '+tx+' '+c.t);} });
+    svg.innerHTML=out.map(function(p){return '<path d="'+p+'"></path>';}).join('');
+  }
+  addEventListener('resize',function(){size(); if(reduce) drawMesh(0); drawWires();});
+
+  /* terminal */
+  var term=$('term');
+  var script=[
+    ['cmd','ls skills/'],['out','languages/  interfaces/  backend/  ai-ml/  ai-tools/\ndata-science/  data-engineering/  cloud/  security/'],
+    ['cmd','cat stack.txt'],['out','python · go · dart · typescript · sql\nflutter · react · fastapi · postgres · redis\nlangchain · openai · claude · pgvector\nsnowflake · dbt · airflow · aws · docker'],
+    ['cmd','deploy --target aws --env prod'],['dim','› building image ……… done\n› running tests ……… passed\n› rolling out ………… 3/3 healthy'],['out','✓ deployed'],
+    ['cmd','agent ask "which vans need restocking?"'],['dim','› retrieve 5 chunks · call inventory api'],['out','vans 4, 9 and 12 — before 2 pm (sample)']
+  ];
+  var base=term.innerHTML.replace('<span class="cur"></span>',''), hist=base, idx=0;
+  function show(extra){term.innerHTML=hist+(extra||'')+'<span class="cur"></span>';}
+  function next(){
+    if(idx>=script.length){ setTimeout(function(){hist=base;idx=0;show();setTimeout(next,600);},3600); return; }
+    var s=script[idx++];
+    if(s[0]==='cmd'){ var i=0; (function type(){ if(i<=s[1].length){ show(esc(s[1].slice(0,i))); i++; setTimeout(type,36+Math.random()*40);} else { hist+=esc(s[1])+'\n'; setTimeout(next,280);} })(); }
+    else { hist+='<span class="'+(s[0]==='out'?'o':'d')+'">'+esc(s[1])+'</span>\n'; if(idx>=script.length||script[idx][0]==='cmd') hist+='<span class="p">$</span> '; show(); setTimeout(next,s[0]==='dim'?700:1000); }
+  }
+  if(reduce){ hist=base; script.forEach(function(s){ hist+= s[0]==='cmd'? esc(s[1])+'\n' : '<span class="'+(s[0]==='out'?'o':'d')+'">'+esc(s[1])+'</span>\n<span class="p">$</span> '; }); show(); }
+  else setTimeout(next,1400);
+
+  /* code */
+  var CODE=[
+    {t:'rag_answer.py',l:[
+      '<span class="cm"># Answer from the product\'s own documents, with sources.</span>',
+      '<span class="k">from</span> langchain_openai <span class="k">import</span> <span class="ty">OpenAIEmbeddings</span>, <span class="ty">ChatOpenAI</span>',
+      '<span class="k">from</span> langchain_postgres <span class="k">import</span> <span class="ty">PGVector</span>',
+      '',
+      'store = <span class="ty">PGVector</span>(embeddings=<span class="ty">OpenAIEmbeddings</span>(), collection_name=<span class="s">"docs"</span>)',
+      'llm = <span class="ty">ChatOpenAI</span>(model=<span class="s">"gpt-4o-mini"</span>, temperature=<span class="s">0</span>)',
+      '',
+      '<span class="k">def</span> <span class="fn">answer</span>(question: <span class="ty">str</span>) -&gt; <span class="ty">dict</span>:',
+      '    docs = store.<span class="fn">similarity_search</span>(question, k=<span class="s">5</span>)',
+      '    context = <span class="s">"\\n\\n"</span>.<span class="fn">join</span>(d.page_content <span class="k">for</span> d <span class="k">in</span> docs)',
+      '    reply = llm.<span class="fn">invoke</span>(<span class="s">f"Use only this context:\\n{context}\\n\\nQ: {question}"</span>)',
+      '    <span class="k">return</span> {<span class="s">"text"</span>: reply.content, <span class="s">"sources"</span>: [d.metadata[<span class="s">"id"</span>] <span class="k">for</span> d <span class="k">in</span> docs]}']},
+    {t:'orders_handler.go',l:[
+      '<span class="k">func</span> (h *<span class="ty">Handler</span>) <span class="fn">CreateOrder</span>(w http.<span class="ty">ResponseWriter</span>, r *http.<span class="ty">Request</span>) {',
+      '    <span class="k">var</span> in <span class="ty">OrderInput</span>',
+      '    <span class="k">if</span> err := json.<span class="fn">NewDecoder</span>(r.Body).<span class="fn">Decode</span>(&amp;in); err != <span class="k">nil</span> {',
+      '        http.<span class="fn">Error</span>(w, <span class="s">"invalid body"</span>, http.StatusBadRequest)',
+      '        <span class="k">return</span>',
+      '    }',
+      '    order, err := h.orders.<span class="fn">Create</span>(r.<span class="fn">Context</span>(), in)',
+      '    <span class="k">if</span> err != <span class="k">nil</span> { h.<span class="fn">fail</span>(w, err); <span class="k">return</span> }',
+      '    json.<span class="fn">NewEncoder</span>(w).<span class="fn">Encode</span>(order)',
+      '}']},
+    {t:'order_repository.dart',l:[
+      '<span class="cm">// Every write lands on the device first, then syncs.</span>',
+      '<span class="k">class</span> <span class="ty">OrderRepository</span> {',
+      '  <span class="k">final</span> <span class="ty">LocalDb</span> db;',
+      '  <span class="k">final</span> <span class="ty">SyncQueue</span> queue;',
+      '',
+      '  <span class="ty">Future</span>&lt;<span class="k">void</span>&gt; <span class="fn">save</span>(<span class="ty">Order</span> order) <span class="k">async</span> {',
+      '    <span class="k">await</span> db.<span class="fn">insert</span>(<span class="s">\'orders\'</span>, order.<span class="fn">toMap</span>());',
+      '    queue.<span class="fn">enqueue</span>(<span class="ty">SyncJob</span>.<span class="fn">upload</span>(order.id));',
+      '  }',
+      '}']},
+    {t:'daily_sales.sql',l:[
+      '<span class="cm">-- dbt model: daily sales per route, for the warehouse</span>',
+      '<span class="k">select</span>',
+      '    route_id,',
+      '    <span class="fn">date_trunc</span>(<span class="s">\'day\'</span>, sold_at)   <span class="k">as</span> sale_day,',
+      '    <span class="fn">count</span>(*)                      <span class="k">as</span> orders,',
+      '    <span class="fn">sum</span>(total_amount)             <span class="k">as</span> revenue',
+      '<span class="k">from</span> {{ <span class="fn">ref</span>(<span class="s">\'stg_orders\'</span>) }}',
+      '<span class="k">where</span> status = <span class="s">\'synced\'</span>',
+      '<span class="k">group by</span> <span class="s">1</span>, <span class="s">2</span>']}
+  ];
+  var codeEl=$('code'), tabs=[].slice.call(document.querySelectorAll('.tabs button')), cur=0, hotT;
+  function renderCode(i){cur=i; var c=CODE[i]; $('codeTitle').textContent=c.t;
+    codeEl.innerHTML='<ol>'+c.l.map(function(x){return '<li><span>'+(x||' ')+'</span></li>';}).join('')+'</ol>';
+    tabs.forEach(function(b){b.setAttribute('aria-selected',String(+b.dataset.t===i));});
+    var lis=codeEl.querySelectorAll('li'), k=0; clearInterval(hotT);
+    if(!reduce) hotT=setInterval(function(){lis.forEach(function(l){l.classList.remove('hot')}); lis[k%lis.length].classList.add('hot'); k++;},900);
+    drawWires();
+  }
+  tabs.forEach(function(b){b.addEventListener('click',function(){renderCode(+b.dataset.t);});});
+  renderCode(0);
+  if(!reduce) setInterval(function(){ if(!document.hidden && !codeEl.matches(':hover')) renderCode((cur+1)%CODE.length); },9000);
+  setTimeout(drawWires,600); if(document.fonts&&document.fonts.ready) document.fonts.ready.then(drawWires);
+
+  /* agent */
+  var gp=$('gp'), NS='http://www.w3.org/2000/svg', alog=$('alog'), running=false;
+  function pulse(id,ms){return new Promise(function(res){
+    if(reduce){res();return;} var path=$(id), L=path.getTotalLength();
+    var c=document.createElementNS(NS,'circle'); c.setAttribute('r','5'); c.setAttribute('class','gpulse'); gp.appendChild(c);
+    var t0=performance.now(); (function f(now){var p=Math.min(1,(now-t0)/ms), q=path.getPointAtLength(L*p); c.setAttribute('cx',q.x); c.setAttribute('cy',q.y); if(p<1) requestAnimationFrame(f); else {c.remove(); res();}})(t0);
+  });}
+  function on(id){document.querySelectorAll('.gnode').forEach(function(n){n.classList.remove('on')}); if(id) $(id).classList.add('on');}
+  function log(cls,t){alog.innerHTML+='\n<span class="'+cls+'">'+esc(t)+'</span>';}
+  function wait(ms){return new Promise(function(r){setTimeout(r,reduce?0:ms);});}
+  async function run(){
+    if(running) return; running=true; $('runAgent').disabled=true;
+    alog.innerHTML='<span class="p">$</span> agent ask "Which vans need restocking today?"';
+    on('nQ'); await wait(400); await pulse('g1',500);
+    on('nP'); log('d','plan   → 1) find low stock  2) match today\'s routes'); await wait(700);
+    await Promise.all([pulse('g2',600),pulse('g3',600),pulse('g4',600)]);
+    on('nR'); log('d','search → 5 chunks from inventory docs (pgvector)'); await wait(700);
+    on('nT'); log('d','tool   → SQL: stock below minimum · 3 vans'); await wait(700);
+    on('nM'); log('d','memory → keep route context for follow-ups'); await wait(700);
+    await Promise.all([pulse('g5',600),pulse('g6',600),pulse('g7',600)]);
+    on('nA'); log('o','answer → Vans 4, 9 and 12 need restocking before 2 pm.'); log('d','sources: inventory · routes · sync log  (sample run)');
+    alog.innerHTML+='\n<span class="p">$</span> <span class="cur"></span>';
+    await wait(1200); on(null); running=false; $('runAgent').disabled=false;
+  }
+  $('runAgent').addEventListener('click',run);
+
+  /* projects */
+  function g2(n,dot){var s='';for(var i=0;i<n;i++)s+='<span class="c">'+(dot?'<span class="dot"></span>':'')+'<span class="ln"></span><span class="ln s"></span></span>';return '<span class="g2">'+s+'</span>';}
+  var R='<span class="row"><span class="dot"></span><span class="ln"></span><span class="ln s"></span></span>';
+  function bar(t){return '<span class="bar"><span>'+t+'</span><span></span></span>';}
+  var UI={
+    list:function(t){return '<span class="ui">'+bar(t)+'<span class="ht"><span>Today’s route</span><b>14 stops</b></span>'+R+R+'<span class="cta">New sale</span></span>';},
+    booking:function(t){return '<span class="ui">'+bar(t)+'<span class="chipr"><span class="on">Exterior</span><span>Interior</span><span>Full</span></span>'+g2(4)+'<span class="cta">Book &amp; pay</span></span>';},
+    voice:function(t){return '<span class="ui">'+bar(t)+'<span class="bub">2 biryani, 1 lime soda</span><span class="bub me">രണ്ട് ബിരിയാണി</span><span class="wave"><i></i><i style="animation-delay:.1s"></i><i style="animation-delay:.2s"></i><i style="animation-delay:.3s"></i><i style="animation-delay:.4s"></i><i style="animation-delay:.5s"></i></span><span class="cta">Hold to speak</span></span>';},
+    pay:function(t){return '<span class="ui">'+bar(t)+'<span class="ht"><span>Wallet</span><b>₹ 2,450</b></span>'+g2(4,true)+'<span class="cta">Recharge</span></span>';},
+    clock:function(t){return '<span class="ui">'+bar(t)+'<span class="ring">7h 40m</span>'+R+'<span class="cta">Clock out</span></span>';},
+    stock:function(t){return '<span class="ui">'+bar(t)+'<span class="bars"><i style="height:40%"></i><i style="height:75%"></i><i style="height:55%"></i><i style="height:90%"></i><i style="height:65%"></i></span>'+R+'<span class="cta">Scan item</span></span>';},
+    board:function(t){return '<span class="ui">'+bar(t)+'<span class="kan"><span class="k2"><i class="c"></i><i></i><i></i></span><span class="k2"><i></i><i class="c"></i></span><span class="k2"><i class="c"></i></span></span>'+R+'<span class="cta">Add task</span></span>';},
+    scan:function(t){return '<span class="ui">'+bar(t)+'<span class="scan"><span class="ln"></span><span class="ln s"></span><span class="ln"></span></span>'+R+'<span class="cta">Extract</span></span>';},
+    team:function(t){return '<span class="ui">'+bar(t)+'<span class="chipr"><span class="on">Today</span><span>Week</span></span>'+R+R+'<span class="cta">Assign</span></span>';},
+    apps:function(t){return '<span class="ui">'+bar(t)+g2(4,true)+'<span class="ht"><span>3 apps</span><b>1 platform</b></span><span class="cta">Open</span></span>';}
+  };
+  var P=[
+    {n:'Vanforces',file:'vanforces.app',org:'Texol World',when:'Jan 2024 – now',hue:145,ui:'list',img:'vanforces.jpg',sum:'Van sales and inventory platform for field sales teams. Works offline and syncs when the signal returns.',detail:'Vanforces helps van sales teams manage inventory, track deliveries and optimise routes. It works offline and syncs when connectivity is available, so teams never lose sales data.',feat:['Offline-first architecture with SQLite and two-way REST sync','Google Maps routing and delivery tracking','Real-time inventory with live stock updates','Battery-efficient location tracking'],role:'Senior full-stack · team lead',stack:['Flutter','Go','SQLite','REST','Maps'],play:'https://play.google.com/store/apps/details?id=com.vanforces.salesman.app',ios:'https://apps.apple.com/in/app/vanforces/id6741518174',s:['flutter','dart','ios','android','web','offline','sqlite','rest','maps','go','cicd','auth','sql','state','arch']},
+    {n:'DHG Car Wash',file:'dhg.suite',org:'Texol World',when:'Jun – Aug 2025',hue:190,ui:'booking',img:'dhg.jpg',count:'3 apps',sum:'Car wash management suite with connected Customer, Shop and Operator apps.',detail:'Customers book services, shop owners manage operations and operators process bookings, with multiple payment gateways, commission tracking and real-time booking management.',feat:['Three interconnected Flutter apps with role-based access','Apple Pay, Telr payment gateway and custom wallet','Commission calculation and management','Real-time booking and tracking'],role:'Full-stack developer',stack:['Flutter','REST','Apple Pay','Telr'],s:['flutter','dart','ios','android','multiapp','maps','pay','upi','rest','auth','state']},
+    {n:'Speak Order',file:'speak-order.app',org:'Texol World',when:'Dec 2024 – Mar 2025',hue:60,ui:'voice',img:'speakorder.jpg',sum:'Voice ordering platform: order in your own language with AI voice recognition and translation.',detail:'Users discover nearby businesses, place orders by voice in their native language and pay in the app. Automatic translation lets customers and businesses chat across languages.',feat:['AI voice recognition for multiple languages','Real-time translation for cross-language chat','Geo-based business discovery','Integrated payments; voice-to-text and text-to-voice'],role:'Full-stack developer',stack:['Flutter','REST','AI speech','Translation'],play:'https://play.google.com/store/apps/details?id=com.texol.speakorder',ios:'https://apps.apple.com/in/app/speak-order/id6738990670',s:['flutter','dart','ios','android','voice','llm','realtime','maps','rest','pay','push']},
+    {n:'Taskforces ERP',file:'taskforces.erp',org:'Texol World',when:'Apr 2024 – now',hue:165,ui:'team',img:'taskforces.jpg',sum:'ERP mobile suite for inventory, sales, invoicing, orders and collections.',detail:'A full ERP app that gives businesses control of operations from anywhere, with real-time cloud sync, offline support and analytics.',feat:['Inventory, sales, invoicing, orders and collections modules','Real-time cloud sync with offline support','Role-based access and multi-warehouse tracking','Analytics and reporting dashboards'],role:'Full-stack developer',stack:['Flutter','REST','Cloud sync'],play:'https://play.google.com/store/apps/details?id=com.texol.taskforces',ios:'https://apps.apple.com/in/app/taskforces-erp/id6475192934',s:['flutter','dart','ios','android','offline','rest','auth','state','arch']},
+    {n:'WorkForceTime',file:'workforcetime.app',org:'Texol World',when:'Mar 2024 – now',hue:130,ui:'clock',img:'workforcetime.jpg',sum:'Attendance and HR app with QR and GPS check-in, shifts, leave and payroll reports.',detail:'Simplifies attendance, shift management and workforce analytics. QR codes and GPS mark attendance accurately; payroll and productivity reports update in real time.',feat:['QR code and GPS-based attendance','Shift scheduling, leave requests and approvals','Real-time payroll and productivity reports','Clean architecture with efficient background sync'],role:'Full-stack developer',stack:['Flutter','REST','GPS','QR'],play:'https://play.google.com/store/apps/details?id=com.texol.workforcetime',ios:'https://apps.apple.com/in/app/workforcetime/id1378828558',s:['flutter','dart','ios','android','maps','rest','arch','state','offline']},
+    {n:'Enteura',file:'enteura.suite',org:'Texol World',when:'[YEAR]',hue:110,ui:'apps',count:'3 apps',sum:'[One line: what Enteura does]',feat:['[Feature]','[Feature]','[Feature]'],role:'[Your role]',stack:['[Stack]'],s:['multiapp']},
+    {n:'Stock Taking',file:'stock-taking.app',org:'Texol World',when:'[YEAR]',hue:85,ui:'stock',img:'stocktaking.jpg',sum:'[One line: what Stock Taking does]',feat:['[Feature]','[Feature]'],role:'[Your role]',stack:['Flutter','[Stack]'],s:['flutter','dart']},
+    {n:'Project Tracker',file:'project-tracker.app',org:'Texol World',when:'[YEAR]',hue:200,ui:'board',sum:'[One line: what Project Tracker does]',feat:['[Feature]','[Feature]'],role:'[Your role]',stack:['[Stack]'],s:[]},
+    {n:'Invoice Extract',file:'invoice-extract.ai',org:'Texol World',when:'[YEAR]',hue:155,ui:'scan',sum:'[One line: what Invoice Extract does]',feat:['[Feature]','[Feature]'],role:'[Your role]',stack:['[Stack]'],s:['ocr','llm']},
+    {n:'AGSKart',file:'agskart.app',org:'BigWelt',when:'Jun – Dec 2023',hue:100,ui:'pay',img:'agskart.jpg',sum:'Mobile recharge and bill payment app for Android and iOS.',detail:'Users recharge phones, pay utility bills and make payments through the PhonePe gateway, secured with biometric authentication and backed by real-time notifications.',feat:['Recharge and bill payment modules','PhonePe payment gateway','Biometric authentication (fingerprint, Face ID)','Push notifications, wallet and transaction history'],role:'Flutter developer',stack:['Flutter','REST','UPI','PhonePe'],play:'https://play.google.com/store/apps/developer?id=AGSKART+PRIVATE+LIMITED',ios:'https://apps.apple.com/in/app/agskart/id6503183690',s:['flutter','dart','ios','android','upi','pay','bio','auth','rest','push']}
+  ];
+  var g=$('gallery');
+  g.innerHTML=P.map(function(p,i){
+    return '<button class="win proj reveal" type="button" data-i="'+i+'" data-org="'+esc(p.org)+'" style="--hue:'+p.hue+'">'+
+      '<span class="win-bar"><i></i><i></i><i></i><span class="ttl">'+esc(p.file)+'</span></span>'+
+      '<span class="art">'+(p.count?'<span class="count">'+p.count+'</span>':'')+'<span class="mini"><span class="scr">'+(p.img?'<img src="assets/images/'+p.img+'" alt="'+esc(p.n)+' app screen" loading="lazy" width="138" height="300">':UI[p.ui](esc(p.n)))+'</span></span></span>'+
+      '<span class="info"><span class="eyebrow">'+esc(p.org)+' · '+esc(p.when)+'</span><span class="pt">'+esc(p.n)+'</span><span class="ps">'+esc(p.sum)+'</span>'+
+      '<span class="stack">'+p.stack.map(function(s){return '<span>'+esc(s)+'</span>'}).join('')+'</span><span class="open">open →</span></span></button>';
+  }).join('');
+
+  var sheet=$('sheet');
+  g.addEventListener('click',function(e){
+    var b=e.target.closest('.proj'); if(!b) return; var p=P[+b.dataset.i];
+    $('sheetArt').style.setProperty('--hue',p.hue); $('sheetTitle').textContent=p.n; $('sheetSum').textContent=p.detail||p.sum; var sh=$('sheetShot'); if(p.img){sh.src='assets/images/'+p.img; sh.alt=p.n+' app screen'; sh.hidden=false;} else sh.hidden=true;
+    var st=''; if(p.play) st+='<a href="'+p.play+'" target="_blank" rel="noopener">▶ Google Play</a>'; if(p.ios) st+='<a href="'+p.ios+'" target="_blank" rel="noopener"> App Store</a>'; $('sheetStores').innerHTML=st;
+    $('sheetFeat').innerHTML=p.feat.map(function(f){return '<li>'+esc(f)+'</li>'}).join('');
+    $('sheetOrg').textContent=p.org+(p.count?' · '+p.count:''); $('sheetWhen').textContent=p.when; $('sheetRole').textContent=p.role; $('sheetStack').textContent=p.stack.join(' · ');
+    if(sheet.showModal) sheet.showModal(); else sheet.setAttribute('open','');
+  });
+  $('sheetClose').addEventListener('click',function(){sheet.close?sheet.close():sheet.removeAttribute('open');});
+  sheet.addEventListener('click',function(e){if(e.target===sheet) sheet.close();});
+
+  var tags=[].slice.call(document.querySelectorAll('.tag')), cards=[].slice.call(g.querySelectorAll('.proj')), note=$('skillNote');
+  tags.forEach(function(t){t.addEventListener('click',function(){
+    var was=t.getAttribute('aria-pressed')==='true';
+    tags.forEach(function(x){x.setAttribute('aria-pressed','false')});
+    if(was){cards.forEach(function(c){c.classList.remove('dim')}); note.textContent='pick a skill to highlight matching projects'; return;}
+    t.setAttribute('aria-pressed','true'); var k=t.dataset.s, names=[];
+    cards.forEach(function(c){var p=P[+c.dataset.i], hit=p.s.indexOf(k)>-1; c.classList.toggle('dim',!hit); if(hit) names.push(p.n);});
+    note.innerHTML=''; var sp=document.createElement('span');
+    sp.textContent=names.length? 'grep "'+t.textContent+'" → '+names.join(', ') : 'grep "'+t.textContent+'" → [add the projects where you used this]';
+    note.appendChild(sp);
+    if(names.length){var go=document.createElement('button');go.type='button';go.textContent='show projects';go.addEventListener('click',function(){$('projects').scrollIntoView({behavior:reduce?'auto':'smooth'});});note.appendChild(go);}
+  });});
+
+  var chips=[].slice.call(document.querySelectorAll('[data-f]'));
+  chips.forEach(function(c){c.addEventListener('click',function(){
+    chips.forEach(function(x){x.setAttribute('aria-pressed',x===c?'true':'false')});
+    var f=c.dataset.f, shown=0;
+    cards.forEach(function(card){var ok=f==='all'||card.dataset.org===f; card.hidden=!ok; if(ok)shown++;});
+    $('emptyP').hidden=shown>0;
+  });});
+})();
+</script>
+
+</body>
 </html>
