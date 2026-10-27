@@ -181,6 +181,8 @@ p{margin:0}
 .layers-legend{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:18px}
 @media (max-width:760px){.layers-legend{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .layers-legend div{padding:14px;border-radius:12px;border:1px solid var(--line);background:var(--surface);display:flex;flex-direction:column;gap:4px}
+.ma-real{margin-top:16px;padding:14px 16px;border-radius:12px;border:1px dashed var(--leaf);font-size:15.5px;color:var(--muted)}
+.ma-real b{color:var(--accent)}
 .layers-legend b{font-family:var(--f-mono);font-size:13px;color:var(--accent)}
 .layers-legend span{font-size:14px;color:var(--muted)}
 
@@ -253,6 +255,7 @@ p{margin:0}
 .ui .map .van{position:absolute;width:14px;height:9px;border-radius:3px;background:oklch(var(--tc2l) var(--tch2) var(--hue));box-shadow:0 0 0 2px var(--surface);animation:drive 5s ease-in-out infinite}
 @keyframes drive{0%{left:10%;top:56%}50%{left:46%;top:44%}100%{left:80%;top:32%}}
 .ui .kpi{font-size:13px}
+.ui .row .tag2{margin-left:auto;font-size:8px;padding:2px 5px;border-radius:4px;background:var(--forest);color:var(--term-ink)}
 .ui .row.inv .tag2{font-size:8px;padding:2px 5px;border-radius:4px;background:var(--forest);color:var(--term-ink)}
 .ui .qr{position:relative;display:grid;grid-template-columns:repeat(3,1fr);gap:4px;width:70px;flex:none;margin:2px auto;padding:6px;border-radius:8px;background:var(--surface);border:1px solid var(--line)}
 .ui .qr i{aspect-ratio:1;border-radius:2px;background:var(--forest)}
@@ -416,7 +419,8 @@ p{margin:0}
 .gh-live i{width:7px;height:7px;border-radius:50%;background:var(--leaf);animation:ping 2s infinite}
 
 
-.orgs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.orgs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+@media (max-width:1060px){.orgs{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:760px){.orgs{grid-template-columns:minmax(0,1fr)}}
 .org{padding:16px;border-radius:14px;background:var(--surface);border:1px solid var(--line);display:flex;flex-direction:column;gap:10px;transition:transform .25s,border-color .25s}
 .org:hover{transform:translateY(-3px);border-color:var(--leaf)}
@@ -658,7 +662,7 @@ window.SITE_ANALYTICS_ID='';
       <p class="sys">System: <b>Senior Full-Stack Engineer</b></p>
       <h1 id="title" aria-label="Althaf M">Althaf M</h1>
       <p class="roles-line" aria-live="off">I build <b id="roleTxt">mobile apps</b><i aria-hidden="true"></i></p>
-      <p class="lede">From web and mobile apps to APIs, data platforms, AI agents and secure cloud infrastructure, I design and ship the whole product. Ten products and 15+ apps shipped since 2022. I lead the engineering team at Texol World and live in Kozhikode, Kerala.</p>
+      <p class="lede">From web and mobile apps to APIs, data platforms, AI agents and secure cloud infrastructure, I design and ship the whole product. Thirteen products and 15+ apps shipped since 2022. I lead the engineering team at Texol World and live in Kozhikode, Kerala.</p>
       <div class="ctas">
         <a class="btn primary mag" href="#projects">$ open projects</a>
         <a class="btn ghost" href="#skills">view skills</a>
@@ -680,7 +684,7 @@ window.SITE_ANALYTICS_ID='';
         <div class="win-bar"><i></i><i></i><i></i><span class="ttl">dashboard.app</span></div>
         <div class="dash">
           <div class="chips">
-            <div class="dchip"><b>10</b><span>products shipped</span></div>
+            <div class="dchip"><b>13</b><span>products shipped</span></div>
             <div class="dchip"><b>4+</b><span>years building</span></div>
             <div class="dchip"><b>15+</b><span>apps built</span></div>
             <div class="dchip"><b>EoM</b><span>Employee of the Month, many times</span></div>
@@ -814,6 +818,7 @@ window.SITE_ANALYTICS_ID='';
         <div><b>Tools · MCP</b><span>Every capability is an explicit, audited tool</span></div>
         <div><b>Guardrails</b><span>Reviewer checks facts, safety and tests before replying</span></div>
       </div>
+      <p class="ma-real reveal">Built for real in <b>AI Frontier</b>: six agents (discovery, verification, report, relevance, mission, evidence) behind one provider router for OpenAI, Claude, Gemini, Mistral, Groq and Ollama, with source text isolated against prompt injection.</p>
     </section>
 
     <section class="blk" id="craft">
@@ -905,18 +910,19 @@ window.SITE_ANALYTICS_ID='';
       <div class="skill-note" id="skillNote" aria-live="polite">pick a skill to highlight matching projects</div>
     </section>
 
-    <div class="ticker rev" aria-hidden="true"><div><span>Offline-first</span><span>Multi-app platforms</span><span>Payments</span><span>Voice & translation</span><span>ERP</span><span>HR & attendance</span><span>Fintech</span><span>Logistics</span><span>10 products</span><span>15+ apps</span><span>Offline-first</span><span>Multi-app platforms</span><span>Payments</span><span>Voice & translation</span><span>ERP</span><span>HR & attendance</span><span>Fintech</span><span>Logistics</span><span>10 products</span><span>15+ apps</span></div></div>
+    <div class="ticker rev" aria-hidden="true"><div><span>Offline-first</span><span>Multi-app platforms</span><span>Payments</span><span>Voice & translation</span><span>ERP</span><span>HR & attendance</span><span>Fintech</span><span>Logistics</span><span>13 products</span><span>15+ apps</span><span>Offline-first</span><span>Multi-app platforms</span><span>Payments</span><span>Voice & translation</span><span>ERP</span><span>HR & attendance</span><span>Fintech</span><span>Logistics</span><span>13 products</span><span>15+ apps</span></div></div>
 
     <section class="blk" id="projects">
       <div class="sec-head">
         <div>
           <span class="eyebrow">Projects · newest first</span>
-          <h2>Ten products, end to end</h2>
+          <h2>Thirteen products, end to end</h2>
           <p>Open any window for features, my role and the stack.</p>
         </div>
         <div class="filters" role="group" aria-label="Filter projects">
           <button class="chip" type="button" data-f="all" aria-pressed="true">all</button>
           <button class="chip" type="button" data-f="Texol World" aria-pressed="false">texol world</button>
+          <button class="chip" type="button" data-f="Independent" aria-pressed="false">independent</button>
           <button class="chip" type="button" data-f="BigWelt" aria-pressed="false">bigwelt</button>
         </div>
       </div>
@@ -927,13 +933,13 @@ window.SITE_ANALYTICS_ID='';
     <section class="blk" id="more">
       <div class="two">
         <div class="win reveal" id="oss">
-          <div class="win-bar"><i></i><i></i><i></i><span class="ttl">print_bluetooth_thermal — git log</span></div>
+          <div class="win-bar"><i></i><i></i><i></i><span class="ttl">print_bluetooth_thermal — usage</span></div>
           <div class="gitlog">
-            <span class="eyebrow" style="margin-bottom:8px">Open source · Flutter plugin fork</span>
-            <span><span class="h">a1f3c2e</span> [your commit: what you changed]</span>
-            <span><span class="h">7be901d</span> [your commit: the bug or feature]</span>
-            <span><span class="h">c44d8aa</span> fork from upstream</span>
-            <a href="https://github.com/AlthafMjeelani/print_bluetooth_thermal">→ view on GitHub</a>
+            <span class="eyebrow" style="margin-bottom:8px">Open source in production · Flutter plugin</span>
+            <span><span class="h">vanforces</span> depends on print_bluetooth_thermal + esc_pos_utils_plus</span>
+            <span><span class="h">use</span> ESC/POS receipts printed from the van over Bluetooth</span>
+            <span><span class="h">fork</span> kept under my account to track upstream for the app</span>
+            <a href="https://github.com/AlthafMjeelani/print_bluetooth_thermal">→ view the fork on GitHub</a>
           </div>
         </div>
         <div class="win reveal">
@@ -949,20 +955,25 @@ window.SITE_ANALYTICS_ID='';
         <div class="win-bar"><i></i><i></i><i></i><span class="ttl">github — personal + organisations</span></div>
         <div class="gh">
           <div class="gh-stats">
-            <div><b>2</b><span>organisations</span></div>
-            <div><b>14+</b><span>private org repos</span></div>
+            <div><b>3</b><span>workspaces · 2 orgs + own</span></div>
+            <div><b>20+</b><span>private repos</span></div>
             <div><b id="ghRepos">35+</b><span>public repos</span></div>
           </div>
           <div class="orgs">
             <div class="org">
               <div class="org-h"><span class="org-av" aria-hidden="true">TW</span><div><b>Texol World</b><small>texol-world-iCohort · private</small></div><span class="org-tag">10+ repos</span></div>
               <p>Client products I build and lead across mobile, web and backend.</p>
-              <div class="org-chips"><span>Taskforces ERP</span><span>WorkForceTime</span><span>Stock Taking</span><span>Project Tracker</span><span>DHG Car Wash</span><span>Speak Order</span><span>Enteura</span><span>Invoice Extract</span></div>
+              <div class="org-chips"><span>Taskforces ERP</span><span>WorkForceTime</span><span>Stock Taking</span><span>Project Tracker</span><span>DHG Car Wash</span><span>Speak Order</span><span>Enteura</span></div>
             </div>
             <div class="org">
               <div class="org-h"><span class="org-av" aria-hidden="true">VF</span><div><b>Vanforces</b><small>vanforces · private</small></div><span class="org-tag">4 repos</span></div>
-              <p>The full Vanforces platform, end to end.</p>
+              <p>Top contributor to the mobile app (~1,900 commits) and the admin portal (826), plus Go backend work.</p>
               <div class="org-chips"><span>Flutter mobile app</span><span>Go backend</span><span>Admin portal</span><span>SaaS admin</span></div>
+            </div>
+            <div class="org">
+              <div class="org-h"><span class="org-av" aria-hidden="true">AM</span><div><b>Independent builds</b><small>AlthafMjeelani · private</small></div><span class="org-tag">4 products</span></div>
+              <p>Products I design and build end to end: about 670 commits on PayNest alone.</p>
+              <div class="org-chips"><span>PayNest</span><span>AI Frontier</span><span>Order Extract</span><span>Collection App</span></div>
             </div>
           </div>
           <figure class="gh-graph" id="ghGraph">
@@ -1001,14 +1012,14 @@ window.SITE_ANALYTICS_ID='';
           <div class="win-bar"><i></i><i></i><i></i><span class="ttl">achievements.json</span></div>
           <ul class="edu">
             <li><em>Texol World</em><b>Employee of the Month, many times</b><span>Recognised for outstanding project delivery and innovation.</span></li>
-            <li><em>Open source</em><b>print_bluetooth_thermal</b><span>Fork of the Flutter Bluetooth printing plugin. [What you changed.]</span></li>
+            <li><em>Top contributor</em><b>Vanforces mobile and admin</b><span>About 1,900 commits on the Flutter app and 826 on the React admin portal.</span></li>
           </ul>
         </div>
       </div>
       <div class="win dark reveal" id="timeline" style="margin-top:18px">
         <div class="win-bar"><i></i><i></i><i></i><span class="ttl">~/career — history</span></div>
         <div class="hist"><ol>
-          <li><span class="n">04</span><span><span class="w">Senior Full-Stack Engineer</span> · Texol World, Calicut</span><span class="x">Jan 2024 – now · leads development, deployment and release pipelines across apps, backend, data, cloud and AI; CI/CD with GitHub Actions</span></li>
+          <li><span class="n">04</span><span><span class="w">Senior Full-Stack Engineer</span> · Texol World, Calicut</span><span class="x">Jan 2024 – now · top contributor to the Vanforces app (~1,900 commits) and React admin (826); Go backend since 2026; CI/CD with GitHub Actions</span></li>
           <li><span class="n">03</span><span><span class="w">Flutter Developer</span> · BigWelt Infotech, Bangalore</span><span class="x">Dec 2022 – Dec 2023 · cross-platform apps with optimised state management, with backend and UI/UX teams</span></li>
           <li><span class="n">02</span><span><span class="w">Flutter Developer Intern</span> · Brototype, Calicut</span><span class="x">May – Dec 2022 · client projects end to end; state management, performance and deployment</span></li>
           <li><span class="n">01</span><span><span class="w">BCA</span> · MET Arts and Science College, Nadapuram</span><span class="x">Jun 2019 – Mar 2022 · Calicut University</span></li>
@@ -1433,18 +1444,24 @@ window.SITE_ANALYTICS_ID='';
     team:function(t){return '<span class="ui">'+bar(t)+'<span class="chipr"><span class="on">Today</span><span>Week</span></span>'+R+R+'<span class="cta">Assign</span></span>';},
     erp:function(t){return '<span class="ui">'+bar(t)+'<span class="g2"><span class="c"><b class="kpi">₹ 4.2L</b><span class="ln s"></span></span><span class="c"><b class="kpi">128</b><span class="ln s"></span></span></span><span class="bars"><i style="--h:40%"></i><i style="--h:70%"></i><i style="--h:52%"></i><i style="--h:88%"></i><i style="--h:62%"></i><i style="--h:76%"></i></span><span class="row inv"><span class="dot"></span><span class="ln"></span><b class="tag2">INV</b></span><span class="cta">New invoice</span></span>';},
     qr:function(t){return '<span class="ui">'+bar(t)+'<span class="qr"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><span class="beam"></span></span><span class="row"><span class="dot"></span><b class="kpi">09:02 \u00b7 GPS \u2713</b></span><span class="cta">Check in</span></span>';},
+    feed:function(t){return '<span class="ui">'+bar(t)+'<span class="row"><span class="dot"></span><span class="ln"></span><b class="tag2">NEW</b></span><span class="row"><span class="dot"></span><span class="ln"></span><b class="tag2">92%</b></span><span class="row"><span class="dot"></span><span class="ln"></span><b class="tag2">78%</b></span><span class="ht"><span>Mission</span><b>Try the new API</b></span><span class="cta">Submit evidence</span></span>';},
+    dues:function(t){return '<span class="ui">'+bar(t)+'<span class="ht"><span>Collected this month</span><b>\u20B9 3.8L</b></span><span class="bars"><i style="--h:82%"></i><i style="--h:64%"></i><i style="--h:90%"></i><i style="--h:48%"></i><i style="--h:72%"></i></span><span class="row"><span class="dot"></span><span class="ln"></span><b class="tag2">DUE</b></span><span class="cta">Collect</span></span>';},
+    ledger:function(t){return '<span class="ui">'+bar(t)+'<span class="chipr"><span class="on">Paid</span><span>Pending</span></span><span class="row"><span class="dot"></span><span class="ln"></span><b class="tag2">\u2713</b></span><span class="row"><span class="dot"></span><span class="ln"></span><b class="tag2">\u2713</b></span><span class="row"><span class="dot"></span><span class="ln"></span><span class="ln s"></span></span><span class="cta">Monthly report</span></span>';},
     apps:function(t){return '<span class="ui">'+bar(t)+g2(4,true)+'<span class="ht"><span>3 apps</span><b>1 platform</b></span><span class="cta">Open</span></span>';}
   };
   var P=[
-    {n:'Vanforces',file:'vanforces.app',org:'Texol World',when:'Jan 2024 – now',hue:145,ui:'list',img:'vanforces.jpg',sum:'Van sales and inventory platform for field sales teams. Works offline and syncs when the signal returns.',detail:'Vanforces helps van sales teams manage inventory, track deliveries and optimise routes. It works offline and syncs when connectivity is available, so teams never lose sales data.',feat:['Offline-first architecture with SQLite and two-way REST sync','Google Maps routing and delivery tracking','Real-time inventory with live stock updates','Battery-efficient location tracking'],role:'Senior full-stack · team lead',stack:['Flutter','Go','SQLite','REST','Maps'],play:'https://play.google.com/store/apps/details?id=com.vanforces.salesman.app',ios:'https://apps.apple.com/in/app/vanforces/id6741518174',s:['flutter','dart','ios','android','web','offline','sqlite','rest','maps','go','cicd','auth','sql','state','arch']},
-    {n:'DHG Car Wash',file:'dhg.suite',org:'Texol World',when:'Jun – Aug 2025',hue:190,ui:'booking',img:'dhg.jpg',count:'3 apps',sum:'Car wash management suite with connected Customer, Shop and Operator apps.',detail:'Customers book services, shop owners manage operations and operators process bookings, with multiple payment gateways, commission tracking and real-time booking management.',feat:['Three interconnected Flutter apps with role-based access','Apple Pay, Telr payment gateway and custom wallet','Commission calculation and management','Real-time booking and tracking'],role:'Full-stack developer',stack:['Flutter','REST','Apple Pay','Telr'],s:['flutter','dart','ios','android','multiapp','maps','pay','upi','rest','auth','state']},
-    {n:'Speak Order',file:'speak-order.app',org:'Texol World',when:'Dec 2024 – Mar 2025',hue:60,ui:'voice',img:'speakorder.jpg',sum:'Voice ordering platform: order in your own language with AI voice recognition and translation.',detail:'Users discover nearby businesses, place orders by voice in their native language and pay in the app. Automatic translation lets customers and businesses chat across languages.',feat:['AI voice recognition for multiple languages','Real-time translation for cross-language chat','Geo-based business discovery','Integrated payments; voice-to-text and text-to-voice'],role:'Full-stack developer',stack:['Flutter','REST','AI speech','Translation'],play:'https://play.google.com/store/apps/details?id=com.texol.speakorder',ios:'https://apps.apple.com/in/app/speak-order/id6738990670',s:['flutter','dart','ios','android','voice','llm','realtime','maps','rest','pay','push']},
-    {n:'Taskforces ERP',file:'taskforces.erp',org:'Texol World',when:'Apr 2024 – now',hue:165,ui:'erp',img:'taskforces.jpg',sum:'ERP mobile suite for inventory, sales, invoicing, orders and collections.',detail:'A full ERP app that gives businesses control of operations from anywhere, with real-time cloud sync, offline support and analytics.',feat:['Inventory, sales, invoicing, orders and collections modules','Real-time cloud sync with offline support','Role-based access and multi-warehouse tracking','Analytics and reporting dashboards'],role:'Full-stack developer',stack:['Flutter','REST','Cloud sync'],play:'https://play.google.com/store/apps/details?id=com.texol.taskforces',ios:'https://apps.apple.com/in/app/taskforces-erp/id6475192934',s:['flutter','dart','ios','android','offline','rest','auth','state','arch']},
-    {n:'WorkForceTime',file:'workforcetime.app',org:'Texol World',when:'Mar 2024 – now',hue:130,ui:'qr',img:'workforcetime.jpg',sum:'Attendance and HR app with QR and GPS check-in, shifts, leave and payroll reports.',detail:'Simplifies attendance, shift management and workforce analytics. QR codes and GPS mark attendance accurately; payroll and productivity reports update in real time.',feat:['QR code and GPS-based attendance','Shift scheduling, leave requests and approvals','Real-time payroll and productivity reports','Clean architecture with efficient background sync'],role:'Full-stack developer',stack:['Flutter','REST','GPS','QR'],play:'https://play.google.com/store/apps/details?id=com.texol.workforcetime',ios:'https://apps.apple.com/in/app/workforcetime/id1378828558',s:['flutter','dart','ios','android','maps','rest','arch','state','offline']},
-    {n:'Enteura',file:'enteura.suite',org:'Texol World',when:'[YEAR]',hue:110,ui:'apps',count:'3 apps',sum:'[One line: what Enteura does]',feat:['[Feature]','[Feature]','[Feature]'],role:'[Your role]',stack:['[Stack]'],s:['multiapp']},
-    {n:'Stock Taking',file:'stock-taking.app',org:'Texol World',when:'[YEAR]',hue:85,ui:'stock',img:'stocktaking.jpg',sum:'[One line: what Stock Taking does]',feat:['[Feature]','[Feature]'],role:'[Your role]',stack:['Flutter','[Stack]'],s:['flutter','dart']},
-    {n:'Project Tracker',file:'project-tracker.app',org:'Texol World',when:'[YEAR]',hue:200,ui:'board',sum:'[One line: what Project Tracker does]',feat:['[Feature]','[Feature]'],role:'[Your role]',stack:['[Stack]'],s:[]},
-    {n:'Invoice Extract',file:'invoice-extract.ai',org:'Texol World',when:'[YEAR]',hue:155,ui:'scan',sum:'[One line: what Invoice Extract does]',feat:['[Feature]','[Feature]'],role:'[Your role]',stack:['[Stack]'],s:['ocr','llm']},
+    {n:'Vanforces',file:'vanforces.platform',org:'Texol World',when:'Jan 2024 – now',hue:145,ui:'list',img:'vanforces.jpg',count:'3 apps',sum:'Route-to-market platform for van sales teams: a Flutter field app, a React admin portal and a Go backend. Works offline and syncs when the signal returns.',detail:'Vanforces runs van sales and distribution for businesses: reps sell, invoice and print receipts from the van, while the office manages stock, routes and targets. I am the top contributor to the mobile app since January 2024 and to the admin portal, and work on the Go backend.',feat:['Top contributor to the Flutter app: about 1,900 of 3,276 commits since Jan 2024','Top contributor to the React admin portal (antd, Google Maps, charts, PDF and Excel exports)','Go backend (Gin, MySQL, Redis, WebSockets, AWS S3, Firebase, Prometheus)','Offline-first SQLite sync, Google Maps routing, live stock, Bluetooth ESC/POS receipt printing'],role:'Lead mobile engineer · full-stack',stack:['Flutter','React','Go','MySQL','Redis','SQLite','Maps'],play:'https://play.google.com/store/apps/details?id=com.vanforces.salesman.app',ios:'https://apps.apple.com/in/app/vanforces/id6741518174',s:['flutter','dart','ios','android','web','react','js','offline','sqlite','sql','rest','realtime','maps','go','aws','docker','cicd','auth','state','arch','push','testing','native','hosting']},
+    {n:'AI Frontier',file:'ai-frontier.agents',org:'Independent',when:'Oct 2026',hue:285,ui:'feed',sum:'Tracks AI releases from chosen sources, writes sourced intelligence reports and turns relevant releases into learning missions.',detail:'A multi-agent pipeline: six agents discover releases, verify claims, write the report, score relevance against your interests, create missions and check submitted evidence. Achievements are granted only after evidence is verified.',feat:['Six agents (discovery, verification, report, relevance, mission, evidence) behind one provider router','Works with OpenAI, Anthropic Claude, Gemini, Mistral, Groq and local Ollama models','Prompt-injection defence: source text is isolated as untrusted data','API keys encrypted at rest; explainable fallback when no model is set','Go API, background worker and scheduler, PostgreSQL, Flutter web and desktop, Docker'],role:'Solo build: architecture, backend, agents, app',stack:['Go','Flutter','PostgreSQL','LLMs','Docker'],s:['agents','llm','prompt','openai','claude','gemini','ollama','go','postgres','docker','flutter','dart','web','apisec','rest','arch','testing']},
+    {n:'Order Extract',file:'order-extract.ai',org:'Independent',when:'Oct 2026',hue:155,ui:'scan',sum:'Reads an order or invoice from a PDF, Excel, CSV or photo and matches every line to items, customers, routes and salesmen.',detail:'Local parsing first: PDFium for text PDFs, a sheet parser for Excel and CSV, and on-device ML Kit OCR with tilt correction for photos. Unusual or handwritten documents fall back to a Claude-powered cloud gateway that returns schema-validated JSON. Fuzzy matching links every line to master data with a confidence score.',feat:['PDF, Excel, CSV and photo import; repeated pages de-duplicated','On-device OCR with ML Kit, plus Claude fallback through a Node gateway with a strict JSON schema','Fuzzy matching on words, trigrams, pack size, MRP and GSTIN','Review screen with confidence levels; SQLite on device, IndexedDB on web'],role:'Solo build',stack:['Flutter','ML Kit OCR','Claude API','Node.js','SQLite'],s:['ocr','llm','claude','prompt','flutter','dart','ios','android','web','sqlite','node','offline','testing']},
+    {n:'PayNest',file:'paynest.saas',org:'Independent',when:'Mar – Aug 2026',hue:200,ui:'dues',count:'3 apps',sum:'Multi-tenant SaaS for organisations that collect recurring payments, with a platform console, a tenant portal and a customer app.',detail:'A Go backend serves three clients: a Centre Console for the platform, a Tenant Portal for each organisation and a Flutter customer app. Every organisation gets its own PostgreSQL database. About 670 commits across the backend and admin apps.',feat:['Database-per-tenant isolation with automated provisioning','RS256 JWT, refresh tokens, TOTP two-factor login and role-based access','Redis + Asynq background jobs; SendGrid email, Twilio SMS, AWS S3 storage; PDF and Excel reports','React + TypeScript monorepo (Turborepo) with TanStack Query, Zod forms, Storybook and Vitest','Docker, Kubernetes and Helm, GitHub Actions CI/CD'],role:'Full-stack: backend, admin apps, DevOps',stack:['Go','PostgreSQL','Redis','React','TypeScript','AWS','Kubernetes'],s:['go','postgres','redis','sql','rest','auth','apisec','iam','aws','docker','k8s','cicd','hosting','react','ts','js','web','multiapp','pay','testing','arch','linux']},
+    {n:'Collection App',file:'collection.app',org:'Independent',when:'Feb 2026',hue:95,ui:'ledger',sum:'Monthly collections and expenses tracker for a local masjid committee.',detail:'Admins record each house and its monthly amount, log payments (including partial ones) and expenses, and see a monthly paid-versus-pending report.',feat:['Houses, payments and expenses with monthly periods','Paid vs pending report per month','Go (chi) API with JWT and PostgreSQL; Flutter web admin'],role:'Solo build',stack:['Go','PostgreSQL','Flutter Web'],s:['go','postgres','sql','rest','auth','flutter','dart','web']},
+    {n:'DHG Car Wash',file:'dhg.suite',org:'Texol World',when:'Jun – Aug 2025',hue:190,ui:'booking',img:'dhg.jpg',count:'3 apps',sum:'Car wash management suite with connected Customer, Shop and Operator apps.',detail:'Customers book services, shop owners manage operations and operators process bookings, with multiple payment gateways, commission tracking and real-time booking management.',feat:['Three interconnected Flutter apps with role-based access','Apple Pay, Telr payment gateway and custom wallet','Commission calculation and management','Real-time booking and tracking'],role:'Flutter developer',stack:['Flutter','REST','Apple Pay','Telr'],s:['flutter','dart','ios','android','multiapp','maps','pay','upi','rest','auth','state']},
+    {n:'Speak Order',file:'speak-order.app',org:'Texol World',when:'Dec 2024 – Mar 2025',hue:60,ui:'voice',img:'speakorder.jpg',sum:'Voice ordering platform: order in your own language with AI voice recognition and translation.',detail:'Users discover nearby businesses, place orders by voice in their native language and pay in the app. Automatic translation lets customers and businesses chat across languages.',feat:['AI voice recognition for multiple languages','Real-time translation for cross-language chat','Geo-based business discovery','Integrated payments; voice-to-text and text-to-voice'],role:'Flutter developer',stack:['Flutter','REST','AI speech','Translation'],play:'https://play.google.com/store/apps/details?id=com.texol.speakorder',ios:'https://apps.apple.com/in/app/speak-order/id6738990670',s:['flutter','dart','ios','android','voice','llm','realtime','maps','rest','pay','push']},
+    {n:'Taskforces ERP',file:'taskforces.erp',org:'Texol World',when:'Apr 2024 – now',hue:165,ui:'erp',img:'taskforces.jpg',sum:'ERP mobile suite for inventory, sales, invoicing, orders and collections.',detail:'A full ERP app that gives businesses control of operations from anywhere, with real-time cloud sync, offline support and analytics.',feat:['Inventory, sales, invoicing, orders and collections modules','Real-time cloud sync with offline support','Role-based access and multi-warehouse tracking','Analytics and reporting dashboards'],role:'Flutter developer',stack:['Flutter','REST','Cloud sync'],play:'https://play.google.com/store/apps/details?id=com.texol.taskforces',ios:'https://apps.apple.com/in/app/taskforces-erp/id6475192934',s:['flutter','dart','ios','android','offline','rest','auth','state','arch']},
+    {n:'WorkForceTime',file:'workforcetime.app',org:'Texol World',when:'Mar 2024 – now',hue:130,ui:'qr',img:'workforcetime.jpg',sum:'Attendance and HR app with QR and GPS check-in, shifts, leave and payroll reports.',detail:'Simplifies attendance, shift management and workforce analytics. QR codes and GPS mark attendance accurately; payroll and productivity reports update in real time.',feat:['QR code and GPS-based attendance','Shift scheduling, leave requests and approvals','Real-time payroll and productivity reports','Clean architecture with efficient background sync'],role:'Flutter developer',stack:['Flutter','REST','GPS','QR'],play:'https://play.google.com/store/apps/details?id=com.texol.workforcetime',ios:'https://apps.apple.com/in/app/workforcetime/id1378828558',s:['flutter','dart','ios','android','maps','rest','arch','state','offline']},
+    {n:'Enteura',file:'enteura.suite',org:'Texol World',when:'[YEAR]',hue:110,ui:'apps',count:'3 apps',sum:'[One line: what Enteura does]',feat:['[Feature]','[Feature]','[Feature]'],role:'[Your role]',stack:['Flutter','[Stack]'],s:['multiapp','flutter','dart']},
+    {n:'Stock Taking',file:'stock-taking.app',org:'Texol World',when:'[YEAR]',hue:85,ui:'stock',sum:'[One line: what Stock Taking does]',feat:['[Feature]','[Feature]'],role:'[Your role]',stack:['Flutter','[Stack]'],s:['flutter','dart']},
+    {n:'Project Tracker',file:'project-tracker.app',org:'Texol World',when:'[YEAR]',hue:230,ui:'board',sum:'[One line: what Project Tracker does]',feat:['[Feature]','[Feature]'],role:'[Your role]',stack:['[Stack]'],s:[]},
     {n:'AGSKart',file:'agskart.app',org:'BigWelt',when:'Jun – Dec 2023',hue:100,ui:'pay',img:'agskart.jpg',sum:'Mobile recharge and bill payment app for Android and iOS.',detail:'Users recharge phones, pay utility bills and make payments through the PhonePe gateway, secured with biometric authentication and backed by real-time notifications.',feat:['Recharge and bill payment modules','PhonePe payment gateway','Biometric authentication (fingerprint, Face ID)','Push notifications, wallet and transaction history'],role:'Flutter developer',stack:['Flutter','REST','UPI','PhonePe'],play:'https://play.google.com/store/apps/developer?id=AGSKART+PRIVATE+LIMITED',ios:'https://apps.apple.com/in/app/agskart/id6503183690',s:['flutter','dart','ios','android','upi','pay','bio','auth','rest','push']}
   ];
   var g=$('gallery');
