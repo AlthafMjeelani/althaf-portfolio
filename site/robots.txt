@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://althafmjeelani.github.io/althaf-portfolio/sitemap.xml

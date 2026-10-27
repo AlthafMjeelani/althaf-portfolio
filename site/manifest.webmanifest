@@ -1,0 +1,23 @@
+{
+  "name": "Althaf M \u00b7 Senior Full-Stack Engineer",
+  "short_name": "Althaf M",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#EDF2E8",
+  "theme_color": "#3C573E",
+  "description": "Portfolio of Althaf M, senior full-stack engineer: apps, backend, data, cloud and AI.",
+  "icons": [
+    {
+      "src": "assets/images/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/images/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

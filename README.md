@@ -41,6 +41,18 @@ python3 -m http.server 8000
 ./deploy.sh --flutter  # builds and publishes the old Flutter version instead
 ```
 
+## SEO, analytics and domain
+
+- `index.html` has structured data (schema.org Person + WebSite), canonical URL, Open Graph and Twitter tags.
+- `robots.txt` and `sitemap.xml` are in `site/`. Submit the sitemap in [Google Search Console](https://search.google.com/search-console) so your name search finds the site.
+- `manifest.webmanifest` lets phones install the site; `404.html` is a styled not-found page.
+- **Analytics:** set `window.SITE_ANALYTICS_ID = 'G-XXXXXXX'` near the top of `index.html` (Google Analytics 4). Empty means no tracking.
+- **Custom domain:** buy a domain (for example `althaf.dev`), add a `CNAME` file in `site/` containing the domain, point a DNS CNAME record to `althafmjeelani.github.io`, then update the canonical and Open Graph URLs plus `sitemap.xml`.
+
+## Performance
+
+A lite mode turns on automatically for Data Saver or low-end phones (fewer background particles, slower frame rate, no blobs). All motion stops for visitors who prefer reduced motion.
+
 ## Editing content
 
 All project data is in the `P` array near the bottom of `site/index.html`. Each project has a name, dates, summary, details, features, role, stack, screenshot, store links and the skill keys (`s`) used for skill highlighting.
