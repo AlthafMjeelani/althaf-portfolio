@@ -1,89 +1,70 @@
 #!/bin/bash
 
-# Deployment script for Flutter web to GitHub Pages
-# This script builds the Flutter web app and deploys it to the gh-pages branch
+# Deploy the portfolio site (site/) to GitHub Pages (gh-pages branch).
+# The site is plain HTML/CSS/JS, so there is no build step.
+#
+# Usage:  ./deploy.sh
+# Live at: https://althafmjeelani.github.io/althaf-portfolio/
+#
+# The previous Flutter web version is still in lib/ and web/.
+# To deploy that instead, run:  ./deploy.sh --flutter
 
-set -e  # Exit on error
+set -e
 
 REPO_NAME="althaf-portfolio"
-BASE_HREF="/${REPO_NAME}/"
 CURRENT_BRANCH=$(git branch --show-current)
-BUILD_DIR="build/web"
 DEPLOY_BRANCH="gh-pages"
 
-echo "🚀 Starting deployment to GitHub Pages..."
+if [ "$1" == "--flutter" ]; then
+    echo "📦 Building Flutter web app..."
+    fvm flutter clean
+    fvm flutter pub get
+    fvm flutter build web --base-href "/${REPO_NAME}/" --release
+    SRC_DIR="build/web"
+else
+    SRC_DIR="site"
+fi
 
-# Step 1: Build Flutter web app
-echo "📦 Building Flutter web app..."
-fvm flutter clean
-fvm flutter pub get
-fvm flutter build web --base-href "${BASE_HREF}" --release
-
-# Step 2: Check if build was successful
-if [ ! -d "$BUILD_DIR" ]; then
-    echo "❌ Build failed: $BUILD_DIR not found"
+if [ ! -f "$SRC_DIR/index.html" ]; then
+    echo "❌ $SRC_DIR/index.html not found"
     exit 1
 fi
 
-# Step 3: Copy build files to temporary directory before switching branches
-TEMP_DIR=$(mktemp -d)
-echo "📁 Copying build files to temporary directory..."
-cp -r $BUILD_DIR/* "$TEMP_DIR/"
+echo "🚀 Deploying $SRC_DIR to $DEPLOY_BRANCH..."
 
-# Step 4: Save current branch and switch to gh-pages
-echo "🔄 Switching to $DEPLOY_BRANCH branch..."
+# Copy the site to a temp folder before switching branches
+TEMP_DIR=$(mktemp -d)
+cp -r "$SRC_DIR"/. "$TEMP_DIR/"
+
+# Stash uncommitted work
 if ! git diff-index --quiet HEAD --; then
-    git stash  # Stash any uncommitted changes
+    git stash
     STASHED=true
 else
     STASHED=false
 fi
-git checkout $DEPLOY_BRANCH 2>/dev/null || git checkout -b $DEPLOY_BRANCH
 
-# Step 5: Remove old files (except .git and .gitignore)
-echo "🧹 Cleaning old files..."
-find . -mindepth 1 -maxdepth 1 ! -name '.' ! -name '.git' ! -name '.gitignore' -exec rm -rf {} +
+git checkout $DEPLOY_BRANCH 2>/dev/null || git checkout --orphan $DEPLOY_BRANCH
 
-# Step 6: Copy new build files from temp directory
-echo "📋 Copying build files..."
-cp -r "$TEMP_DIR"/* .
-
-# Step 7: Create .nojekyll file to prevent Jekyll processing
-echo "📝 Creating .nojekyll file..."
+# Replace everything except .git
+find . -mindepth 1 -maxdepth 1 ! -name '.git' -exec rm -rf {} +
+cp -r "$TEMP_DIR"/. .
 touch .nojekyll
 
-# Step 7.5: Copy favicon files to ensure they're included
-echo "📋 Ensuring favicon files are included..."
-if [ -f "web/favicon_circular.png" ]; then
-  cp web/favicon_circular.png . 2>/dev/null || true
-fi
-if [ -f "web/favicon_circular.svg" ]; then
-  cp web/favicon_circular.svg . 2>/dev/null || true
-fi
-
-# Step 8: Stage and commit
-echo "💾 Committing changes..."
 git add -A
 if git diff --staged --quiet; then
-    echo "⚠️  No changes to commit"
+    echo "⚠️  No changes to deploy"
 else
-    git commit -m "Deploy Flutter web app to GitHub Pages - $(date '+%Y-%m-%d %H:%M:%S')"
-    
-    # Step 9: Push to GitHub
+    git commit -m "Deploy portfolio - $(date '+%Y-%m-%d %H:%M:%S')"
     echo "📤 Pushing to GitHub..."
     git push origin $DEPLOY_BRANCH --force
 fi
 
-# Step 10: Cleanup temp directory
 rm -rf "$TEMP_DIR"
-
-# Step 11: Switch back to original branch
-echo "🔄 Switching back to $CURRENT_BRANCH branch..."
-git checkout $CURRENT_BRANCH
+git checkout "$CURRENT_BRANCH"
 if [ "$STASHED" = true ]; then
     git stash pop 2>/dev/null || true
 fi
 
 echo "✅ Deployment complete!"
-echo "🌐 Your site should be available at: https://althafmjeelani.github.io/${REPO_NAME}/"
-
+echo "🌐 https://althafmjeelani.github.io/${REPO_NAME}/"
