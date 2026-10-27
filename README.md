@@ -61,8 +61,6 @@ All project data is in the `P` array near the bottom of `site/index.html`. Each 
 
 Search `site/index.html` for `[` to find every placeholder:
 
-- **Enteura, Stock Taking, Project Tracker, Invoice Extract**: one-line summary, year, features, role and stack (and the names of Enteura's 3 apps)
-- **print_bluetooth_thermal**: what you changed in the fork (the git log window and the achievements window)
-- **Lead the team**: how you review code and mentor developers
-- **Skill → project links**: add skill keys to each project's `s` list for skills like `rag`, `aws`, `python`, `snowflake`
-- **Screenshots**: add images for Enteura, Project Tracker and Invoice Extract to `site/assets/images/` and set `img` in the project data
+- **Enteura, Stock Taking, Project Tracker** (Texol World): one-line summary, year, features, role and stack (and the names of Enteura's 3 apps). These repos are not shared with Claude yet.
+- **Lead the team**: how you review code and mentor developers.
+- **Skills with no linked project yet** (Python, data science, data warehousing, RAG/vector search, LangChain and similar): add a project that uses them, or remove the skill.
