@@ -360,6 +360,37 @@ p{margin:0}
 .status{animation:glyph .8s .8s both}
 @media (prefers-reduced-motion: reduce){.ticker div{animation:none}.desk .win{animation:none}}
 
+
+/* ---- attract pass ---- */
+@property --ang{syntax:'<angle>';inherits:false;initial-value:0deg}
+.blob{position:fixed;z-index:0;pointer-events:none;width:46vmax;height:46vmax;border-radius:50%;filter:blur(70px);opacity:.38;mix-blend-mode:multiply}
+.blob.b1{background:radial-gradient(circle,color-mix(in oklab,var(--leaf) 55%,transparent),transparent 65%);left:-14vmax;top:-10vmax;animation:drift1 26s ease-in-out infinite alternate}
+.blob.b2{background:radial-gradient(circle,color-mix(in oklab,var(--ts) 60%,transparent),transparent 65%);right:-16vmax;top:40vh;animation:drift2 32s ease-in-out infinite alternate}
+:root[data-theme="dark"] .blob{mix-blend-mode:screen;opacity:.22}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .blob{mix-blend-mode:screen;opacity:.22}}
+@keyframes drift1{to{transform:translate(18vmax,22vmax) scale(1.15)}}
+@keyframes drift2{to{transform:translate(-20vmax,-18vmax) scale(.9)}}
+.hero h1 .ch{animation:glyph .7s cubic-bezier(.2,.7,.1,1) both,glint 7s ease-in-out infinite}
+@keyframes glint{0%,6%,100%{color:var(--ink);text-shadow:none}3%{color:var(--accent);text-shadow:0 0 18px color-mix(in oklab,var(--accent) 50%,transparent)}}
+@keyframes sheen{0%{background-position:100% 0}60%,100%{background-position:-50% 0}}
+.glow{position:relative;isolation:isolate}
+.glow::before{content:"";position:absolute;inset:-1.5px;border-radius:17px;padding:1.5px;background:conic-gradient(from var(--ang),transparent 0 70%,var(--leaf) 80%,var(--ts) 88%,transparent 96%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;animation:angspin 5s linear infinite;z-index:2;pointer-events:none}
+@keyframes angspin{to{--ang:360deg}}
+.float-code{position:absolute;z-index:1;font-family:var(--f-mono);font-size:12.5px;line-height:1.6;padding:12px 14px;border-radius:12px;background:color-mix(in oklab,var(--paper) 88%,transparent);border:1px solid var(--line);box-shadow:0 18px 40px -24px var(--forest);text-align:left;white-space:pre;animation:bob 6s ease-in-out infinite;backdrop-filter:blur(6px)}
+.float-code.fc1{left:-4%;top:18%;transform:rotate(-4deg)}
+.float-code.fc2{right:-6%;top:58%;animation-delay:-3s}
+.float-code .k{color:var(--k)} .float-code .s{color:var(--s)} .float-code .fn{color:var(--f)} .float-code .cm{color:var(--c)}
+.hero-stage{position:relative;width:100%;display:flex;justify-content:center}
+@media (max-width:1060px){.float-code{display:none}}
+.hero .sys b{position:relative}
+.hero .sys b::after{content:"";position:absolute;left:0;right:0;bottom:-3px;height:2px;background:var(--accent);transform-origin:left;animation:uline 1.2s .6s cubic-bezier(.2,.7,.1,1) both}
+@keyframes uline{from{transform:scaleX(0)}}
+.scroll-cue{display:flex;flex-direction:column;align-items:center;gap:6px;font-family:var(--f-mono);font-size:12px;color:var(--muted);margin-top:6px;text-decoration:none}
+.scroll-cue i{width:22px;height:34px;border-radius:12px;border:1.5px solid var(--muted);position:relative}
+.scroll-cue i::after{content:"";position:absolute;left:50%;top:7px;width:3px;height:7px;border-radius:2px;background:var(--accent);transform:translateX(-50%);animation:wheel 1.8s ease-in-out infinite}
+@keyframes wheel{0%{opacity:0;transform:translate(-50%,0)}30%{opacity:1}100%{opacity:0;transform:translate(-50%,12px)}}
+@media (prefers-reduced-motion: reduce){.blob{animation:none}.hero h1{animation:none}.glow::before{animation:none}}
+
 section.blk{padding-block:72px 16px}
 .sec-head{display:flex;justify-content:space-between;align-items:end;gap:16px;flex-wrap:wrap;margin-bottom:28px}
 .sec-head > div{display:flex;flex-direction:column;gap:10px;max-width:680px}
@@ -514,6 +545,7 @@ dialog.sheet[open]{animation:pop .35s cubic-bezier(.2,.7,.1,1)}
 <body>
 
 <canvas id="mesh" aria-hidden="true"></canvas>
+<div class="blob b1" aria-hidden="true"></div><div class="blob b2" aria-hidden="true"></div>
 <div class="spot" aria-hidden="true"></div>
 <div class="progress" aria-hidden="true"></div>
 <div class="page">
@@ -543,10 +575,18 @@ dialog.sheet[open]{animation:pop .35s cubic-bezier(.2,.7,.1,1)}
 <main id="top">
   <div class="wrap">
     <section class="hero">
+      <div class="hero-stage">
+      <pre class="float-code fc1" aria-hidden="true"><span class="k">const</span> althaf = <span class="k">new</span> <span class="fn">Engineer</span>({
+  role: <span class="s">'full-stack'</span>,
+  ships: [<span class="s">'apps'</span>, <span class="s">'apis'</span>, <span class="s">'ai'</span>],
+});</pre>
+      <pre class="float-code fc2" aria-hidden="true"><span class="cm">$ git commit -m</span> <span class="s">"feat: rag agent"</span>
+<span class="cm">$ ./deploy.sh</span> <span class="k">✓</span> live</pre>
       <div class="orbit-wrap">
         <div class="orbit" aria-hidden="true"><span style="--i:0"><b>Flutter</b></span><span style="--i:1"><b>Go</b></span><span style="--i:2"><b>Python</b></span><span style="--i:3"><b>LLM · RAG</b></span><span style="--i:4"><b>AWS</b></span><span style="--i:5"><b>Docker</b></span><span style="--i:6"><b>PostgreSQL</b></span><span style="--i:7"><b>AI agents</b></span></div>
         <div class="orbit o2" aria-hidden="true"></div>
         <div class="avatar"><img src="assets/images/profile.jpg" alt="Photo of Althaf M" width="116" height="116"></div>
+      </div>
       </div>
       <p class="sys">System: <b>Senior Full-Stack Engineer</b></p>
       <h1 id="title" aria-label="Althaf M">Althaf M</h1>
@@ -558,11 +598,12 @@ dialog.sheet[open]{animation:pop .35s cubic-bezier(.2,.7,.1,1)}
         <a class="btn ghost" href="assets/files/Althaf_M_Resume.pdf" download="Althaf_M_Resume.pdf">↓ resume</a>
       </div>
       <span class="status"><i></i>Texol World · Calicut, IST</span>
+      <a class="scroll-cue" href="#desk" aria-label="Scroll to the workspace"><i aria-hidden="true"></i>scroll</a>
     </section>
 
     <section class="desk" id="desk" aria-label="Workspace">
       <svg id="wires" aria-hidden="true"></svg>
-      <div class="win dark reveal" id="wTerm">
+      <div class="win dark reveal glow" id="wTerm">
         <div class="win-bar"><i></i><i></i><i></i><span class="ttl">althaf@texol: ~ — zsh</span></div>
         <div class="term" id="term"><span class="p">$</span> whoami
 <span class="o">althaf m — senior full-stack engineer @ texol world</span>
@@ -646,7 +687,7 @@ dialog.sheet[open]{animation:pop .35s cubic-bezier(.2,.7,.1,1)}
         <p>How I design multi-agent systems: an orchestrator plans and routes work to specialist agents, each with its own tools over MCP, while a reviewer checks every answer before it reaches the user. Tap any node to inspect it.</p>
       </div></div>
       <div class="ma-grid">
-        <div class="win ma reveal">
+        <div class="win ma reveal glow">
           <div class="win-bar"><i></i><i></i><i></i><span class="ttl">multi_agent.system</span></div>
           <p class="swipe">swipe to see all agents</p>
           <div class="graph">
@@ -876,7 +917,7 @@ dialog.sheet[open]{animation:pop .35s cubic-bezier(.2,.7,.1,1)}
     </section>
 
     <section class="contact" id="contact">
-      <div class="win dark reveal">
+      <div class="win dark reveal glow">
         <div class="win-bar"><i></i><i></i><i></i><span class="ttl">contact — zsh</span></div>
         <div class="term"><span class="p">$</span> contact --althaf
 <span class="o">Building a product? Let's talk.</span>
@@ -932,8 +973,23 @@ dialog.sheet[open]{animation:pop .35s cubic-bezier(.2,.7,.1,1)}
 
   /* mesh */
   var cv=$('mesh'), cx=cv.getContext('2d'), mc='rgba(76,122,73,.22)', W=0,H=0,DPR=Math.min(2,window.devicePixelRatio||1);
-  function meshColor(){mc=getComputedStyle(root).getPropertyValue('--mesh').trim()||mc; if(reduce) drawMesh(0);}
+  function meshColor(){var cs=getComputedStyle(root); mc=cs.getPropertyValue('--mesh').trim()||mc; codeCol=hexToRgb(cs.getPropertyValue('--accent'))||codeCol; if(reduce) drawMesh(0);}
   function size(){W=innerWidth;H=innerHeight;cv.width=W*DPR;cv.height=H*DPR;cx.setTransform(DPR,0,0,DPR,0,0);}
+  var TOK=['</>','{ }','=>','async','await','fn()','[ ]','git push','const','\u03bb','01','SELECT *','import','return','&&','::','#!','<div>','.dart','.go','.py','@agent','$ deploy','// TODO','RAG','{...}','?.','!==','yield','map()','ctx','200 OK','JSON','sudo','::1','<T>','</>'],
+      P2=[], codeCol='76,122,73', PX=-999, PY=-999;
+  function seed(){ var n=Math.min(42,Math.round(W*H/32000)); P2=[]; for(var i=0;i<n;i++) P2.push({x:Math.random()*W,y:Math.random()*H,t:TOK[(Math.random()*TOK.length)|0],s:11+Math.random()*10,a:.10+Math.random()*.16,v:.12+Math.random()*.28,ph:Math.random()*6.28,dx:0,dy:0}); }
+  function hexToRgb(h){h=h.trim(); if(h[0]!=='#') return null; if(h.length===4) h='#'+h[1]+h[1]+h[2]+h[2]+h[3]+h[3]; var n=parseInt(h.slice(1),16); return ((n>>16)&255)+','+((n>>8)&255)+','+(n&255);}
+  addEventListener('pointermove',function(e){PX=e.clientX;PY=e.clientY;},{passive:true});
+  function drawCode(t,step){
+    cx.textBaseline='middle';
+    for(var i=0;i<P2.length;i++){var q=P2[i];
+      if(step){ q.y-=q.v; q.x+=Math.sin(t*.0004+q.ph)*.15;
+        var ddx=q.x-PX, ddy=q.y-PY, d2=ddx*ddx+ddy*ddy; if(d2<16000){var f=(16000-d2)/16000*2.2, d=Math.sqrt(d2)||1; q.dx+=ddx/d*f; q.dy+=ddy/d*f;}
+        q.x+=q.dx; q.y+=q.dy; q.dx*=.9; q.dy*=.9;
+        if(q.y<-30){q.y=H+30;q.x=Math.random()*W;q.t=TOK[(Math.random()*TOK.length)|0];} if(q.x<-80) q.x=W+40; if(q.x>W+80) q.x=-40; }
+      cx.font=(q.s|0)+"px 'JetBrains Mono', ui-monospace, monospace"; cx.fillStyle='rgba('+codeCol+','+q.a+')'; cx.fillText(q.t,q.x,q.y);
+    }
+  }
   function drawMesh(t){
     cx.clearRect(0,0,W,H); cx.strokeStyle=mc; cx.lineWidth=1;
     var step=26, cols=Math.ceil(W/step)+2, rows=Math.ceil(H/step)+2;
@@ -943,8 +999,9 @@ dialog.sheet[open]{animation:pop .35s cubic-bezier(.2,.7,.1,1)}
     for(j=0;j<rows;j++){for(i=1;i<cols;i++){var a=pt(i-1,j),b=pt(i,j); if(a[2]<=0&&b[2]<=0) continue; cx.globalAlpha=Math.min(1,(a[2]+b[2])*.9); cx.beginPath();cx.moveTo(a[0],a[1]);cx.lineTo(b[0],b[1]);cx.stroke();}}
     for(i=0;i<cols;i++){for(j=1;j<rows;j++){var c=pt(i,j-1),d=pt(i,j); if(c[2]<=0&&d[2]<=0) continue; cx.globalAlpha=Math.min(1,(c[2]+d[2])*.9); cx.beginPath();cx.moveTo(c[0],c[1]);cx.lineTo(d[0],d[1]);cx.stroke();}}
     cx.globalAlpha=1;
+    drawCode(t,!reduce);
   }
-  size(); meshColor();
+  size(); seed(); meshColor();
   matchMedia('(prefers-color-scheme: dark)').addEventListener('change',meshColor);
   if(!reduce){var lastT=0;(function loop(t){ if(!document.hidden && t-lastT>33){drawMesh(t);lastT=t;} requestAnimationFrame(loop);})(0);} else drawMesh(0);
 
@@ -980,7 +1037,7 @@ dialog.sheet[open]{animation:pop .35s cubic-bezier(.2,.7,.1,1)}
 
   /* title */
   var h=$('title'), txt=h.textContent; h.textContent='';
-  txt.split('').forEach(function(c,i){var s=document.createElement('span');s.className='ch';s.setAttribute('aria-hidden','true');s.style.animationDelay=(i*0.05)+'s';s.textContent=c===' '?' ':c;h.appendChild(s);});
+  txt.split('').forEach(function(c,i){var s=document.createElement('span');s.className='ch';s.setAttribute('aria-hidden','true');s.style.animationDelay=(i*0.05)+'s,'+(1.6+i*0.09)+'s';s.textContent=c===' '?' ':c;h.appendChild(s);});
 
   /* wires */
   function drawWires(){
@@ -992,7 +1049,7 @@ dialog.sheet[open]{animation:pop .35s cubic-bezier(.2,.7,.1,1)}
     [a,b].forEach(function(s,k){ if(s.b<c.t-4){ var tx=c.l+(c.r-c.l)*(k?0.72:0.28); out.push('M '+s.cx+' '+s.b+' C '+s.cx+' '+(s.b+28)+', '+tx+' '+(c.t-28)+', '+tx+' '+c.t);} });
     svg.innerHTML=out.map(function(p){return '<path d="'+p+'"></path>';}).join('');
   }
-  addEventListener('resize',function(){size(); if(reduce) drawMesh(0); drawWires();});
+  addEventListener('resize',function(){size(); seed(); if(reduce) drawMesh(0); drawWires();});
 
   /* terminal */
   var term=$('term');
