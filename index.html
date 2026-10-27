@@ -226,6 +226,47 @@ p{margin:0}
 .pipe-head{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:12px;font-family:var(--f-mono);font-size:13px;color:var(--term-dim)}
 .pipe-head b{color:var(--ts);font-weight:500}
 
+/* animated app screens */
+.ui .row{animation:rowin 4.8s ease-in-out infinite both}
+.ui .row:nth-of-type(2){animation-delay:.25s}.ui .row:nth-of-type(3){animation-delay:.5s}
+@keyframes rowin{0%,6%{opacity:0;transform:translateX(-10px)}14%,86%{opacity:1;transform:none}100%{opacity:0;transform:translateX(6px)}}
+.ui .cta{position:relative;overflow:hidden}
+.ui .cta::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent 30%,rgba(255,255,255,.28) 50%,transparent 70%);transform:translateX(-100%);animation:shine 3.2s ease-in-out infinite}
+@keyframes shine{60%,100%{transform:translateX(100%)}}
+.ui .ht b{display:inline-block;animation:pulse2 3s ease-in-out infinite}
+@keyframes pulse2{50%{transform:scale(1.04)}}
+.ui .bars i{height:var(--h,60%);transform-origin:bottom;animation:grow 3.6s ease-in-out infinite}
+.ui .bars i:nth-child(2){animation-delay:.15s}.ui .bars i:nth-child(3){animation-delay:.3s}.ui .bars i:nth-child(4){animation-delay:.45s}.ui .bars i:nth-child(5){animation-delay:.6s}.ui .bars i:nth-child(6){animation-delay:.75s}
+@keyframes grow{0%{transform:scaleY(.15)}35%,80%{transform:scaleY(1)}100%{transform:scaleY(.15)}}
+.ui .ring{animation:none}
+@keyframes ringspin{to{transform:rotate(360deg)}}
+.ui .ring.sm{width:54px;height:54px;border-width:6px;font-size:9px}
+.ui .chipr span{animation:chipcyc 4.5s steps(1) infinite}
+.ui .chipr span:nth-child(2){animation-delay:1.5s}.ui .chipr span:nth-child(3){animation-delay:3s}
+@keyframes chipcyc{0%,33%{background:oklch(var(--tc2l) var(--tch2) var(--hue));color:var(--surface);border-color:transparent}34%,100%{background:transparent;color:inherit;border-color:var(--line)}}
+.ui .kan i.c{animation:kmove 4s ease-in-out infinite}
+@keyframes kmove{0%,20%{transform:none}50%,70%{transform:translateX(105%)}100%{transform:none}}
+.ui .map{position:relative;height:58px;flex:none;border-radius:9px;background:oklch(var(--tl) var(--tch) var(--hue));overflow:hidden}
+.ui .map .road{position:absolute;left:8%;right:8%;top:50%;height:3px;border-radius:2px;background:repeating-linear-gradient(90deg,var(--surface) 0 6px,transparent 6px 10px);transform:translateY(-50%) rotate(-8deg)}
+.ui .map .pin{position:absolute;width:8px;height:8px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);background:var(--forest)}
+.ui .map .p1{left:14%;top:52%}.ui .map .p2{left:48%;top:40%}.ui .map .p3{left:80%;top:30%}
+.ui .map .van{position:absolute;width:14px;height:9px;border-radius:3px;background:oklch(var(--tc2l) var(--tch2) var(--hue));box-shadow:0 0 0 2px var(--surface);animation:drive 5s ease-in-out infinite}
+@keyframes drive{0%{left:10%;top:56%}50%{left:46%;top:44%}100%{left:80%;top:32%}}
+.ui .kpi{font-size:13px}
+.ui .row.inv .tag2{font-size:8px;padding:2px 5px;border-radius:4px;background:var(--forest);color:var(--term-ink)}
+.ui .qr{position:relative;display:grid;grid-template-columns:repeat(3,1fr);gap:4px;width:70px;flex:none;margin:2px auto;padding:6px;border-radius:8px;background:var(--surface);border:1px solid var(--line)}
+.ui .qr i{aspect-ratio:1;border-radius:2px;background:var(--forest)}
+.ui .qr i:nth-child(2n){background:oklch(var(--tc2l) var(--tch2) var(--hue));opacity:.6}
+.ui .qr .beam{position:absolute;left:4px;right:4px;height:2px;background:oklch(var(--tc2l) var(--tch2) var(--hue));box-shadow:0 0 8px oklch(var(--tc2l) var(--tch2) var(--hue));animation:scan 2s ease-in-out infinite}
+.ui .bub{animation:bubin 5s ease-in-out infinite both}.ui .bub.me{animation-delay:.8s}
+@keyframes bubin{0%,8%{opacity:0;transform:translateY(6px)}16%,85%{opacity:1;transform:none}100%{opacity:0}}
+.ui .g2 .c{animation:rowin 5.2s ease-in-out infinite both}
+.ui .g2 .c:nth-child(2){animation-delay:.2s}.ui .g2 .c:nth-child(3){animation-delay:.4s}.ui .g2 .c:nth-child(4){animation-delay:.6s}
+.sheet-phone{display:block;width:170px;height:300px;border-radius:26px;background:var(--forest);padding:7px;margin-bottom:16px}
+.sheet-phone .scr{display:flex;height:100%;border-radius:20px;overflow:hidden;background:var(--surface)}
+.sheet-phone .ui{font-size:11px;padding:14px 11px}
+@media (prefers-reduced-motion: reduce){.ui .row,.ui .bub,.ui .g2 .c{opacity:1!important;transform:none!important}}
+
 section.blk{padding-block:72px 16px}
 .sec-head{display:flex;justify-content:space-between;align-items:end;gap:16px;flex-wrap:wrap;margin-bottom:28px}
 .sec-head > div{display:flex;flex-direction:column;gap:10px;max-width:680px}
@@ -766,7 +807,7 @@ dialog.sheet[open]{animation:pop .35s cubic-bezier(.2,.7,.1,1)}
   <div class="sheet-body">
     <div><h4>What it does</h4><p id="sheetSum"></p><h4 style="margin-top:20px">Key features</h4><ul id="sheetFeat"></ul><div class="stores" id="sheetStores"></div></div>
     <div class="kv">
-      <img class="sheet-shot" id="sheetShot" alt="" hidden>
+      <span class="sheet-phone" id="sheetPhone" aria-hidden="true"></span>
       <div><h4>Company</h4><b id="sheetOrg"></b></div>
       <div><h4>When</h4><b id="sheetWhen"></b></div>
       <div><h4>My role</h4><b id="sheetRole"></b></div>
@@ -1070,23 +1111,25 @@ dialog.sheet[open]{animation:pop .35s cubic-bezier(.2,.7,.1,1)}
   var R='<span class="row"><span class="dot"></span><span class="ln"></span><span class="ln s"></span></span>';
   function bar(t){return '<span class="bar"><span>'+t+'</span><span></span></span>';}
   var UI={
-    list:function(t){return '<span class="ui">'+bar(t)+'<span class="ht"><span>Today’s route</span><b>14 stops</b></span>'+R+R+'<span class="cta">New sale</span></span>';},
+    list:function(t){return '<span class="ui">'+bar(t)+'<span class="map"><span class="road"></span><span class="pin p1"></span><span class="pin p2"></span><span class="pin p3"></span><span class="van"></span></span><span class="ht"><span>Today’s route</span><b>14 stops</b></span>'+R+R+'<span class="cta">New sale</span></span>';},
     booking:function(t){return '<span class="ui">'+bar(t)+'<span class="chipr"><span class="on">Exterior</span><span>Interior</span><span>Full</span></span>'+g2(4)+'<span class="cta">Book &amp; pay</span></span>';},
     voice:function(t){return '<span class="ui">'+bar(t)+'<span class="bub">2 biryani, 1 lime soda</span><span class="bub me">രണ്ട് ബിരിയാണി</span><span class="wave"><i></i><i style="animation-delay:.1s"></i><i style="animation-delay:.2s"></i><i style="animation-delay:.3s"></i><i style="animation-delay:.4s"></i><i style="animation-delay:.5s"></i></span><span class="cta">Hold to speak</span></span>';},
     pay:function(t){return '<span class="ui">'+bar(t)+'<span class="ht"><span>Wallet</span><b>₹ 2,450</b></span>'+g2(4,true)+'<span class="cta">Recharge</span></span>';},
     clock:function(t){return '<span class="ui">'+bar(t)+'<span class="ring">7h 40m</span>'+R+'<span class="cta">Clock out</span></span>';},
-    stock:function(t){return '<span class="ui">'+bar(t)+'<span class="bars"><i style="height:40%"></i><i style="height:75%"></i><i style="height:55%"></i><i style="height:90%"></i><i style="height:65%"></i></span>'+R+'<span class="cta">Scan item</span></span>';},
+    stock:function(t){return '<span class="ui">'+bar(t)+'<span class="bars"><i style="--h:40%"></i><i style="--h:75%"></i><i style="--h:55%"></i><i style="--h:90%"></i><i style="--h:65%"></i></span>'+R+'<span class="cta">Scan item</span></span>';},
     board:function(t){return '<span class="ui">'+bar(t)+'<span class="kan"><span class="k2"><i class="c"></i><i></i><i></i></span><span class="k2"><i></i><i class="c"></i></span><span class="k2"><i class="c"></i></span></span>'+R+'<span class="cta">Add task</span></span>';},
     scan:function(t){return '<span class="ui">'+bar(t)+'<span class="scan"><span class="ln"></span><span class="ln s"></span><span class="ln"></span></span>'+R+'<span class="cta">Extract</span></span>';},
     team:function(t){return '<span class="ui">'+bar(t)+'<span class="chipr"><span class="on">Today</span><span>Week</span></span>'+R+R+'<span class="cta">Assign</span></span>';},
+    erp:function(t){return '<span class="ui">'+bar(t)+'<span class="g2"><span class="c"><b class="kpi">₹ 4.2L</b><span class="ln s"></span></span><span class="c"><b class="kpi">128</b><span class="ln s"></span></span></span><span class="bars"><i style="--h:40%"></i><i style="--h:70%"></i><i style="--h:52%"></i><i style="--h:88%"></i><i style="--h:62%"></i><i style="--h:76%"></i></span><span class="row inv"><span class="dot"></span><span class="ln"></span><b class="tag2">INV</b></span><span class="cta">New invoice</span></span>';},
+    qr:function(t){return '<span class="ui">'+bar(t)+'<span class="qr"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><span class="beam"></span></span><span class="row"><span class="dot"></span><b class="kpi">09:02 \u00b7 GPS \u2713</b></span><span class="cta">Check in</span></span>';},
     apps:function(t){return '<span class="ui">'+bar(t)+g2(4,true)+'<span class="ht"><span>3 apps</span><b>1 platform</b></span><span class="cta">Open</span></span>';}
   };
   var P=[
     {n:'Vanforces',file:'vanforces.app',org:'Texol World',when:'Jan 2024 – now',hue:145,ui:'list',img:'vanforces.jpg',sum:'Van sales and inventory platform for field sales teams. Works offline and syncs when the signal returns.',detail:'Vanforces helps van sales teams manage inventory, track deliveries and optimise routes. It works offline and syncs when connectivity is available, so teams never lose sales data.',feat:['Offline-first architecture with SQLite and two-way REST sync','Google Maps routing and delivery tracking','Real-time inventory with live stock updates','Battery-efficient location tracking'],role:'Senior full-stack · team lead',stack:['Flutter','Go','SQLite','REST','Maps'],play:'https://play.google.com/store/apps/details?id=com.vanforces.salesman.app',ios:'https://apps.apple.com/in/app/vanforces/id6741518174',s:['flutter','dart','ios','android','web','offline','sqlite','rest','maps','go','cicd','auth','sql','state','arch']},
     {n:'DHG Car Wash',file:'dhg.suite',org:'Texol World',when:'Jun – Aug 2025',hue:190,ui:'booking',img:'dhg.jpg',count:'3 apps',sum:'Car wash management suite with connected Customer, Shop and Operator apps.',detail:'Customers book services, shop owners manage operations and operators process bookings, with multiple payment gateways, commission tracking and real-time booking management.',feat:['Three interconnected Flutter apps with role-based access','Apple Pay, Telr payment gateway and custom wallet','Commission calculation and management','Real-time booking and tracking'],role:'Full-stack developer',stack:['Flutter','REST','Apple Pay','Telr'],s:['flutter','dart','ios','android','multiapp','maps','pay','upi','rest','auth','state']},
     {n:'Speak Order',file:'speak-order.app',org:'Texol World',when:'Dec 2024 – Mar 2025',hue:60,ui:'voice',img:'speakorder.jpg',sum:'Voice ordering platform: order in your own language with AI voice recognition and translation.',detail:'Users discover nearby businesses, place orders by voice in their native language and pay in the app. Automatic translation lets customers and businesses chat across languages.',feat:['AI voice recognition for multiple languages','Real-time translation for cross-language chat','Geo-based business discovery','Integrated payments; voice-to-text and text-to-voice'],role:'Full-stack developer',stack:['Flutter','REST','AI speech','Translation'],play:'https://play.google.com/store/apps/details?id=com.texol.speakorder',ios:'https://apps.apple.com/in/app/speak-order/id6738990670',s:['flutter','dart','ios','android','voice','llm','realtime','maps','rest','pay','push']},
-    {n:'Taskforces ERP',file:'taskforces.erp',org:'Texol World',when:'Apr 2024 – now',hue:165,ui:'team',img:'taskforces.jpg',sum:'ERP mobile suite for inventory, sales, invoicing, orders and collections.',detail:'A full ERP app that gives businesses control of operations from anywhere, with real-time cloud sync, offline support and analytics.',feat:['Inventory, sales, invoicing, orders and collections modules','Real-time cloud sync with offline support','Role-based access and multi-warehouse tracking','Analytics and reporting dashboards'],role:'Full-stack developer',stack:['Flutter','REST','Cloud sync'],play:'https://play.google.com/store/apps/details?id=com.texol.taskforces',ios:'https://apps.apple.com/in/app/taskforces-erp/id6475192934',s:['flutter','dart','ios','android','offline','rest','auth','state','arch']},
-    {n:'WorkForceTime',file:'workforcetime.app',org:'Texol World',when:'Mar 2024 – now',hue:130,ui:'clock',img:'workforcetime.jpg',sum:'Attendance and HR app with QR and GPS check-in, shifts, leave and payroll reports.',detail:'Simplifies attendance, shift management and workforce analytics. QR codes and GPS mark attendance accurately; payroll and productivity reports update in real time.',feat:['QR code and GPS-based attendance','Shift scheduling, leave requests and approvals','Real-time payroll and productivity reports','Clean architecture with efficient background sync'],role:'Full-stack developer',stack:['Flutter','REST','GPS','QR'],play:'https://play.google.com/store/apps/details?id=com.texol.workforcetime',ios:'https://apps.apple.com/in/app/workforcetime/id1378828558',s:['flutter','dart','ios','android','maps','rest','arch','state','offline']},
+    {n:'Taskforces ERP',file:'taskforces.erp',org:'Texol World',when:'Apr 2024 – now',hue:165,ui:'erp',img:'taskforces.jpg',sum:'ERP mobile suite for inventory, sales, invoicing, orders and collections.',detail:'A full ERP app that gives businesses control of operations from anywhere, with real-time cloud sync, offline support and analytics.',feat:['Inventory, sales, invoicing, orders and collections modules','Real-time cloud sync with offline support','Role-based access and multi-warehouse tracking','Analytics and reporting dashboards'],role:'Full-stack developer',stack:['Flutter','REST','Cloud sync'],play:'https://play.google.com/store/apps/details?id=com.texol.taskforces',ios:'https://apps.apple.com/in/app/taskforces-erp/id6475192934',s:['flutter','dart','ios','android','offline','rest','auth','state','arch']},
+    {n:'WorkForceTime',file:'workforcetime.app',org:'Texol World',when:'Mar 2024 – now',hue:130,ui:'qr',img:'workforcetime.jpg',sum:'Attendance and HR app with QR and GPS check-in, shifts, leave and payroll reports.',detail:'Simplifies attendance, shift management and workforce analytics. QR codes and GPS mark attendance accurately; payroll and productivity reports update in real time.',feat:['QR code and GPS-based attendance','Shift scheduling, leave requests and approvals','Real-time payroll and productivity reports','Clean architecture with efficient background sync'],role:'Full-stack developer',stack:['Flutter','REST','GPS','QR'],play:'https://play.google.com/store/apps/details?id=com.texol.workforcetime',ios:'https://apps.apple.com/in/app/workforcetime/id1378828558',s:['flutter','dart','ios','android','maps','rest','arch','state','offline']},
     {n:'Enteura',file:'enteura.suite',org:'Texol World',when:'[YEAR]',hue:110,ui:'apps',count:'3 apps',sum:'[One line: what Enteura does]',feat:['[Feature]','[Feature]','[Feature]'],role:'[Your role]',stack:['[Stack]'],s:['multiapp']},
     {n:'Stock Taking',file:'stock-taking.app',org:'Texol World',when:'[YEAR]',hue:85,ui:'stock',img:'stocktaking.jpg',sum:'[One line: what Stock Taking does]',feat:['[Feature]','[Feature]'],role:'[Your role]',stack:['Flutter','[Stack]'],s:['flutter','dart']},
     {n:'Project Tracker',file:'project-tracker.app',org:'Texol World',when:'[YEAR]',hue:200,ui:'board',sum:'[One line: what Project Tracker does]',feat:['[Feature]','[Feature]'],role:'[Your role]',stack:['[Stack]'],s:[]},
@@ -1097,7 +1140,7 @@ dialog.sheet[open]{animation:pop .35s cubic-bezier(.2,.7,.1,1)}
   g.innerHTML=P.map(function(p,i){
     return '<button class="win proj reveal" type="button" data-i="'+i+'" data-org="'+esc(p.org)+'" style="--hue:'+p.hue+'">'+
       '<span class="win-bar"><i></i><i></i><i></i><span class="ttl">'+esc(p.file)+'</span></span>'+
-      '<span class="art">'+(p.count?'<span class="count">'+p.count+'</span>':'')+'<span class="mini"><span class="scr">'+(p.img?'<img src="assets/images/'+p.img+'" alt="'+esc(p.n)+' app screen" loading="lazy" width="138" height="300">':UI[p.ui](esc(p.n)))+'</span></span></span>'+
+      '<span class="art">'+(p.count?'<span class="count">'+p.count+'</span>':'')+'<span class="mini"><span class="scr">'+UI[p.ui](esc(p.n))+'</span></span></span>'+
       '<span class="info"><span class="eyebrow">'+esc(p.org)+' · '+esc(p.when)+'</span><span class="pt">'+esc(p.n)+'</span><span class="ps">'+esc(p.sum)+'</span>'+
       '<span class="stack">'+p.stack.map(function(s){return '<span>'+esc(s)+'</span>'}).join('')+'</span><span class="open">open →</span></span></button>';
   }).join('');
@@ -1105,7 +1148,7 @@ dialog.sheet[open]{animation:pop .35s cubic-bezier(.2,.7,.1,1)}
   var sheet=$('sheet');
   g.addEventListener('click',function(e){
     var b=e.target.closest('.proj'); if(!b) return; var p=P[+b.dataset.i];
-    $('sheetArt').style.setProperty('--hue',p.hue); $('sheetTitle').textContent=p.n; $('sheetSum').textContent=p.detail||p.sum; var sh=$('sheetShot'); if(p.img){sh.src='assets/images/'+p.img; sh.alt=p.n+' app screen'; sh.hidden=false;} else sh.hidden=true;
+    $('sheetArt').style.setProperty('--hue',p.hue); $('sheetTitle').textContent=p.n; $('sheetSum').textContent=p.detail||p.sum; var sp=$('sheetPhone'); sp.style.setProperty('--hue',p.hue); sp.innerHTML='<span class="scr">'+UI[p.ui](esc(p.n))+'</span>';
     var st=''; if(p.play) st+='<a href="'+p.play+'" target="_blank" rel="noopener">▶ Google Play</a>'; if(p.ios) st+='<a href="'+p.ios+'" target="_blank" rel="noopener"> App Store</a>'; $('sheetStores').innerHTML=st;
     $('sheetFeat').innerHTML=p.feat.map(function(f){return '<li>'+esc(f)+'</li>'}).join('');
     $('sheetOrg').textContent=p.org+(p.count?' · '+p.count:''); $('sheetWhen').textContent=p.when; $('sheetRole').textContent=p.role; $('sheetStack').textContent=p.stack.join(' · ');
