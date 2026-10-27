@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Page not found · Althaf M</title>
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/png" href="/althaf-portfolio/favicon.png">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Martian+Mono:wght@600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+:root{--bg:#EDF2E8;--ink:#1C281D;--muted:#526352;--forest:#3C573E;--term:#E3EEDB;--dim:#A8BDA4;--leaf:#5E8F55;--ts:#F0D58C;color-scheme:light}
+@media (prefers-color-scheme: dark){:root{--bg:#0E140F;--ink:#E2EBDC;--muted:#9CB09A;--forest:#0A100B;--term:#DDE9D5;--dim:#8FA58C;--leaf:#7DB574;color-scheme:dark}}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;display:grid;place-items:center;background:var(--bg);color:var(--ink);font-family:'JetBrains Mono',ui-monospace,Menlo,monospace;padding:24px max(16px,env(safe-area-inset-left,0px))}
+.t{width:min(560px,100%);background:var(--forest);color:var(--term);border-radius:16px;overflow:hidden;box-shadow:0 30px 60px -30px var(--forest)}
+.b{display:flex;gap:7px;padding:12px 14px;background:rgba(0,0,0,.18)}.b i{width:11px;height:11px;border-radius:50%;background:#E0675A}.b i:nth-child(2){background:#E6B648}.b i:nth-child(3){background:#6FB35E}
+.c{padding:20px 22px 24px;font-size:14px;line-height:1.8}
+h1{font-family:'Martian Mono',monospace;font-size:clamp(48px,14vw,84px);margin:0 0 6px;color:var(--ts)}
+.p{color:var(--leaf)}.d{color:var(--dim)}
+a{display:inline-flex;align-items:center;min-height:48px;margin-top:16px;padding:0 18px;border-radius:10px;background:var(--term);color:var(--forest);text-decoration:none;font-weight:500}
+a:focus-visible{outline:2px solid var(--ts);outline-offset:3px}
+.cur{display:inline-block;width:8px;height:16px;background:var(--term);vertical-align:-3px;animation:k 1s steps(2) infinite}@keyframes k{50%{opacity:0}}
+@media (prefers-reduced-motion: reduce){.cur{animation:none}}
+</style>
+</head>
+<body>
+<main class="t">
+  <div class="b" aria-hidden="true"><i></i><i></i><i></i></div>
+  <div class="c">
+    <h1>404</h1>
+    <div><span class="p">$</span> cd <span id="path">this-page</span></div>
+    <div class="d">cd: no such file or directory</div>
+    <div><span class="p">$</span> <span class="cur" aria-hidden="true"></span></div>
+    <a href="/althaf-portfolio/">← back to the portfolio</a>
+  </div>
+</main>
+<script>try{document.getElementById('path').textContent=location.pathname.replace('/althaf-portfolio/','')||'this-page'}catch(e){}</script>
+</body>
+</html>

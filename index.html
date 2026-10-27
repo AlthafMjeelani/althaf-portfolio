@@ -391,6 +391,30 @@ p{margin:0}
 @keyframes wheel{0%{opacity:0;transform:translate(-50%,0)}30%{opacity:1}100%{opacity:0;transform:translate(-50%,12px)}}
 @media (prefers-reduced-motion: reduce){.blob{animation:none}.hero h1{animation:none}.glow::before{animation:none}}
 
+
+.skip{position:fixed;left:max(16px,env(safe-area-inset-left,0px));top:calc(-60px + env(safe-area-inset-top,0px));z-index:60;padding:12px 16px;border-radius:10px;background:var(--forest);color:var(--term-ink);font-family:var(--f-mono);text-decoration:none;transition:top .2s}
+.skip:focus{top:calc(12px + env(safe-area-inset-top,0px))}
+/* lite mode for low-end devices and data saver */
+.lite .blob,.lite .spot{display:none}
+.lite .desk .win{animation:none}
+.lite .glow::before{animation-duration:12s}
+/* github window */
+.gh{padding:16px 18px;display:flex;flex-direction:column;gap:14px}
+.gh-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.gh-stats div{padding:12px;border-radius:12px;background:var(--surface);border:1px solid var(--line);display:flex;flex-direction:column;gap:2px}
+.gh-stats b{font-family:var(--f-display);font-size:22px;color:var(--accent);font-variant-numeric:tabular-nums}
+.gh-stats span{font-size:13px;color:var(--muted)}
+.gh-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.gh-list li{border-top:1px solid var(--line)}
+.gh-list a{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 12px;padding:11px 2px;text-decoration:none;color:var(--ink);min-height:44px}
+.gh-list a:hover b{color:var(--accent)}
+.gh-list b{font-family:var(--f-mono);font-size:13.5px;font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.gh-list small{font-family:var(--f-mono);font-size:12px;color:var(--muted)}
+.gh-list .lang{grid-column:1/-1;font-size:13px;color:var(--muted);font-family:var(--f-body)}
+.gh-note{font-family:var(--f-mono);font-size:12px;color:var(--muted)}
+.gh-live{display:inline-flex;align-items:center;gap:6px}
+.gh-live i{width:7px;height:7px;border-radius:50%;background:var(--leaf);animation:ping 2s infinite}
+
 section.blk{padding-block:72px 16px}
 .sec-head{display:flex;justify-content:space-between;align-items:end;gap:16px;flex-wrap:wrap;margin-bottom:28px}
 .sec-head > div{display:flex;flex-direction:column;gap:10px;max-width:680px}
@@ -529,6 +553,28 @@ dialog.sheet[open]{animation:pop .35s cubic-bezier(.2,.7,.1,1)}
 }
 </style>
 <meta name="theme-color" content="#3C573E">
+<link rel="canonical" href="https://althafmjeelani.github.io/althaf-portfolio/">
+<meta name="keywords" content="Althaf M, Senior Full-Stack Engineer, Flutter developer, Go developer, Python, AI engineer, RAG, AI agents, AWS, Kozhikode, Kerala, Texol World, portfolio">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta property="og:site_name" content="Althaf M">
+<meta property="og:locale" content="en_IN">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Althaf M, senior full-stack engineer">
+<meta name="twitter:title" content="Althaf M · Senior Full-Stack Engineer">
+<meta name="twitter:description" content="Apps, backend, data, cloud and AI. Senior full-stack engineer at Texol World, Kozhikode.">
+<meta name="twitter:image" content="https://althafmjeelani.github.io/althaf-portfolio/assets/images/og.jpg">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0E140F">
+<link rel="preload" as="image" href="assets/images/profile.jpg">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Person", "@id": "https://althafmjeelani.github.io/althaf-portfolio/#me", "name": "Althaf M", "jobTitle": "Senior Full-Stack Engineer", "url": "https://althafmjeelani.github.io/althaf-portfolio/", "image": "https://althafmjeelani.github.io/althaf-portfolio/assets/images/profile.jpg", "email": "mailto:althafmdev@gmail.com", "address": {"@type": "PostalAddress", "addressLocality": "Kozhikode", "addressRegion": "Kerala", "addressCountry": "IN"}, "worksFor": {"@type": "Organization", "name": "Texol World"}, "alumniOf": {"@type": "CollegeOrUniversity", "name": "MET Arts and Science College, Calicut University"}, "knowsAbout": ["Flutter", "Dart", "Go", "Python", "TypeScript", "React", "REST APIs", "PostgreSQL", "LLM", "Retrieval-Augmented Generation", "AI agents", "AWS", "Docker", "Kubernetes", "Data engineering", "CI/CD"], "knowsLanguage": ["English", "Malayalam", "Hindi", "Tamil"], "sameAs": ["https://linkedin.com/in/althafm2002", "https://github.com/AlthafMjeelani"]}, {"@type": "WebSite", "@id": "https://althafmjeelani.github.io/althaf-portfolio/#site", "url": "https://althafmjeelani.github.io/althaf-portfolio/", "name": "Althaf M · Senior Full-Stack Engineer", "author": {"@id": "https://althafmjeelani.github.io/althaf-portfolio/#me"}, "inLanguage": "en"}]}</script>
+<script>
+/* Analytics: paste a Google Analytics 4 ID (G-XXXXXXX) to turn it on. Leave empty for none. */
+window.SITE_ANALYTICS_ID='';
+(function(id){ if(!id) return; var s=document.createElement('script'); s.async=true; s.src='https://www.googletagmanager.com/gtag/js?id='+id; document.head.appendChild(s);
+  window.dataLayer=window.dataLayer||[]; window.gtag=function(){dataLayer.push(arguments);}; gtag('js',new Date()); gtag('config',id,{anonymize_ip:true}); })(window.SITE_ANALYTICS_ID);
+</script>
+
 <meta name="author" content="Althaf M">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Althaf M · Senior Full-Stack Engineer">
@@ -544,6 +590,7 @@ dialog.sheet[open]{animation:pop .35s cubic-bezier(.2,.7,.1,1)}
 </head>
 <body>
 
+<a class="skip" href="#desk">Skip to content</a>
 <canvas id="mesh" aria-hidden="true"></canvas>
 <div class="blob b1" aria-hidden="true"></div><div class="blob b2" aria-hidden="true"></div>
 <div class="spot" aria-hidden="true"></div>
@@ -878,6 +925,24 @@ dialog.sheet[open]{animation:pop .35s cubic-bezier(.2,.7,.1,1)}
           </div>
         </div>
       </div>
+      <div class="win reveal" id="github" style="margin-top:18px">
+        <div class="win-bar"><i></i><i></i><i></i><span class="ttl">github.com/AlthafMjeelani — activity</span></div>
+        <div class="gh">
+          <div class="gh-stats">
+            <div><b id="ghRepos">35+</b><span>public repos</span></div>
+            <div><b id="ghFollowers">—</b><span>followers</span></div>
+            <div><b id="ghSince">2022</b><span>on GitHub since</span></div>
+          </div>
+          <span class="eyebrow">Recently updated</span>
+          <ul class="gh-list" id="ghList">
+            <li><a href="https://github.com/AlthafMjeelani/print_bluetooth_thermal"><b>print_bluetooth_thermal</b><small>fork</small><span class="lang">Flutter plugin for Bluetooth thermal printers</span></a></li>
+            <li><a href="https://github.com/AlthafMjeelani/althaf-portfolio"><b>althaf-portfolio</b><small>this site</small><span class="lang">HTML · CSS · JavaScript</span></a></li>
+            <li><a href="https://github.com/AlthafMjeelani/Go-Authentication"><b>Go-Authentication</b><small>Go</small><span class="lang">Authentication service in Go</span></a></li>
+            <li><a href="https://github.com/AlthafMjeelani/Kotlin-android-App"><b>Kotlin-android-App</b><small>Kotlin</small><span class="lang">Native Android app</span></a></li>
+          </ul>
+          <span class="gh-note" id="ghNote">Shows live data from GitHub when available.</span>
+        </div>
+      </div>
       <div class="three" id="about">
         <div class="win reveal">
           <div class="win-bar"><i></i><i></i><i></i><span class="ttl">about.md</span></div>
@@ -968,6 +1033,8 @@ dialog.sheet[open]{animation:pop .35s cubic-bezier(.2,.7,.1,1)}
 (function(){
   function $(id){return document.getElementById(id);}
   var root=document.documentElement, reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var conn=navigator.connection||{}, lite=!!(conn.saveData||(navigator.deviceMemory&&navigator.deviceMemory<=2)||(navigator.hardwareConcurrency&&navigator.hardwareConcurrency<=2));
+  if(lite) root.classList.add('lite');
   var esc=function(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});};
   try{var saved=localStorage.getItem('theme'); if(saved) root.dataset.theme=saved;}catch(e){}
 
@@ -977,7 +1044,7 @@ dialog.sheet[open]{animation:pop .35s cubic-bezier(.2,.7,.1,1)}
   function size(){W=innerWidth;H=innerHeight;cv.width=W*DPR;cv.height=H*DPR;cx.setTransform(DPR,0,0,DPR,0,0);}
   var TOK=['</>','{ }','=>','async','await','fn()','[ ]','git push','const','\u03bb','01','SELECT *','import','return','&&','::','#!','<div>','.dart','.go','.py','@agent','$ deploy','// TODO','RAG','{...}','?.','!==','yield','map()','ctx','200 OK','JSON','sudo','::1','<T>','</>'],
       P2=[], codeCol='76,122,73', PX=-999, PY=-999;
-  function seed(){ var n=Math.min(42,Math.round(W*H/32000)); P2=[]; for(var i=0;i<n;i++) P2.push({x:Math.random()*W,y:Math.random()*H,t:TOK[(Math.random()*TOK.length)|0],s:11+Math.random()*10,a:.10+Math.random()*.16,v:.12+Math.random()*.28,ph:Math.random()*6.28,dx:0,dy:0}); }
+  function seed(){ var n=Math.min(lite?14:42,Math.round(W*H/(lite?70000:32000))); P2=[]; for(var i=0;i<n;i++) P2.push({x:Math.random()*W,y:Math.random()*H,t:TOK[(Math.random()*TOK.length)|0],s:11+Math.random()*10,a:.10+Math.random()*.16,v:.12+Math.random()*.28,ph:Math.random()*6.28,dx:0,dy:0}); }
   function hexToRgb(h){h=h.trim(); if(h[0]!=='#') return null; if(h.length===4) h='#'+h[1]+h[1]+h[2]+h[2]+h[3]+h[3]; var n=parseInt(h.slice(1),16); return ((n>>16)&255)+','+((n>>8)&255)+','+(n&255);}
   addEventListener('pointermove',function(e){PX=e.clientX;PY=e.clientY;},{passive:true});
   function drawCode(t,step){
@@ -1003,7 +1070,7 @@ dialog.sheet[open]{animation:pop .35s cubic-bezier(.2,.7,.1,1)}
   }
   size(); seed(); meshColor();
   matchMedia('(prefers-color-scheme: dark)').addEventListener('change',meshColor);
-  if(!reduce){var lastT=0;(function loop(t){ if(!document.hidden && t-lastT>33){drawMesh(t);lastT=t;} requestAnimationFrame(loop);})(0);} else drawMesh(0);
+  if(!reduce){var lastT=0;(function loop(t){ if(!document.hidden && t-lastT>(lite?66:33)){drawMesh(t);lastT=t;} requestAnimationFrame(loop);})(0);} else drawMesh(0);
 
   $('themeBtn').addEventListener('click',function(){
     var cur=root.dataset.theme||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');
@@ -1297,6 +1364,22 @@ dialog.sheet[open]{animation:pop .35s cubic-bezier(.2,.7,.1,1)}
 
   /* ---------- mesh parallax ---------- */
   if(!reduce && matchMedia('(pointer:fine)').matches){ var mx=0,my=0; addEventListener('pointermove',function(e){ mx=(e.clientX/innerWidth-.5)*14; my=(e.clientY/innerHeight-.5)*14; cv.style.transform='translate('+(-mx)+'px,'+(-my)+'px)'; },{passive:true}); }
+
+
+  /* ---------- live GitHub ---------- */
+  (function(){
+    var U='AlthafMjeelani', ago=function(d){var s=(Date.now()-new Date(d))/864e5; if(s<1) return 'today'; if(s<2) return 'yesterday'; if(s<30) return Math.round(s)+' days ago'; if(s<365) return Math.round(s/30)+' mo ago'; return Math.round(s/365)+' yr ago';};
+    if(!window.fetch) return;
+    Promise.all([fetch('https://api.github.com/users/'+U).then(function(r){if(!r.ok) throw 0; return r.json();}),
+                 fetch('https://api.github.com/users/'+U+'/repos?sort=pushed&per_page=12').then(function(r){if(!r.ok) throw 0; return r.json();})])
+    .then(function(res){ var u=res[0], repos=res[1];
+      $('ghRepos').textContent=u.public_repos; $('ghFollowers').textContent=u.followers; $('ghSince').textContent=new Date(u.created_at).getFullYear();
+      var skip=/^(testproject|personal|AlthafMjeelani)$/i;
+      var list=repos.filter(function(r){return !skip.test(r.name);}).slice(0,5);
+      if(list.length) $('ghList').innerHTML=list.map(function(r){return '<li><a href="'+esc(r.html_url)+'" target="_blank" rel="noopener"><b>'+esc(r.name)+'</b><small>'+esc(ago(r.pushed_at))+'</small><span class="lang">'+esc([r.language,r.fork?'fork':'',r.description||''].filter(Boolean).join(' · '))+'</span></a></li>';}).join('');
+      $('ghNote').innerHTML='<span class="gh-live"><i></i>live from the GitHub API</span>';
+    }).catch(function(){ /* keep the static list */ });
+  })();
 
   /* projects */
   function g2(n,dot){var s='';for(var i=0;i<n;i++)s+='<span class="c">'+(dot?'<span class="dot"></span>':'')+'<span class="ln"></span><span class="ln s"></span></span>';return '<span class="g2">'+s+'</span>';}
