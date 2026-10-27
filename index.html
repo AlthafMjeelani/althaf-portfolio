@@ -415,6 +415,26 @@ p{margin:0}
 .gh-live{display:inline-flex;align-items:center;gap:6px}
 .gh-live i{width:7px;height:7px;border-radius:50%;background:var(--leaf);animation:ping 2s infinite}
 
+
+.orgs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+@media (max-width:760px){.orgs{grid-template-columns:minmax(0,1fr)}}
+.org{padding:16px;border-radius:14px;background:var(--surface);border:1px solid var(--line);display:flex;flex-direction:column;gap:10px;transition:transform .25s,border-color .25s}
+.org:hover{transform:translateY(-3px);border-color:var(--leaf)}
+.org-h{display:flex;align-items:center;gap:12px}
+.org-h div{display:flex;flex-direction:column;min-width:0;flex:1}
+.org-h b{font-size:17px}
+.org-h small{font-family:var(--f-mono);font-size:12px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.org-av{width:42px;height:42px;flex:none;border-radius:10px;display:grid;place-items:center;background:var(--forest);color:var(--term-ink);font-family:var(--f-display);font-size:14px;font-weight:600}
+.org-tag{font-family:var(--f-mono);font-size:12px;padding:4px 10px;border-radius:999px;background:var(--accent-soft);white-space:nowrap}
+.org p{font-size:15px;color:var(--muted)}
+.org-chips{display:flex;flex-wrap:wrap;gap:6px}
+.org-chips span{font-family:var(--f-mono);font-size:12px;padding:4px 10px;border-radius:999px;border:1px solid var(--line)}
+.gh-graph{margin:0;display:flex;flex-direction:column;gap:8px}
+.gh-graph-box{overflow-x:auto;padding:12px;border-radius:12px;background:var(--surface);border:1px solid var(--line)}
+.gh-graph-box img{display:block;min-width:620px;width:100%;height:auto}
+:root[data-theme="dark"] .gh-graph-box img{filter:invert(.88) hue-rotate(180deg) saturate(1.3)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .gh-graph-box img{filter:invert(.88) hue-rotate(180deg) saturate(1.3)}}
+
 section.blk{padding-block:72px 16px}
 .sec-head{display:flex;justify-content:space-between;align-items:end;gap:16px;flex-wrap:wrap;margin-bottom:28px}
 .sec-head > div{display:flex;flex-direction:column;gap:10px;max-width:680px}
@@ -926,21 +946,36 @@ window.SITE_ANALYTICS_ID='';
         </div>
       </div>
       <div class="win reveal" id="github" style="margin-top:18px">
-        <div class="win-bar"><i></i><i></i><i></i><span class="ttl">github.com/AlthafMjeelani — activity</span></div>
+        <div class="win-bar"><i></i><i></i><i></i><span class="ttl">github — personal + organisations</span></div>
         <div class="gh">
           <div class="gh-stats">
+            <div><b>2</b><span>organisations</span></div>
+            <div><b>14+</b><span>private org repos</span></div>
             <div><b id="ghRepos">35+</b><span>public repos</span></div>
-            <div><b id="ghFollowers">—</b><span>followers</span></div>
-            <div><b id="ghSince">2022</b><span>on GitHub since</span></div>
           </div>
-          <span class="eyebrow">Recently updated</span>
+          <div class="orgs">
+            <div class="org">
+              <div class="org-h"><span class="org-av" aria-hidden="true">TW</span><div><b>Texol World</b><small>texol-world-iCohort · private</small></div><span class="org-tag">10+ repos</span></div>
+              <p>Client products I build and lead across mobile, web and backend.</p>
+              <div class="org-chips"><span>Taskforces ERP</span><span>WorkForceTime</span><span>Stock Taking</span><span>Project Tracker</span><span>DHG Car Wash</span><span>Speak Order</span><span>Enteura</span><span>Invoice Extract</span></div>
+            </div>
+            <div class="org">
+              <div class="org-h"><span class="org-av" aria-hidden="true">VF</span><div><b>Vanforces</b><small>vanforces · private</small></div><span class="org-tag">4 repos</span></div>
+              <p>The full Vanforces platform, end to end.</p>
+              <div class="org-chips"><span>Flutter mobile app</span><span>Go backend</span><span>Admin portal</span><span>SaaS admin</span></div>
+            </div>
+          </div>
+          <figure class="gh-graph" id="ghGraph">
+            <figcaption class="eyebrow">Contributions this year · private work included</figcaption>
+            <div class="gh-graph-box"><img id="ghChart" src="https://ghchart.rshah.org/4C7A49/AlthafMjeelani" alt="GitHub contribution graph for AlthafMjeelani" loading="lazy" width="663" height="104"></div>
+          </figure>
+          <span class="eyebrow">Personal · recently updated</span>
           <ul class="gh-list" id="ghList">
             <li><a href="https://github.com/AlthafMjeelani/print_bluetooth_thermal"><b>print_bluetooth_thermal</b><small>fork</small><span class="lang">Flutter plugin for Bluetooth thermal printers</span></a></li>
             <li><a href="https://github.com/AlthafMjeelani/althaf-portfolio"><b>althaf-portfolio</b><small>this site</small><span class="lang">HTML · CSS · JavaScript</span></a></li>
             <li><a href="https://github.com/AlthafMjeelani/Go-Authentication"><b>Go-Authentication</b><small>Go</small><span class="lang">Authentication service in Go</span></a></li>
-            <li><a href="https://github.com/AlthafMjeelani/Kotlin-android-App"><b>Kotlin-android-App</b><small>Kotlin</small><span class="lang">Native Android app</span></a></li>
           </ul>
-          <span class="gh-note" id="ghNote">Shows live data from GitHub when available.</span>
+          <span class="gh-note" id="ghNote">Organisation repos are private client work, so only their scope is shown here.</span>
         </div>
       </div>
       <div class="three" id="about">
@@ -1369,15 +1404,16 @@ window.SITE_ANALYTICS_ID='';
   /* ---------- live GitHub ---------- */
   (function(){
     var U='AlthafMjeelani', ago=function(d){var s=(Date.now()-new Date(d))/864e5; if(s<1) return 'today'; if(s<2) return 'yesterday'; if(s<30) return Math.round(s)+' days ago'; if(s<365) return Math.round(s/30)+' mo ago'; return Math.round(s/365)+' yr ago';};
+    var gc=$('ghChart'); if(gc){ gc.addEventListener('error',function(){ $('ghGraph').hidden=true; }); if(gc.complete && !gc.naturalWidth && gc.src) $('ghGraph').hidden=true; }
     if(!window.fetch) return;
     Promise.all([fetch('https://api.github.com/users/'+U).then(function(r){if(!r.ok) throw 0; return r.json();}),
                  fetch('https://api.github.com/users/'+U+'/repos?sort=pushed&per_page=12').then(function(r){if(!r.ok) throw 0; return r.json();})])
     .then(function(res){ var u=res[0], repos=res[1];
-      $('ghRepos').textContent=u.public_repos; $('ghFollowers').textContent=u.followers; $('ghSince').textContent=new Date(u.created_at).getFullYear();
+      $('ghRepos').textContent=u.public_repos;
       var skip=/^(testproject|personal|AlthafMjeelani)$/i;
-      var list=repos.filter(function(r){return !skip.test(r.name);}).slice(0,5);
+      var list=repos.filter(function(r){return !skip.test(r.name);}).slice(0,4);
       if(list.length) $('ghList').innerHTML=list.map(function(r){return '<li><a href="'+esc(r.html_url)+'" target="_blank" rel="noopener"><b>'+esc(r.name)+'</b><small>'+esc(ago(r.pushed_at))+'</small><span class="lang">'+esc([r.language,r.fork?'fork':'',r.description||''].filter(Boolean).join(' · '))+'</span></a></li>';}).join('');
-      $('ghNote').innerHTML='<span class="gh-live"><i></i>live from the GitHub API</span>';
+      $('ghNote').innerHTML='<span class="gh-live"><i></i>personal repos live from the GitHub API</span> · organisation repos are private client work';
     }).catch(function(){ /* keep the static list */ });
   })();
 
