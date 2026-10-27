@@ -4,6 +4,17 @@ Personal portfolio of **Althaf M**, Senior Full-Stack Engineer at Texol World, K
 
 **Live:** https://althafmjeelani.github.io/althaf-portfolio/
 
+## Documentation
+
+| File | What it covers |
+| --- | --- |
+| [docs/FEATURES.md](docs/FEATURES.md) | Every section and feature visitors see |
+| [docs/TECHNICAL.md](docs/TECHNICAL.md) | Architecture, design tokens, JS modules, data model, SEO, deployment |
+| [docs/PROMPTS.md](docs/PROMPTS.md) | Ready-made prompts for updating the site with Claude or another agent |
+| [CLAUDE.md](CLAUDE.md) / [AGENTS.md](AGENTS.md) | Rules for AI agents working in this repo |
+| [tools/check.sh](tools/check.sh) | Pre-commit checks |
+| [tools/resume/build_resume.py](tools/resume/build_resume.py) | Rebuilds the ATS resume PDF |
+
 ## What's inside
 
 The current site lives in `site/`. It's plain HTML, CSS and JavaScript in a single page, with no build step.
