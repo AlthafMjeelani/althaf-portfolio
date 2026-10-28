@@ -21,8 +21,8 @@ The current site lives in `site/`. It's plain HTML, CSS and JavaScript in a sing
 
 - Animated wire-mesh background and a "workspace" of connected windows: a live terminal, a dashboard and tabbed code views (Python RAG, Go, Dart, SQL)
 - An AI agent pipeline that runs a sample query step by step
-- Nine skill modules; tapping a skill highlights the projects that use it
-- Ten project windows with app screenshots, details, and App Store / Play Store links
+- Eight skill modules; tapping a skill highlights the projects that use it
+- Thirteen project windows with animated app screens, details, and App Store / Play Store links
 - About, education, achievements and career history
 - Contact form (EmailJS, with a mail-app fallback), resume download, light and dark themes
 
@@ -68,10 +68,9 @@ A lite mode turns on automatically for Data Saver or low-end phones (fewer backg
 
 All project data is in the `P` array near the bottom of `site/index.html`. Each project has a name, dates, summary, details, features, role, stack, screenshot, store links and the skill keys (`s`) used for skill highlighting.
 
-### Details still to fill in
+### Still to confirm
 
-Search `site/index.html` for `[` to find every placeholder:
-
-- **Enteura, Stock Taking, Project Tracker** (Texol World): one-line summary, year, features, role and stack (and the names of Enteura's 3 apps). These repos are not shared with Claude yet.
-- **Lead the team**: how you review code and mentor developers.
-- **Skills with no linked project yet** (Python, data science, data warehousing, RAG/vector search, LangChain and similar): add a project that uses them, or remove the skill.
+- **Dates for Taskforces ERP and WorkForceTime:** the site keeps the original ranges (Apr 2024 – now, Mar 2024 – now); the latest notes gave Oct 2026 and Jul–Sep 2026.
+- **Speak Order translation provider:** not named on the site until confirmed.
+- **Unlinked skills** (no project shows them yet): GraphQL, MongoDB, Next.js, Gemini/Ollama outside AI Frontier, LlamaIndex, Hugging Face, Pinecone, pgvector, PyTorch, TensorFlow, fine-tuning, BigQuery, Redshift, Airflow, Spark, Kafka, Power BI/Looker, Google Cloud, Azure, Terraform. Link them to a project or remove them.
+- Removed as unconfirmed: LangChain, Snowflake, data science (Pandas, NumPy, scikit-learn, Jupyter).

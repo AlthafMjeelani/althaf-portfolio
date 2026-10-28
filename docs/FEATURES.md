@@ -33,7 +33,7 @@ Three windows joined by animated wires:
 
 - **Terminal** that types commands in a loop: `ls skills/`, `cat stack.txt`, a deploy to AWS, an agent query.
 - **Dashboard** with count-up figures (13 products, 4+ years, 15+ apps, Employee of the Month) and the active stack.
-- **Code views** with tabs, auto-rotating, with a moving highlighted line: Python RAG, Go API handler, Dart offline-first repository, SQL dbt model.
+- **Code views** with tabs, auto-rotating, with a moving highlighted line: Python RAG (FastAPI + Qdrant), Go API handler, Dart offline-first repository, SQL dbt model.
 
 ## 3. AI agents
 
@@ -55,13 +55,13 @@ Single-agent pipeline (Query → Planner → Retriever / Tools / Memory → Resp
 
 ## 6. Skills
 
-Nine modules: languages, apps and interfaces, backend and databases, AI and ML, AI tools and frameworks, data science, data engineering and warehousing, cloud and DevOps, security and payments.
+Eight modules: languages, apps and interfaces, backend and databases, AI and ML, AI tools and frameworks, data engineering and warehousing, cloud and DevOps, security and payments.
 
 Tapping a skill dims the projects that do not use it and names the ones that do, with a jump link.
 
 ## 7. Projects
 
-Thirteen products, newest first, each in an app window with its own animated drawn screen (a van driving its route, cycling wash packages, voice chat, ERP charts, QR check-in, AI release feed, dues collected, a ledger, invoice scanning…).
+Thirteen products, newest first, each in an app window with its own animated drawn screen (a van driving its route, an Entaura question with chart and alerts, invoice scanning, an AI release feed, a task board, ERP charts, QR check-in, stock counting, dues collected, a ledger, wash packages, voice chat, a wallet).
 
 - Filters: all, Texol World, independent, BigWelt.
 - Open any card for a detail sheet: what it does, key features, company, dates, role, stack, App Store and Google Play links.
@@ -69,7 +69,7 @@ Thirteen products, newest first, each in an app window with its own animated dra
 ## 8. More
 
 - **GitHub:** workspaces (Texol World, Vanforces, independent builds) with product chips and contribution figures; contribution graph; personal repos and public repo count pulled live from the GitHub API (static fallback).
-- **Open source in production:** how the Bluetooth thermal printing plugin is used in Vanforces.
+- **Open source:** the Bluetooth thermal printing plugin extension (device metadata and printer detection).
 - **Practice:** how the owner runs projects (lifecycle, release automation, team lead).
 - **About:** portrait, short bio, languages spoken.
 - **Education and achievements.**

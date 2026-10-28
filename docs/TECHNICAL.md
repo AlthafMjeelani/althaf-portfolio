@@ -60,7 +60,7 @@ Layout concept: a "cyber-natural" workspace, one 1180px column on a living wire 
 | `#agent` | single-agent pipeline (`#graph`, log `#alog`) |
 | `#multi` | multi-agent diagram (`#maSvg`, inspector `#insp`, log `#malog`) |
 | `#craft` | clean architecture, refactor diff, principles, CI pipeline |
-| `#skills` | nine skill modules |
+| `#skills` | eight skill modules |
 | `#projects` | gallery `#gallery`, detail dialog `#sheet` |
 | `#more` | open source, practice, `#github`, `#about`, `#timeline` |
 | `#contact` | contact card and form `#cform` |
@@ -95,7 +95,7 @@ Layout concept: a "cyber-natural" workspace, one 1180px column on a living wire 
   org: 'Independent',           // 'Texol World' | 'Independent' | 'BigWelt' (drives the filter)
   when: 'Mar – Aug 2026',
   hue: 200,                     // card tint, 0–360
-  ui: 'dues',                   // key in UI: list booking voice pay clock stock board scan team erp qr feed dues ledger apps
+  ui: 'dues',                   // key in UI: list booking voice pay clock stock board scan team erp qr feed dues ledger ask apps
   count: '3 apps',              // optional badge
   sum: 'One-line summary',
   detail: 'Longer description for the sheet',
@@ -107,7 +107,7 @@ Layout concept: a "cyber-natural" workspace, one 1180px column on a living wire 
 }
 ```
 
-**Skill keys** (`data-s` on tags): `python go dart ts js kotlin sql flutter state arch native react web ios android multiapp maps figma rest graphql node fastapi realtime offline postgres mongo redis sqlite firebase llm rag vector agents prompt finetune ocr voice openai claude gemini langchain llamaindex hf ollama mcp pinecone pgvector pytorch tf pandas numpy sklearn jupyter viz stats etl snowflake bigquery redshift dbt airflow spark kafka bi aws gcp azure hosting docker k8s terraform cicd linux testing auth bio apisec iam push pay upi`.
+**Skill keys** (`data-s` on tags): `python go dart ts js kotlin sql flutter state arch native react web ios android multiapp maps figma rest graphql node fastapi php realtime offline postgres mongo redis sqlite firebase llm rag vector agents prompt finetune ocr voice openai claude gemini openrouter llamaindex hf ollama mcp qdrant pinecone pgvector pytorch tf etl clickhouse bigquery redshift dbt airflow spark kafka bi aws gcp azure hosting docker k8s terraform cicd linux testing auth bio apisec iam push pay upi`.
 
 ## Performance
 
