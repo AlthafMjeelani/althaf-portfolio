@@ -625,9 +625,9 @@ window.SITE_ANALYTICS_ID='';
   <div class="wrap">
     <a class="brand" href="#top"><i></i>ALTHAF.M</a>
     <nav class="nav" aria-label="Main">
-      <a href="#desk" class="hide-sm">workspace</a>
       <a href="#agent" class="hide-sm">agents</a>
       <a href="#multi" class="hide-sm">architecture</a>
+      <a href="#desk" class="hide-sm">workspace</a>
       <a href="#craft" class="hide-sm">code</a>
       <a href="#skills">skills</a>
       <a href="#projects">projects</a>
@@ -642,7 +642,7 @@ window.SITE_ANALYTICS_ID='';
 
 <nav class="mmenu" id="mmenu" aria-label="Sections" hidden>
   <button class="iconbtn mmenu-close" id="menuClose" type="button" aria-label="Close menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8"></path></svg></button>
-  <a href="#desk"><span>01</span>workspace</a><a href="#agent"><span>02</span>agents</a><a href="#multi"><span>03</span>architecture</a><a href="#craft"><span>04</span>code</a><a href="#skills"><span>05</span>skills</a><a href="#projects"><span>06</span>projects</a><a href="#about"><span>07</span>about</a><a href="#timeline"><span>08</span>experience</a><a href="#contact"><span>09</span>contact</a>
+  <a href="#agent"><span>01</span>agents</a><a href="#multi"><span>02</span>architecture</a><a href="#desk"><span>03</span>workspace</a><a href="#craft"><span>04</span>code</a><a href="#skills"><span>05</span>skills</a><a href="#projects"><span>06</span>projects</a><a href="#about"><span>07</span>about</a><a href="#timeline"><span>08</span>experience</a><a href="#contact"><span>09</span>contact</a>
 </nav>
 <main id="top">
   <div class="wrap">
@@ -670,44 +670,8 @@ window.SITE_ANALYTICS_ID='';
         <a class="btn ghost" href="assets/files/Althaf_M_Resume.pdf" download="Althaf_M_Resume.pdf">↓ resume</a>
       </div>
       <span class="status"><i></i>Texol World · Calicut, IST</span>
-      <a class="scroll-cue" href="#desk" aria-label="Scroll to the workspace"><i aria-hidden="true"></i>scroll</a>
+      <a class="scroll-cue" href="#agent" aria-label="Scroll to the AI agents"><i aria-hidden="true"></i>scroll</a>
     </section>
-
-    <section class="desk" id="desk" aria-label="Workspace">
-      <svg id="wires" aria-hidden="true"></svg>
-      <div class="win dark reveal glow" id="wTerm">
-        <div class="win-bar"><i></i><i></i><i></i><span class="ttl">althaf@texol: ~ — zsh</span></div>
-        <div class="term" id="term"><span class="p">$</span> whoami
-<span class="o">althaf m — senior full-stack engineer @ texol world</span>
-<span class="p">$</span> <span class="cur"></span></div>
-      </div>
-      <div class="win reveal" id="wDash">
-        <div class="win-bar"><i></i><i></i><i></i><span class="ttl">dashboard.app</span></div>
-        <div class="dash">
-          <div class="chips">
-            <div class="dchip"><b>13</b><span>products shipped</span></div>
-            <div class="dchip"><b>4+</b><span>years building</span></div>
-            <div class="dchip"><b>15+</b><span>apps built</span></div>
-            <div class="dchip"><b>EoM</b><span>Employee of the Month, many times</span></div>
-          </div>
-          <span class="eyebrow">Active stack</span>
-          <div class="stackline"><span>Python</span><span>Go</span><span>Dart · Flutter</span><span>TypeScript</span><span>LLM · RAG</span><span>FastAPI</span><span>AWS</span><span>Docker</span><span>ClickHouse</span></div>
-        </div>
-      </div>
-      <div class="win reveal" id="wCode" style="grid-column:1 / -1">
-        <div class="win-bar"><i></i><i></i><i></i><span class="ttl" id="codeTitle">ask.py</span>
-          <div class="tabs" role="tablist" aria-label="Code samples">
-            <button type="button" role="tab" aria-selected="true" data-t="0">Python · RAG</button>
-            <button type="button" role="tab" aria-selected="false" data-t="1">Go API</button>
-            <button type="button" role="tab" aria-selected="false" data-t="2">Dart</button>
-            <button type="button" role="tab" aria-selected="false" data-t="3">SQL</button>
-          </div>
-        </div>
-        <div class="code" id="code" role="tabpanel" aria-labelledby="codeTitle"></div>
-      </div>
-    </section>
-
-    <div class="ticker" aria-hidden="true"><div><span>Flutter</span><span>Go</span><span>Python</span><span>TypeScript</span><span>React</span><span>FastAPI</span><span>PostgreSQL</span><span>Redis</span><span>Qdrant</span><span>RAG</span><span>AI agents</span><span>MCP</span><span>AWS</span><span>Docker</span><span>Kubernetes</span><span>ClickHouse</span><span>dbt</span><span>CI/CD</span><span>Flutter</span><span>Go</span><span>Python</span><span>TypeScript</span><span>React</span><span>FastAPI</span><span>PostgreSQL</span><span>Redis</span><span>Qdrant</span><span>RAG</span><span>AI agents</span><span>MCP</span><span>AWS</span><span>Docker</span><span>Kubernetes</span><span>ClickHouse</span><span>dbt</span><span>CI/CD</span></div></div>
 
     <section class="blk" id="agent">
       <div class="sec-head"><div>
@@ -821,6 +785,43 @@ window.SITE_ANALYTICS_ID='';
       </div>
       <p class="ma-real reveal">Built for real in <b>Entaura Insight</b> (RAG over ERP data and policies) and <b>AI Frontier</b>: six agents (discovery, verification, report, relevance, mission, evidence) behind one provider router for OpenAI, Claude, Gemini, Mistral, Groq and Ollama, with source text isolated against prompt injection.</p>
     </section>
+
+    <section class="desk" id="desk" aria-label="Workspace">
+      <svg id="wires" aria-hidden="true"></svg>
+      <div class="win dark reveal glow" id="wTerm">
+        <div class="win-bar"><i></i><i></i><i></i><span class="ttl">althaf@texol: ~ — zsh</span></div>
+        <div class="term" id="term"><span class="p">$</span> whoami
+<span class="o">althaf m — senior full-stack engineer @ texol world</span>
+<span class="p">$</span> <span class="cur"></span></div>
+      </div>
+      <div class="win reveal" id="wDash">
+        <div class="win-bar"><i></i><i></i><i></i><span class="ttl">dashboard.app</span></div>
+        <div class="dash">
+          <div class="chips">
+            <div class="dchip"><b>13</b><span>products shipped</span></div>
+            <div class="dchip"><b>4+</b><span>years building</span></div>
+            <div class="dchip"><b>15+</b><span>apps built</span></div>
+            <div class="dchip"><b>EoM</b><span>Employee of the Month, many times</span></div>
+          </div>
+          <span class="eyebrow">Active stack</span>
+          <div class="stackline"><span>Python</span><span>Go</span><span>Dart · Flutter</span><span>TypeScript</span><span>LLM · RAG</span><span>FastAPI</span><span>AWS</span><span>Docker</span><span>ClickHouse</span></div>
+        </div>
+      </div>
+      <div class="win reveal" id="wCode" style="grid-column:1 / -1">
+        <div class="win-bar"><i></i><i></i><i></i><span class="ttl" id="codeTitle">ask.py</span>
+          <div class="tabs" role="tablist" aria-label="Code samples">
+            <button type="button" role="tab" aria-selected="true" data-t="0">Python · RAG</button>
+            <button type="button" role="tab" aria-selected="false" data-t="1">Go API</button>
+            <button type="button" role="tab" aria-selected="false" data-t="2">Dart</button>
+            <button type="button" role="tab" aria-selected="false" data-t="3">SQL</button>
+          </div>
+        </div>
+        <div class="code" id="code" role="tabpanel" aria-labelledby="codeTitle"></div>
+      </div>
+    </section>
+
+    <div class="ticker" aria-hidden="true"><div><span>Flutter</span><span>Go</span><span>Python</span><span>TypeScript</span><span>React</span><span>FastAPI</span><span>PostgreSQL</span><span>Redis</span><span>Qdrant</span><span>RAG</span><span>AI agents</span><span>MCP</span><span>AWS</span><span>Docker</span><span>Kubernetes</span><span>ClickHouse</span><span>dbt</span><span>CI/CD</span><span>Flutter</span><span>Go</span><span>Python</span><span>TypeScript</span><span>React</span><span>FastAPI</span><span>PostgreSQL</span><span>Redis</span><span>Qdrant</span><span>RAG</span><span>AI agents</span><span>MCP</span><span>AWS</span><span>Docker</span><span>Kubernetes</span><span>ClickHouse</span><span>dbt</span><span>CI/CD</span></div></div>
+
 
     <section class="blk" id="craft">
       <div class="sec-head"><div>
