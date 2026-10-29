@@ -1,4 +1,19 @@
-# Althaf M — Portfolio
+<div align="center">
+
+<a href="https://althafmjeelani.github.io/althaf-portfolio/"><img src="site/assets/images/og.jpg" alt="Althaf M, AI Application Engineer" width="720"></a>
+
+# Althaf M · Portfolio
+
+**An AI-era portfolio: a live workspace with a runnable agent pipeline, a multi-agent architecture view and animated project windows.**
+
+[![Live site](https://img.shields.io/badge/Live-althafmjeelani.github.io-4C7A49?style=for-the-badge&logo=githubpages&logoColor=white)](https://althafmjeelani.github.io/althaf-portfolio/)
+![HTML](https://img.shields.io/badge/HTML-CSS-JS-3C573E?style=for-the-badge)
+![No build step](https://img.shields.io/badge/build-none-8FC48A?style=for-the-badge)
+![Light and dark](https://img.shields.io/badge/themes-light%20%2B%20dark-526352?style=for-the-badge)
+
+</div>
+
+---
 
 Personal portfolio of **Althaf M**, AI Application Engineer (Flutter and mobile background) at Texol World, Kozhikode.
 
