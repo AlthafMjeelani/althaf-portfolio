@@ -25,7 +25,7 @@ def bullets(items): return ListFlowable([ListItem(Paragraph(i,bul),leftIndent=10
 def entry(left,right,items):
     return KeepTogether([Paragraph(f'{left} <font color="#444444">| {right}</font>',role),bullets(items)])
 S=[]
-S+= [Paragraph('ALTHAF M',name),Paragraph('AI Application Engineer | Full-Stack, Flutter &amp; Mobile Background',title),
+S+= [Paragraph('ALTHAF M',name),Paragraph('AI Application Engineer',title),
      Paragraph('Kozhikode, Kerala, India | +91 8086689184 | '+L('mailto:althafmdev@gmail.com','althafmdev@gmail.com'),contact),
      Paragraph('LinkedIn: '+L('https://linkedin.com/in/althafm2002','linkedin.com/in/althafm2002')+' | GitHub: '+L('https://github.com/AlthafMjeelani','github.com/AlthafMjeelani')+' | Portfolio: '+L('https://althafmjeelani.github.io/althaf-portfolio/','althafmjeelani.github.io/althaf-portfolio'),contact)]
 S+=sec('Professional Summary')
@@ -43,7 +43,7 @@ sk=[('Languages','Dart, Go (Golang), Python, TypeScript, JavaScript, Kotlin, SQL
 ('Practices','Agile/Scrum, Code Review, Unit &amp; Integration Testing, Debugging, Performance Optimization, Team Leadership')]
 for k,v in sk: S.append(Paragraph(f'<b>{k}:</b> {v}',ParagraphStyle('sk',parent=body,spaceAfter=1.5)))
 S+=sec('Professional Experience')
-S.append(entry('<b>AI Application Engineer (Senior Full-Stack)</b>','Texol World, Kozhikode, Kerala | Jan 2024 – Present',[
+S.append(entry('<b>AI Application Engineer</b>','Texol World, Kozhikode, Kerala | Jan 2024 – Present',[
 'Lead the engineering team across mobile, web, backend, cloud and AI, owning the full lifecycle from analysis and architecture to deployment.',
 'Built Entaura, an enterprise data and policy intelligence platform (Ask, Insight, Watch) with Python/FastAPI, React, ClickHouse, Qdrant, RAG and AI agents.',
 'Top contributor to Vanforces, a route-to-market SaaS: about 1,900 commits on the offline-first Flutter app since Jan 2024 and 826 on the React admin portal, plus Go backend work (Gin, MySQL, Redis).',
