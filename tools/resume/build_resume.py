@@ -25,11 +25,11 @@ def bullets(items): return ListFlowable([ListItem(Paragraph(i,bul),leftIndent=10
 def entry(left,right,items):
     return KeepTogether([Paragraph(f'{left} <font color="#444444">| {right}</font>',role),bullets(items)])
 S=[]
-S+= [Paragraph('ALTHAF M',name),Paragraph('Senior Full-Stack Engineer',title),
+S+= [Paragraph('ALTHAF M',name),Paragraph('AI-Integrated Senior Full-Stack Engineer',title),
      Paragraph('Kozhikode, Kerala, India | +91 8086689184 | '+L('mailto:althafmdev@gmail.com','althafmdev@gmail.com'),contact),
      Paragraph('LinkedIn: '+L('https://linkedin.com/in/althafm2002','linkedin.com/in/althafm2002')+' | GitHub: '+L('https://github.com/AlthafMjeelani','github.com/AlthafMjeelani')+' | Portfolio: '+L('https://althafmjeelani.github.io/althaf-portfolio/','althafmjeelani.github.io/althaf-portfolio'),contact)]
 S+=sec('Professional Summary')
-S.append(Paragraph('Senior Full-Stack Engineer with 4+ years of experience designing, building and shipping production software across mobile, web, backend, cloud and AI. Delivered 13 products and 15+ apps on iOS, Android and web, including offline-first sales platforms, multi-tenant SaaS, multi-app service marketplaces, ERP and HR systems, fintech apps and multi-agent AI tools. Leads the engineering team at Texol World, owning architecture, CI/CD and releases. Experienced in Flutter, Go, Python, REST APIs, SQL and NoSQL databases, AWS, Docker, and LLM features using RAG and AI agents.',body))
+S.append(Paragraph('AI-Integrated Senior Full-Stack Engineer with 4+ years of experience designing, building and shipping production software across mobile, web, backend, cloud and AI, integrating LLMs, RAG and AI agents into real products. Delivered 13 products and 15+ apps on iOS, Android and web, including offline-first sales platforms, multi-tenant SaaS, multi-app service marketplaces, ERP and HR systems, fintech apps and multi-agent AI tools. Leads the engineering team at Texol World, owning architecture, CI/CD and releases. Experienced in Flutter, Go, Python, REST APIs, SQL and NoSQL databases, AWS, Docker, and LLM features using RAG and AI agents.',body))
 S+=sec('Technical Skills')
 sk=[('Languages','Dart, Go (Golang), Python, TypeScript, JavaScript, Kotlin, SQL'),
 ('Mobile &amp; Frontend','Flutter, iOS, Android, React, Next.js, Provider, Bloc, Riverpod, Clean Architecture, MVVM, Platform Channels, Responsive UI, Figma'),
@@ -43,7 +43,7 @@ sk=[('Languages','Dart, Go (Golang), Python, TypeScript, JavaScript, Kotlin, SQL
 ('Practices','Agile/Scrum, Code Review, Unit &amp; Integration Testing, Debugging, Performance Optimization, Team Leadership')]
 for k,v in sk: S.append(Paragraph(f'<b>{k}:</b> {v}',ParagraphStyle('sk',parent=body,spaceAfter=1.5)))
 S+=sec('Professional Experience')
-S.append(entry('<b>Senior Full-Stack Engineer</b>','Texol World, Kozhikode, Kerala | Jan 2024 – Present',[
+S.append(entry('<b>AI-Integrated Senior Full-Stack Engineer</b>','Texol World, Kozhikode, Kerala | Jan 2024 – Present',[
 'Lead the engineering team across mobile, web, backend, cloud and AI, owning the full lifecycle from analysis and architecture to deployment.',
 'Top contributor to Vanforces, a route-to-market SaaS: about 1,900 commits on the offline-first Flutter app since Jan 2024 and 826 on the React admin portal, plus Go backend work (Gin, MySQL, Redis).',
 'Built Entaura, an enterprise data and policy intelligence platform (Ask, Insight, Watch) with Python/FastAPI, React, ClickHouse, Qdrant, RAG and AI agents.',
@@ -92,5 +92,5 @@ S.append(bullets(['Employee of the Month at Texol World, awarded multiple times 
 S+=sec('Languages')
 S.append(Paragraph('English, Malayalam, Hindi, Tamil',body))
 doc=SimpleDocTemplate(out,pagesize=A4,leftMargin=16*mm,rightMargin=16*mm,topMargin=12*mm,bottomMargin=12*mm,
-  title='Althaf M - Senior Full-Stack Engineer - Resume',author='Althaf M',subject='Resume',keywords='Senior Full-Stack Engineer, Flutter, Go, Python, AWS, RAG, AI')
+  title='Althaf M - AI-Integrated Senior Full-Stack Engineer - Resume',author='Althaf M',subject='Resume',keywords='AI-Integrated Senior Full-Stack Engineer, AI Integration, LLM, Flutter, Go, Python, AWS, RAG, AI')
 doc.build(S)

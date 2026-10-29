@@ -1,6 +1,6 @@
 # Althaf M — Portfolio
 
-Personal portfolio of **Althaf M**, Senior Full-Stack Engineer at Texol World, Kozhikode.
+Personal portfolio of **Althaf M**, AI-Integrated Senior Full-Stack Engineer at Texol World, Kozhikode.
 
 **Live:** https://althafmjeelani.github.io/althaf-portfolio/
 
