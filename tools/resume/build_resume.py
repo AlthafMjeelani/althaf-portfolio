@@ -48,7 +48,7 @@ S.append(entry('<b>AI-Integrated Senior Full-Stack Engineer</b>','Texol World, K
 'Built Entaura, an enterprise data and policy intelligence platform (Ask, Insight, Watch) with Python/FastAPI, React, ClickHouse, Qdrant, RAG and AI agents.',
 'Top contributor to Vanforces, a route-to-market SaaS: about 1,900 commits on the offline-first Flutter app since Jan 2024 and 826 on the React admin portal, plus Go backend work (Gin, MySQL, Redis).',
 'Built TrackFlow (Go, React, PostgreSQL) and DHG Car Wash (Laravel backend with three Flutter apps).',
-'Built Flutter apps Taskforces ERP, WorkForceTime, StockSnap, Invoice Extract and the Speak Order client.',
+'Built Flutter apps Taskforces ERP, WorkForceTime, StockSnap, Invoice Extract and Speak Order (AI voice ordering with LLMs).',
 'Set up CI/CD with GitHub Actions for automated builds, testing and App Store / Google Play releases.',
 'Recognised as Employee of the Month multiple times for project delivery and innovation.']))
 S.append(entry('<b>Flutter Developer</b>','BigWelt Infotech Pvt. Ltd., Bangalore, Karnataka | Dec 2022 – Dec 2023',[
@@ -80,7 +80,7 @@ S.append(entry('<b>Vanforces – Van Sales &amp; Distribution Platform</b>','Flu
 'Live on '+L('https://apps.apple.com/in/app/vanforces/id6741518174','App Store')+' and '+L('https://play.google.com/store/apps/details?id=com.vanforces.salesman.app','Google Play')+'.']))
 S.append(entry('<b>More shipped apps</b>','Flutter, Laravel, REST APIs',[
 'DHG Car Wash: Laravel backend with customer and operator Flutter apps, Apple Pay, Telr and wallet payments.',
-'Speak Order (Flutter client): voice, text and barcode ordering with Soniox transcription, WebSockets and Drift.',
+'Speak Order (Flutter client): AI voice ordering and voice input using LLMs, plus text and barcode ordering, Soniox transcription, WebSockets and Drift.',
 'Taskforces ERP, WorkForceTime and StockSnap (offline stock counting) at Texol World; AGSKart payments at BigWelt.']))
 S+=sec('Education')
 S.append(Paragraph('<b>Bachelor of Computer Applications (BCA)</b> <font color="#444444">| MET Arts and Science College, Nadapuram – Calicut University | Jun 2019 – Mar 2022</font>',ParagraphStyle('e',parent=body,spaceAfter=3)))
