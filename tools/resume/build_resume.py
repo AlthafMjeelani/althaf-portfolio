@@ -45,8 +45,8 @@ for k,v in sk: S.append(Paragraph(f'<b>{k}:</b> {v}',ParagraphStyle('sk',parent=
 S+=sec('Professional Experience')
 S.append(entry('<b>AI-Integrated Senior Full-Stack Engineer</b>','Texol World, Kozhikode, Kerala | Jan 2024 – Present',[
 'Lead the engineering team across mobile, web, backend, cloud and AI, owning the full lifecycle from analysis and architecture to deployment.',
-'Top contributor to Vanforces, a route-to-market SaaS: about 1,900 commits on the offline-first Flutter app since Jan 2024 and 826 on the React admin portal, plus Go backend work (Gin, MySQL, Redis).',
 'Built Entaura, an enterprise data and policy intelligence platform (Ask, Insight, Watch) with Python/FastAPI, React, ClickHouse, Qdrant, RAG and AI agents.',
+'Top contributor to Vanforces, a route-to-market SaaS: about 1,900 commits on the offline-first Flutter app since Jan 2024 and 826 on the React admin portal, plus Go backend work (Gin, MySQL, Redis).',
 'Built TrackFlow (Go, React, PostgreSQL) and DHG Car Wash (Laravel backend with three Flutter apps).',
 'Built Flutter apps Taskforces ERP, WorkForceTime, StockSnap, Invoice Extract and the Speak Order client.',
 'Set up CI/CD with GitHub Actions for automated builds, testing and App Store / Google Play releases.',
@@ -62,16 +62,16 @@ S+=sec('Key Projects')
 S.append(entry('<b>Entaura – Enterprise Data &amp; Policy Intelligence</b>','Python, FastAPI, React, TypeScript, ClickHouse, PostgreSQL, Qdrant, dbt | 2026',[
 'Three apps: Ask searches ERP records and policy documents together, Insight generates trusted analytics with charts, SQL and reasoning, Watch monitors thresholds and business rules with alerts.',
 'RAG and AI agents over ERP data and documents with OpenAI, Anthropic and OpenRouter models; Redis, S3 and Docker.']))
+S.append(entry('<b>Invoice Extract – AI Document Extraction</b>','Flutter, ML Kit OCR, Claude API, Node.js, SQLite | Oct 2026',[
+'Extracts order and invoice data from PDF, Excel, CSV and photos: layout-preserving PDF tables, on-device ML Kit OCR and a Claude fallback for handwritten documents.',
+'Matches products, customers, routes and salesmen against SQLite master data.']))
+S.append(entry('<b>AI Frontier – Multi-agent AI Release Tracker</b>','Go, Flutter, PostgreSQL, LLMs, Docker | Oct 2026',[
+'Six-agent pipeline (discovery, verification, report, relevance, mission, evidence) behind one provider router for OpenAI, Claude, Gemini, Mistral, Groq and Ollama.',
+'Prompt-injection defence by isolating source text as untrusted data; API keys encrypted at rest; Go API, worker and scheduler.']))
 S.append(entry('<b>PayNest – Multi-tenant Payments SaaS</b>','Go, PostgreSQL, Redis, React, TypeScript, AWS, Kubernetes | Mar 2026 – Aug 2026',[
 'Built the Go backend and React/TypeScript admin apps (about 670 commits) serving a platform console, tenant portal and Flutter customer app.',
 'Database-per-tenant PostgreSQL with automated provisioning; RS256 JWT, refresh tokens, TOTP 2FA and role-based access.',
 'Redis + Asynq background jobs, SendGrid, Twilio and AWS S3; Docker, Kubernetes/Helm and GitHub Actions CI/CD.']))
-S.append(entry('<b>AI Frontier – Multi-agent AI Release Tracker</b>','Go, Flutter, PostgreSQL, LLMs, Docker | Oct 2026',[
-'Six-agent pipeline (discovery, verification, report, relevance, mission, evidence) behind one provider router for OpenAI, Claude, Gemini, Mistral, Groq and Ollama.',
-'Prompt-injection defence by isolating source text as untrusted data; API keys encrypted at rest; Go API, worker and scheduler.']))
-S.append(entry('<b>Invoice Extract – AI Document Extraction</b>','Flutter, ML Kit OCR, Claude API, Node.js, SQLite | Oct 2026',[
-'Extracts order and invoice data from PDF, Excel, CSV and photos: layout-preserving PDF tables, on-device ML Kit OCR and a Claude fallback for handwritten documents.',
-'Matches products, customers, routes and salesmen against SQLite master data.']))
 S.append(entry('<b>TrackFlow – Project &amp; Delivery Management</b>','Go, Gin, React, TypeScript, PostgreSQL, Redis, Asynq | Sep – Oct 2026',[
 'Role-based projects and tasks, timesheets and reports, plus releases, approvals, risks, incidents and governed documents.']))
 S.append(entry('<b>Vanforces – Van Sales &amp; Distribution Platform</b>','Flutter, React, Go, MySQL, Redis, SQLite, Google Maps',[
