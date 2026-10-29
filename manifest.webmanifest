@@ -1,12 +1,12 @@
 {
-  "name": "Althaf M \u00b7 AI-Integrated Senior Full-Stack Engineer",
+  "name": "Althaf M \u00b7 AI Application Engineer",
   "short_name": "Althaf M",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
   "background_color": "#EDF2E8",
   "theme_color": "#3C573E",
-  "description": "Portfolio of Althaf M, senior full-stack engineer: apps, backend, data, cloud and AI.",
+  "description": "Portfolio of Althaf M, AI application engineer with a Flutter and mobile background: apps, backend, data, cloud and AI.",
   "icons": [
     {
       "src": "assets/images/icon-192.png",
