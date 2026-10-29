@@ -22,7 +22,7 @@ What visitors see and can do on https://althafmjeelani.github.io/althaf-portfoli
 
 - Profile photo inside two orbiting rings of skill chips.
 - Floating code cards beside the photo on desktop (`new Engineer({...})`, a `git commit` / deploy terminal).
-- "SYSTEM: SENIOR FULL-STACK ENGINEER" with a drawn underline.
+- "SYSTEM: AI APPLICATION ENGINEER" with a drawn underline.
 - Name revealed letter by letter, then a looping green glint.
 - "I build …" line that types and deletes: mobile apps, web platforms, REST & Go APIs, data pipelines, RAG search, AI agents, cloud infrastructure.
 - Buttons: open projects, view skills, download resume. Scroll cue.
