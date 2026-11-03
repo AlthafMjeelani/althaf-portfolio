@@ -4,7 +4,7 @@ Guidance for Claude Code and other AI agents working in this repository.
 
 ## What this repo is
 
-The personal portfolio of **Althaf M, AI Application Engineer & Flutter Lead** (Texol World, Kozhikode).
+The personal portfolio of **Althaf M, AI Application Engineer** (Texol World, Kozhikode).
 
 - **Live site:** https://althafmjeelani.github.io/althaf-portfolio/
 - **Current site:** `site/`, a static single page (HTML, CSS, vanilla JS) with no build step.
