@@ -1,6 +1,6 @@
 <div align="center">
 
-<a href="https://althafmjeelani.github.io/althaf-portfolio/"><img src="site/assets/images/og.jpg" alt="Althaf M, AI Application Engineer" width="720"></a>
+<a href="https://althafmjeelani.github.io/althaf-portfolio/"><img src="site/assets/images/og.jpg" alt="Althaf M, AI Application Engineer and Flutter Lead" width="720"></a>
 
 # Althaf M · Portfolio
 
@@ -15,7 +15,7 @@
 
 ---
 
-Personal portfolio of **Althaf M**, AI Application Engineer (Flutter and mobile background) at Texol World, Kozhikode.
+Personal portfolio of **Althaf M**, AI Application Engineer & Flutter Lead at Texol World, Kozhikode.
 
 **Live:** https://althafmjeelani.github.io/althaf-portfolio/
 
