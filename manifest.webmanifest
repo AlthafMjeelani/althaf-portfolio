@@ -1,12 +1,12 @@
 {
-  "name": "Althaf M \u00b7 AI Application Engineer",
+  "name": "Althaf M \u00b7 AI Application Engineer & Flutter Lead",
   "short_name": "Althaf M",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
   "background_color": "#EDF2E8",
   "theme_color": "#3C573E",
-  "description": "Portfolio of Althaf M, AI application engineer with a Flutter and mobile background: apps, backend, data, cloud and AI.",
+  "description": "Portfolio of Althaf M, AI Application Engineer & Flutter Lead: cross-platform apps and LLM-powered products.",
   "icons": [
     {
       "src": "assets/images/icon-192.png",
