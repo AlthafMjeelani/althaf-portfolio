@@ -239,7 +239,7 @@ p{margin:0}
 .stage .bar i{display:block;height:100%;width:var(--w,100%);background:var(--leaf);transition:width .5s linear}
 .stage.run{border-color:var(--ts)} .stage.run b::after{content:" ◌";color:var(--ts)}
 .stage.done b::after{content:" ✓";color:var(--leaf)}
-.pipe-head{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:12px;font-family:var(--f-mono);font-size:13px;color:var(--term-dim)}
+.pipe-head{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:nowrap;white-space:nowrap;min-height:22px;margin-bottom:12px;font-family:var(--f-mono);font-size:13px;color:var(--term-dim)}
 .pipe-head b{color:var(--ts);font-weight:500}
 
 /* animated app screens */
@@ -589,6 +589,15 @@ dialog.sheet[open]{animation:pop .35s cubic-bezier(.2,.7,.1,1)}
 @media (prefers-reduced-motion: reduce){
   *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
 }
+/* fixed-size terminals: no layout jump while text types, runs or resets */
+#code{min-height:370px}
+#diffCode{min-height:258px}
+.diff-note{min-height:6.4em}
+#term{height:400px;min-height:0;overflow:hidden}
+#alog{height:270px;min-height:0;overflow-y:auto}
+#malog{height:260px;min-height:0;max-height:none;overflow-y:auto}
+.roles-line{white-space:nowrap;min-height:1.7em}
+@media (max-width:640px){#term{height:340px}#alog{height:250px}#malog{height:240px}}
 </style>
 <meta name="theme-color" content="#3C573E">
 <link rel="canonical" href="https://althafmjeelani.github.io/althaf-portfolio/">
@@ -1221,7 +1230,7 @@ window.SITE_ANALYTICS_ID='';
     ['cmd','agent ask "which vans need restocking?"'],['dim','› retrieve 5 chunks · call inventory api'],['out','vans 4, 9 and 12 — before 2 pm (sample)']
   ];
   var base=term.innerHTML.replace('<span class="cur"></span>',''), hist=base, idx=0;
-  function show(extra){term.innerHTML=hist+(extra||'')+'<span class="cur"></span>';}
+  function show(extra){term.innerHTML=hist+(extra||'')+'<span class="cur"></span>'; term.scrollTop=term.scrollHeight;}
   function next(){
     if(idx>=script.length){ setTimeout(function(){hist=base;idx=0;show();setTimeout(next,600);},3600); return; }
     var s=script[idx++];
@@ -1303,7 +1312,7 @@ window.SITE_ANALYTICS_ID='';
     var t0=performance.now(); (function f(now){var p=Math.min(1,(now-t0)/ms), q=path.getPointAtLength(L*p); c.setAttribute('cx',q.x); c.setAttribute('cy',q.y); if(p<1) requestAnimationFrame(f); else {c.remove(); res();}})(t0);
   });}
   function on(id){document.querySelectorAll('.gnode').forEach(function(n){n.classList.remove('on')}); if(id) $(id).classList.add('on');}
-  function log(cls,t){alog.innerHTML+='\n<span class="'+cls+'">'+esc(t)+'</span>';}
+  function log(cls,t){alog.innerHTML+='\n<span class="'+cls+'">'+esc(t)+'</span>'; alog.scrollTop=alog.scrollHeight;}
   function wait(ms){return new Promise(function(r){setTimeout(r,reduce?0:ms);});}
   async function run(){
     if(running) return; running=true; $('runAgent').disabled=true;
@@ -1316,7 +1325,7 @@ window.SITE_ANALYTICS_ID='';
     on('nM'); log('d','memory → keep route context for follow-ups'); await wait(700);
     await Promise.all([pulse('g5',600),pulse('g6',600),pulse('g7',600)]);
     on('nA'); log('o','answer → Vans 4, 9 and 12 need restocking before 2 pm.'); log('d','sources: inventory · routes · sync log  (sample run)');
-    alog.innerHTML+='\n<span class="p">$</span> <span class="cur"></span>';
+    alog.innerHTML+='\n<span class="p">$</span> <span class="cur"></span>'; alog.scrollTop=alog.scrollHeight;
     await wait(1200); on(null); running=false; $('runAgent').disabled=false;
   }
   $('runAgent').addEventListener('click',run);
@@ -1388,7 +1397,7 @@ window.SITE_ANALYTICS_ID='';
     mon(['maV']); inspect('review'); mlog('d','reviewer → sources check out · tests pass · rollback needs approval'); await w(700);
     await mpulse('mwV',600); mon(['maA']); inspect('resp');
     mlog('o','answer   → Sync API errors after the 14:05 deploy left orders pending. Fix in PR #231.');
-    mlog('d','(sample scenario)'); malog.innerHTML+='\n<span class="p">$</span> <span class="cur"></span>';
+    mlog('d','(sample scenario)'); malog.innerHTML+='\n<span class="p">$</span> <span class="cur"></span>'; alog.scrollTop=alog.scrollHeight;
     await w(1600); mon([]); maBusy=false; $('maRun').disabled=false;
   }
   $('maRun').addEventListener('click',maRun);
