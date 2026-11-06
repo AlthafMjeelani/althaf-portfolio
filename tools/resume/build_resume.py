@@ -79,7 +79,7 @@ S.append(entry('<b>Vanforces – Van Sales &amp; Distribution Platform</b>','Flu
 'Offline-first app with two-way SQLite sync, so field sales continue without network coverage; data warehouse with Python, dbt and PostgreSQL.',
 'Google Maps routing, live stock management and Bluetooth ESC/POS receipt printing.',
 'Live on '+L('https://apps.apple.com/in/app/vanforces/id6741518174','App Store')+' and '+L('https://play.google.com/store/apps/details?id=com.vanforces.salesman.app','Google Play')+'.']))
-proj('devbox-config – Dev Environment as Code','Shell, GNU Stow, Neovim, tmux, Lua','2026 | github.com/AlthafMjeelani/devbox-config',['Dotfiles and AI-agent setup for all my coding: 122 shared skills across seven AI agents, with hooks that block commits on main.'])
+proj('devbox-config – Dev Environment as Code','Shell, GNU Stow, Neovim, tmux, Lua','2026 | github.com/AlthafMjeelani/devbox-config',['Dotfiles and AI-agent setup for all my coding: 100+ shared skills across seven AI agents, with hooks that block commits on main.'])
 proj('Taskforces – Mobile ERP','Flutter, Provider, Dio, ML Kit OCR, Syncfusion','Apr 2024 – Present',['Sales orders, purchase invoices, collections, HR workflows and reports; barcode and OCR capture, PDF generation and Bluetooth ESC/POS printing.'])
 proj('WorkForceTime – Attendance &amp; Time Tracking','Flutter, Provider, Dio, Google Maps','Mar 2024 – Present',['Clock-in and clock-out with GPS-based attendance, team dashboards and Excel report exports.'])
 proj('StockSnap – Offline Stock Counting','Flutter, SQLite, Mobile Scanner','Sep 2025 – Jul 2026',['Offline-first counting with CSV/XLSX product import, barcode multi-scan, resumable sessions and Excel export.'])
