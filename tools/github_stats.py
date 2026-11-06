@@ -25,7 +25,7 @@ query($after:String){
     organizations{totalCount}
     contributionsCollection{
       totalCommitContributions totalPullRequestContributions
-      totalIssueContributions totalPullRequestReviewContributions
+      totalIssueContributions totalPullRequestReviewContributions restrictedContributionsCount
       contributionCalendar{ totalContributions weeks{ contributionDays{ contributionCount } } }
     }
     repositories(first:100, after:$after, ownerAffiliations:[OWNER,ORGANIZATION_MEMBER,COLLABORATOR]){
@@ -74,6 +74,7 @@ out = {
         'pullRequests': cc['totalPullRequestContributions'],
         'issues': cc['totalIssueContributions'],
         'reviews': cc['totalPullRequestReviewContributions'],
+        'private': cc['restrictedContributionsCount'],
     },
     'repos': {
         'public': sum(1 for n in own if not n['isPrivate']),

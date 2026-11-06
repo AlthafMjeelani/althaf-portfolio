@@ -1498,7 +1498,7 @@ window.SITE_ANALYTICS_ID='';
       var box=$('ghBox'); box.innerHTML='<div class="hm" role="img" aria-label="Contribution calendar for the last year: '+d.year.contributions+' contributions, private work included" style="grid-template-columns:repeat('+d.weeks.length+',minmax(0,1fr))">'+cells+'</div>';
       $('ghGraph').hidden=false;
       var y=d.year, f=function(n){return Number(n).toLocaleString('en-US');};
-      var sum=$('ghSum'); sum.innerHTML='<b>'+f(y.contributions)+'</b> contributions · <b>'+f(y.commits)+'</b> commits · <b>'+f(y.pullRequests)+'</b> pull requests in the last year, private work included (totals only, no repo names)'; sum.hidden=false;
+      var sum=$('ghSum'); sum.innerHTML='<b>'+f(y.contributions)+'</b> contributions in the last year'+(y.private?', <b>'+f(y.private)+'</b> of them in private repos':'')+' (totals only, no repo names)'; sum.hidden=false;
       if(d.languages&&d.languages.length){ var l=$('ghLangs'); l.innerHTML=d.languages.map(function(x){return '<span>'+esc(x.name)+' '+x.pct+'%</span>';}).join(''); l.hidden=false; }
       $('ghNote').innerHTML='<span class="gh-live"><i></i>totals refreshed daily from public and private repos</span> · organisation repos are private client work';
     }).catch(function(){});
