@@ -449,6 +449,15 @@ p{margin:0}
 .org-chips span{font-family:var(--f-mono);font-size:12px;padding:4px 10px;border-radius:999px;border:1px solid var(--line)}
 .gh-graph{margin:0;display:flex;flex-direction:column;gap:8px}
 .gh-graph-box{overflow-x:auto;padding:12px;border-radius:12px;background:var(--surface);border:1px solid var(--line)}
+.gh-graph-box{min-height:130px}
+.gh-sum{margin:0;font-family:var(--f-mono);font-size:13px;color:var(--muted)}
+.gh-sum b{color:var(--accent);font-weight:600}
+.hm{display:grid;grid-auto-flow:column;grid-template-rows:repeat(7,1fr);gap:3px;min-width:620px}
+.hm i{display:block;aspect-ratio:1;border-radius:2px;background:var(--sunk);border:1px solid var(--line)}
+.hm i[data-l="1"]{background:color-mix(in oklab,var(--accent) 25%,var(--sunk));border-color:transparent}
+.hm i[data-l="2"]{background:color-mix(in oklab,var(--accent) 48%,var(--sunk));border-color:transparent}
+.hm i[data-l="3"]{background:color-mix(in oklab,var(--accent) 74%,var(--sunk));border-color:transparent}
+.hm i[data-l="4"]{background:var(--accent);border-color:transparent}
 .gh-graph-box img{display:block;min-width:620px;width:100%;height:auto}
 :root[data-theme="dark"] .gh-graph-box img{filter:invert(.88) hue-rotate(180deg) saturate(1.3)}
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .gh-graph-box img{filter:invert(.88) hue-rotate(180deg) saturate(1.3)}}
@@ -1012,7 +1021,7 @@ window.SITE_ANALYTICS_ID='';
         <div class="gh">
           <div class="gh-stats">
             <div><b>3</b><span>workspaces · 2 orgs + own</span></div>
-            <div><b>20+</b><span>private repos</span></div>
+            <div><b id="ghPriv">20+</b><span>private repos</span></div>
             <div><b id="ghRepos">35+</b><span>public repos</span></div>
           </div>
           <div class="orgs">
@@ -1034,8 +1043,10 @@ window.SITE_ANALYTICS_ID='';
           </div>
           <figure class="gh-graph" id="ghGraph">
             <figcaption class="eyebrow">Contributions this year · private work included</figcaption>
-            <div class="gh-graph-box"><img id="ghChart" src="https://ghchart.rshah.org/4C7A49/AlthafMjeelani" alt="GitHub contribution graph for AlthafMjeelani" loading="lazy" width="663" height="104"></div>
+            <div class="gh-graph-box" id="ghBox"><img id="ghChart" src="https://ghchart.rshah.org/4C7A49/AlthafMjeelani" alt="GitHub contribution graph for AlthafMjeelani" loading="lazy" width="663" height="104"></div>
           </figure>
+          <p class="gh-sum" id="ghSum" hidden></p>
+          <div class="org-chips" id="ghLangs" hidden></div>
           <span class="eyebrow">Personal · recently updated</span>
           <ul class="gh-list" id="ghList">
             <li><a href="https://github.com/AlthafMjeelani/print_bluetooth_thermal"><b>print_bluetooth_thermal</b><small>fork</small><span class="lang">Flutter plugin for Bluetooth thermal printers</span></a></li>
@@ -1477,14 +1488,28 @@ window.SITE_ANALYTICS_ID='';
     var U='AlthafMjeelani', ago=function(d){var s=(Date.now()-new Date(d))/864e5; if(s<1) return 'today'; if(s<2) return 'yesterday'; if(s<30) return Math.round(s)+' days ago'; if(s<365) return Math.round(s/30)+' mo ago'; return Math.round(s/365)+' yr ago';};
     var gc=$('ghChart'); if(gc){ gc.addEventListener('error',function(){ $('ghGraph').hidden=true; }); if(gc.complete && !gc.naturalWidth && gc.src) $('ghGraph').hidden=true; }
     if(!window.fetch) return;
+    var ghj=false;
+    fetch('assets/data/github-stats.json',{cache:'no-cache'}).then(function(r){if(!r.ok) throw 0; return r.json();}).then(function(d){
+      if(!d||!d.year||!d.repos||!d.weeks) return; ghj=true;
+      $('ghRepos').textContent=d.repos.public; $('ghPriv').textContent=d.repos.private;
+      var all=[].concat.apply([],d.weeks).filter(function(n){return n>0}).sort(function(a,b){return a-b}), q=function(f){return all.length?all[Math.min(all.length-1,Math.floor(all.length*f))]:1;}, t1=q(.25), t2=q(.5), t3=q(.75);
+      var lv=function(n){return n<=0?0:n<=t1?1:n<=t2?2:n<=t3?3:4;};
+      var cells=''; d.weeks.forEach(function(w){ for(var i=0;i<7;i++){ cells+='<i data-l="'+(i<w.length?lv(w[i]):0)+'"></i>'; } });
+      var box=$('ghBox'); box.innerHTML='<div class="hm" role="img" aria-label="Contribution calendar for the last year: '+d.year.contributions+' contributions, private work included" style="grid-template-columns:repeat('+d.weeks.length+',minmax(0,1fr))">'+cells+'</div>';
+      $('ghGraph').hidden=false;
+      var y=d.year, f=function(n){return Number(n).toLocaleString('en-US');};
+      var sum=$('ghSum'); sum.innerHTML='<b>'+f(y.contributions)+'</b> contributions · <b>'+f(y.commits)+'</b> commits · <b>'+f(y.pullRequests)+'</b> pull requests in the last year, private work included (totals only, no repo names)'; sum.hidden=false;
+      if(d.languages&&d.languages.length){ var l=$('ghLangs'); l.innerHTML=d.languages.map(function(x){return '<span>'+esc(x.name)+' '+x.pct+'%</span>';}).join(''); l.hidden=false; }
+      $('ghNote').innerHTML='<span class="gh-live"><i></i>totals refreshed daily from public and private repos</span> · organisation repos are private client work';
+    }).catch(function(){});
     Promise.all([fetch('https://api.github.com/users/'+U).then(function(r){if(!r.ok) throw 0; return r.json();}),
                  fetch('https://api.github.com/users/'+U+'/repos?sort=pushed&per_page=12').then(function(r){if(!r.ok) throw 0; return r.json();})])
     .then(function(res){ var u=res[0], repos=res[1];
-      $('ghRepos').textContent=u.public_repos;
+      if(!ghj) $('ghRepos').textContent=u.public_repos;
       var skip=/^(testproject|personal|AlthafMjeelani)$/i;
       var list=repos.filter(function(r){return !skip.test(r.name);}).slice(0,4);
       if(list.length) $('ghList').innerHTML=list.map(function(r){return '<li><a href="'+esc(r.html_url)+'" target="_blank" rel="noopener"><b>'+esc(r.name)+'</b><small>'+esc(ago(r.pushed_at))+'</small><span class="lang">'+esc([r.language,r.fork?'fork':'',r.description||''].filter(Boolean).join(' · '))+'</span></a></li>';}).join('');
-      $('ghNote').innerHTML='<span class="gh-live"><i></i>personal repos live from the GitHub API</span> · organisation repos are private client work';
+      if(!ghj) $('ghNote').innerHTML='<span class="gh-live"><i></i>personal repos live from the GitHub API</span> · organisation repos are private client work';
     }).catch(function(){ /* keep the static list */ });
   })();
 
