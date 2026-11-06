@@ -1,0 +1,55 @@
+name: GitHub stats
+
+# Once a day, read private and organisation repos with a read-only token and
+# write totals (no names, no code) to site/assets/data/github-stats.json.
+# Setup steps: docs/GITHUB-STATS.md
+
+on:
+  schedule:
+    - cron: '17 2 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: github-stats
+  cancel-in-progress: false
+
+jobs:
+  stats:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Build stats
+        env:
+          STATS_TOKEN: ${{ secrets.STATS_TOKEN }}
+        run: python3 tools/github_stats.py
+
+      - name: Commit to main
+        run: |
+          if [ ! -f site/assets/data/github-stats.json ]; then echo "No stats file, nothing to publish."; exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add site/assets/data/github-stats.json
+          if git diff --staged --quiet; then echo "No change."; else
+            git commit -m "chore: update GitHub stats [skip ci]"
+            git push origin main
+          fi
+
+      - name: Publish to the live site (gh-pages)
+        run: |
+          if [ ! -f site/assets/data/github-stats.json ]; then exit 0; fi
+          git fetch origin gh-pages
+          git worktree add ../ghp origin/gh-pages
+          mkdir -p ../ghp/assets/data
+          cp site/assets/data/github-stats.json ../ghp/assets/data/
+          cd ../ghp
+          git add -A
+          if git diff --staged --quiet; then echo "Live site already current."; else
+            git commit -m "Deploy: GitHub stats [skip ci]"
+            git push origin HEAD:gh-pages
+          fi

@@ -63,6 +63,10 @@ Without the script: copy `site/.` into a `gh-pages` checkout, commit, push. Neve
 | Contact form (EmailJS) | `#contact` (keys in `EJ`) |
 | SEO and analytics | `<head>`: JSON-LD, Open Graph, `SITE_ANALYTICS_ID` |
 
+## GitHub stats
+
+Private-repo totals come from a daily Action, not the browser. Never put a token in `site/`. See `docs/GITHUB-STATS.md`. Do not commit a hand-made `github-stats.json`: it is written only by the workflow.
+
 ## Common edits
 
 - **Add or update a project:** edit the `P` array. Fields: `n` name, `file` window title, `org` (`Texol World`, `Independent`, `BigWelt`), `when`, `hue` (0–360), `ui` (screen key from `UI`), `count` (optional badge), `sum`, `detail`, `feat` (array), `role`, `stack` (array), `play`/`ios` (store links), `s` (skill keys). Keep the list newest first. Update the product count (hero text, dashboard chip, ticker, projects heading) if the total changes.
