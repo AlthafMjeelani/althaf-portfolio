@@ -40,6 +40,7 @@ sk=[('Languages','Dart, Go (Golang), Python, TypeScript, JavaScript, Kotlin, SQL
 ('Data Engineering','ETL/ELT, Data Warehousing, dbt, ClickHouse, PostgreSQL, Python data pipelines'),
 ('Cloud &amp; DevOps','AWS, Google Cloud, Azure, Docker, Kubernetes, Terraform, CI/CD, GitHub Actions, Linux, Nginx, Git'),
 ('Security &amp; Payments','API Security, OWASP, IAM, Biometric Authentication, Apple Pay, Telr, PhonePe, UPI, Wallet Systems'),
+('Developer Environment','Neovim, tmux, zsh, GNU Stow dotfiles, Claude Code, Codex, OpenCode, Kimi Code, Amp, MCP, git hooks'),
 ('Practices','Agile/Scrum, Code Review, Unit &amp; Integration Testing, Debugging, Performance Optimization, Team Leadership')]
 for k,v in sk: S.append(Paragraph(f'<b>{k}:</b> {v}',ParagraphStyle('sk',parent=body,spaceAfter=1.5)))
 S+=sec('Professional Experience')
@@ -78,6 +79,7 @@ S.append(entry('<b>Vanforces – Van Sales &amp; Distribution Platform</b>','Flu
 'Offline-first app with two-way SQLite sync, so field sales continue without network coverage; data warehouse with Python, dbt and PostgreSQL.',
 'Google Maps routing, live stock management and Bluetooth ESC/POS receipt printing.',
 'Live on '+L('https://apps.apple.com/in/app/vanforces/id6741518174','App Store')+' and '+L('https://play.google.com/store/apps/details?id=com.vanforces.salesman.app','Google Play')+'.']))
+proj('devbox-config – Dev Environment as Code','Shell, GNU Stow, Neovim, tmux, Lua','2026 | github.com/AlthafMjeelani/devbox-config',['Dotfiles and AI-agent setup for all my coding: 122 shared skills across seven AI agents, with hooks that block commits on main.'])
 proj('Taskforces – Mobile ERP','Flutter, Provider, Dio, ML Kit OCR, Syncfusion','Apr 2024 – Present',['Sales orders, purchase invoices, collections, HR workflows and reports; barcode and OCR capture, PDF generation and Bluetooth ESC/POS printing.'])
 proj('WorkForceTime – Attendance &amp; Time Tracking','Flutter, Provider, Dio, Google Maps','Mar 2024 – Present',['Clock-in and clock-out with GPS-based attendance, team dashboards and Excel report exports.'])
 proj('StockSnap – Offline Stock Counting','Flutter, SQLite, Mobile Scanner','Sep 2025 – Jul 2026',['Offline-first counting with CSV/XLSX product import, barcode multi-scan, resumable sessions and Excel export.'])
@@ -90,9 +92,8 @@ S.append(Paragraph('<b>Higher Secondary Education</b> <font color="#444444">| GH
 S+=sec('Achievements')
 S.append(bullets(['Employee of the Month at Texol World, awarded multiple times for outstanding project delivery and innovation.',
 'Top contributor to the Vanforces mobile app (about 1,900 commits) and admin portal (826 commits).',
-'Open source: extended the print_bluetooth_thermal Flutter plugin with richer device metadata and printer detection on Android and Apple platforms.']))
-S+=sec('Languages')
-S.append(Paragraph('English, Malayalam, Hindi, Tamil',body))
+'Open source: extended the print_bluetooth_thermal Flutter plugin with richer device metadata and printer detection.']))
+S.append(Paragraph('<b>Languages:</b> English, Malayalam, Hindi, Tamil',ParagraphStyle('lg',parent=body,spaceBefore=4)))
 doc=SimpleDocTemplate(out,pagesize=A4,leftMargin=16*mm,rightMargin=16*mm,topMargin=12*mm,bottomMargin=12*mm,
   title='Althaf M - AI Application Engineer - Resume',author='Althaf M',subject='Resume',keywords='AI Application Engineer, Full-Stack Engineer, AI Integration, LLM, Flutter, Go, Python, AWS, RAG, AI')
 doc.build(S)
